@@ -1,9 +1,18 @@
-# Installation
+## Installation
+
+```
 nvm use
 npm install
+```
 
-# Frontend
+## Start frontend
+
+```
 npm run dev
+```
 
-# Backend
+## Start backend
+
+```
 npm run server
+```
