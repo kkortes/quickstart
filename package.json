@@ -5,7 +5,7 @@
   "main": "pages/index.js",
   "type": "module",
   "scripts": {
-    "server": "NODE_ENV=development nodemon --experimental-modules --watch server server/index.js",
+    "server": "NODE_ENV=development nodemon --watch server server/index.js",
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "next",
     "build": "next build",
