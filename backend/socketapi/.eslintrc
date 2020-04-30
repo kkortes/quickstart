@@ -1,0 +1,18 @@
+{
+  "parser": "babel-eslint",
+  "extends": ["airbnb", "prettier"],
+  "plugins": ["prettier", "react"],
+  "prettier/prettier": ["error", { "singleQuote": true, "parser": "flow" }],
+  "globals": {
+    "localStorage": true,
+    "window": true,
+    "document": true
+  },
+  "rules": {
+    "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
+    "import/extensions": 0
+  },
+  "env": {
+    "jest": true
+  }
+}

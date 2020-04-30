@@ -1,16 +1,9 @@
-const micro = require('micro');
-const fs = require('fs');
-const path = require('path');
+import helloWorld from '../../universal/helloWorld.js';
 
-const document = path.join(__dirname, 'index.html');
-const html = fs.readFileSync(document);
-const server = micro(async (req, res) => res.end(html));
-
+const server = require('micro')();
 const io = require('socket.io')(server);
-const config = require('../../api/config.js').default;
 
+console.log(helloWorld);
 require('./websocket-server.js')(io);
 
-server.listen(3002, () =>
-  console.log(`Server started at ${config.endpoint.socket}`)
-);
+server.listen(3002, () => console.log(`Server started at port 3002`));
