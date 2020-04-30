@@ -15,7 +15,6 @@
     "socket.io": "^2.3.0"
   },
   "devDependencies": {
-    "nodemon": "^2.0.3",
-    "babel-eslint": "^10.1.0"
+    "nodemon": "^2.0.3"
   }
 }

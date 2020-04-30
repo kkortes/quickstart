@@ -1,4 +1,4 @@
-module.exports = (io, mongo) => {
+export default (io) => {
   io.on('connection', (socket) => {
     console.log('restdadrtedgd?');
   });
