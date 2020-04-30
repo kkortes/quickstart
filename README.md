@@ -1,18 +1,23 @@
-## Installation
+# Installation
 
 ```
 nvm use
 npm install
+npm run boostrap
 ```
 
-## Start frontend
+## Starting all apps
 
 ```
 npm run dev
 ```
 
-## Start backend
+## Starting an app individually
 
 ```
-npm run server
+cd frontend <appname>
+OR
+cd backend <appname>
+
+npm run dev
 ```
