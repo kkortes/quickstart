@@ -1,4 +1,5 @@
 {
+  "name": "quickstart",
   "type": "module",
   "workspaces": [
     "backend/*",
