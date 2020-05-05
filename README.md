@@ -9,6 +9,7 @@ npm run boostrap
 ## Starting all apps
 
 ```
+npm run mongo
 npm run dev
 ```
 
@@ -18,6 +19,7 @@ npm run dev
 cd frontend <appname>
 OR
 cd backend <appname>
+npm run mongo
 
 npm run dev
 ```

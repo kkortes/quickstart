@@ -6,12 +6,16 @@
   "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "NODE_ENV=development nodemon --watch ./"
+    "dev": "NODE_ENV=development nodemon --watch ./",
+    "mongo": "mkdir mongo-db; mongod --dbpath mongo-db"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "dotenv": "^8.2.0",
+    "lodash": "^4.17.15",
     "micro": "^9.3.4",
+    "mongodb": "^3.5.7",
     "socket.io": "^2.3.0"
   },
   "devDependencies": {

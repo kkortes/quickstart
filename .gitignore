@@ -1,4 +1,7 @@
-.next*
 node_modules*
-*/universal*
-.DS_Store
+.DS_Store*
+.env*
+
+**/mongo-db*
+**/.next*
+**/universal*

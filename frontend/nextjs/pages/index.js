@@ -1,3 +1,3 @@
-import helloWorld from '../../../universal/helloWorld';
+import Login from '../components/Login';
 
-export default helloWorld;
+export default () => <Login />;

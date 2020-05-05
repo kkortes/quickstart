@@ -9,7 +9,8 @@
     "dev": "lerna run dev --parallel",
     "new-version": "lerna version --conventional-commits --yes",
     "diff": "lerna diff",
-    "bootstrap": "lerna bootstrap && lerna exec -- ln -s ../../universal universal"
+    "bootstrap": "lerna bootstrap",
+    "mongo": "lerna run mongo"
   },
   "devDependencies": {
     "babel-eslint": "^10.1.0",
