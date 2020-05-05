@@ -1,4 +1,5 @@
-.next*
 node_modules*
-*/universal*
-.DS_Store
+.DS_Store*
+
+**/.next*
+**/universal*
