@@ -1,16 +1,15 @@
 import { LOGIN, CREATE_ACCOUNT } from '../../universal/SOCKET_ACTIONS.js';
+import login from './actions/login.js';
+import createAccount from './actions/createAccount.js';
 
-const sleep = (ms) => new Promise((res) => setTimeout(res, ms));
-
-export default (io) => {
+export default (io, mongo) =>
   io.on('connection', (socket) => {
-    socket
-      .on(LOGIN, async (data, fn) => {
-        fn(data);
-      })
-      .on(CREATE_ACCOUNT, async (data, fn) => {
-        fn(data);
-      })
-      .on('disconnect', () => {});
+    socket.action = (name, func) =>
+      socket.on(name, async (body, fn) => {
+        const result = await func(body, mongo);
+        return await fn(result);
+      });
+
+    socket.action(LOGIN, login);
+    socket.action(CREATE_ACCOUNT, createAccount);
   });
-};
