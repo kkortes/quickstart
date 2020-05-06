@@ -3,16 +3,29 @@ import { useState } from 'react';
 import socket from '../common/socket';
 import { LOGIN, CREATE_ACCOUNT } from '../../../universal/SOCKET_ACTIONS';
 import { validateEmail } from '../../../universal/helpers';
+import cookie from 'js-cookie';
+import Router from 'next/router';
+import useStore from '../hooks/useStore';
 
-const login = (email, password) => async (e) => {
+const login = (email, password, dispatch) => async (e) => {
   e.preventDefault();
   if (!validateEmail(email)) {
-    console.error('Invalid email address');
+    dispatch({
+      type: 'notify',
+      payload: {
+        title: 'Invalid email address',
+      },
+    });
     return;
   }
 
   if (!password) {
-    console.error('No password');
+    dispatch({
+      type: 'notify',
+      payload: {
+        title: 'No password',
+      },
+    });
     return;
   }
 
@@ -21,18 +34,38 @@ const login = (email, password) => async (e) => {
     password: sha1(password),
   });
 
-  console.log('login status', response);
+  if (!response.error) {
+    cookie.set('token', response.id, { expires: 1 });
+    Router.push('/');
+  } else {
+    dispatch({
+      type: 'notify',
+      payload: {
+        title: response.error,
+      },
+    });
+  }
 };
 
-const createAccount = (email, password) => async (e) => {
+const createAccount = (email, password, dispatch) => async (e) => {
   e.preventDefault();
   if (!validateEmail(email)) {
-    console.error('Invalid email address');
+    dispatch({
+      type: 'notify',
+      payload: {
+        title: 'Invalid email address',
+      },
+    });
     return;
   }
 
   if (!password) {
-    console.error('No password');
+    dispatch({
+      type: 'notify',
+      payload: {
+        title: 'No password',
+      },
+    });
     return;
   }
 
@@ -41,10 +74,18 @@ const createAccount = (email, password) => async (e) => {
     password: sha1(password),
   });
 
-  console.log('create account status', response);
+  if (response.error) {
+    dispatch({
+      type: 'notify',
+      payload: {
+        title: response.error,
+      },
+    });
+  }
 };
 
 export default () => {
+  const dispatch = useStore()[1];
   const [attemptLogin, setAttemptLogin] = useState(true);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -59,8 +100,8 @@ export default () => {
   };
 
   const action = attemptLogin
-    ? login(email, password)
-    : createAccount(email, password);
+    ? login(email, password, dispatch)
+    : createAccount(email, password, dispatch);
 
   return (
     <div>

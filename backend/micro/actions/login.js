@@ -9,7 +9,9 @@ export default async ({ email, password }, mongo) => {
   });
 
   if (user) {
-    return user._id;
+    return {
+      id: user._id,
+    };
   } else {
     return {
       error: 'Incorrect password',
