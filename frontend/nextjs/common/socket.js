@@ -6,7 +6,10 @@ const socket = io(config.endpoint.socket);
 
 socket.request = (name, args) =>
   new Promise((resolve) => {
-    const id = setTimeout(() => resolve(null), 1500);
+    const id = setTimeout(
+      () => resolve({ error: 'Connection to server timed out' }),
+      1500
+    );
 
     socket.emit(name, args, (r) => {
       clearTimeout(id);
