@@ -18,6 +18,6 @@ export default async ({ email, password }, mongo) => {
       created: new Date().getTime(),
     });
 
-    return true;
+    return {};
   }
 };
