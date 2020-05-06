@@ -1,0 +1,8 @@
+#!/bin/bash
+mkdir -p mongo-db log;
+result=$(pgrep mongod); 
+
+if [ -z "$result" ]; then
+  mongod --fork --logpath log/mongod.log --dbpath mongo-db;
+  mongo admin --eval 'db.getUser("wsadmin") || db.createUser({ user: "wsadmin", pwd: "qwe123", roles: ["root"]})'
+fi
