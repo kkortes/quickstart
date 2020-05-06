@@ -56,9 +56,11 @@ export default () => {
     }
   };
 
-  const action = attemptLogin
-    ? attempt(LOGIN_ACCOUNT, email, password)
-    : attempt(CREATE_ACCOUNT, email, password);
+  const action = attempt(
+    attemptLogin ? LOGIN_ACCOUNT : CREATE_ACCOUNT,
+    email,
+    password
+  );
 
   return (
     <div>
