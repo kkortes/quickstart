@@ -14,6 +14,8 @@ export default (notifications, action) => {
     //   ...notifications.slice(0, payload),
     //   ...notifications.slice(payload + 1)
     // ];
+    case 'clearNotifications':
+      return notifications;
     case 'removeNotification':
       return notifications.filter(
         (notification) => notification.key !== payload.key
