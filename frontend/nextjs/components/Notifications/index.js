@@ -1,4 +1,4 @@
-import useStore from '../hooks/useStore';
+import useStore from '../../hooks/useStore';
 import { useEffect } from 'react';
 
 let timeouts = {};
