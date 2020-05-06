@@ -25,7 +25,9 @@ export default () => {
   return (
     <div className='notifications'>
       {notifications.map((notification) => (
-        <div className='notification'>{notification.title}</div>
+        <div key={notification.key} className='notification'>
+          {notification.title}
+        </div>
       ))}
       <style jsx>{`
         .notification {
