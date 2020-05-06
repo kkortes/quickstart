@@ -1,5 +1,8 @@
-import { LOGIN, CREATE_ACCOUNT } from '../../universal/SOCKET_ACTIONS.js';
-import login from './actions/login.js';
+import {
+  LOGIN_ACCOUNT,
+  CREATE_ACCOUNT,
+} from '../../universal/SOCKET_ACTIONS.js';
+import loginAccount from './actions/loginAccount.js';
 import createAccount from './actions/createAccount.js';
 
 export default (io, mongo) =>
@@ -10,6 +13,6 @@ export default (io, mongo) =>
         return await fn(result);
       });
 
-    socket.action(LOGIN, login);
+    socket.action(LOGIN_ACCOUNT, loginAccount);
     socket.action(CREATE_ACCOUNT, createAccount);
   });

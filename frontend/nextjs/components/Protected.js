@@ -21,7 +21,7 @@ export default ({ token }) => {
       <br />
       <input type='text' onChange={(e) => changeUsername(e.target.value)} />
       <div onClick={() => notify('hey!')}>Add notifications</div>
-      <div onClick={() => clearNotifications()}>Clear notifications</div>
+      <div onClick={clearNotifications}>Clear notifications</div>
       <div onClick={logout}>Logout</div>
     </div>
   );

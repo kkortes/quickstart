@@ -84,18 +84,6 @@ export default ({ children }) => (
           color: #1eadfa;
           text-decoration: none;
         }
-        .better,
-        .worse {
-          text-shadow: 0.5px 0.5px rgba(0, 0, 0, 0.75);
-          font-size: 10px;
-          line-height: 10px;
-        }
-        .better {
-          color: #21cc19;
-        }
-        .worse {
-          color: #d70418;
-        }
         * {
           user-select: none;
         }
