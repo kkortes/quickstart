@@ -1,11 +1,14 @@
-import Meta from '../components/Meta';
 import { withInit } from 'reactn';
 import uuid from 'short-uuid';
+import Meta from '../components/Meta';
+import socket from '../common/socket';
 
 const INITIAL_STATE = {
+  socket,
   username: '',
   notifications: [],
 };
+
 const INITIAL_REDUCERS = {
   changeUsername: (_store, _dispatch, payload) => ({
     username: payload,

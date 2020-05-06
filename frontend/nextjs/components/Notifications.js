@@ -1,5 +1,4 @@
-import { useEffect } from 'react';
-import { useGlobal, useDispatch } from 'reactn';
+import { useGlobal, useDispatch, useEffect } from 'reactn';
 
 let timeouts = {};
 

@@ -1,5 +1,4 @@
 import { debounce, pickBy, pick } from 'lodash';
-import socket from '../common/socket';
 // import config from '../config';
 
 let lastStoredState = {};
@@ -13,7 +12,6 @@ const storeState = async (data) => {
   if (!dirtyKeys.length) return;
 
   const update = pick(data, dirtyKeys);
-  console.log(socket.id);
   const payload = {
     id: 'someid',
     update,

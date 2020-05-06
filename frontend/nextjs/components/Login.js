@@ -1,13 +1,11 @@
-import { useState } from 'react';
 import sha1 from 'sha1';
 import cookie from 'js-cookie';
 import Router from 'next/router';
-import socket from '../common/socket';
 import { LOGIN, CREATE_ACCOUNT } from '../../../universal/SOCKET_ACTIONS';
 import { validateEmail } from '../../../universal/helpers';
-import { useDispatch } from 'reactn';
+import { useDispatch, useGlobal, useState } from 'reactn';
 
-const login = (email, password, notify) => async (e) => {
+const login = (email, password, notify, socket) => async (e) => {
   e.preventDefault();
   if (!validateEmail(email)) {
     notify('Invalid email address');
@@ -32,7 +30,7 @@ const login = (email, password, notify) => async (e) => {
   }
 };
 
-const createAccount = (email, password, notify) => async (e) => {
+const createAccount = (email, password, notify, socket) => async (e) => {
   e.preventDefault();
   if (!validateEmail(email)) {
     notify('Invalid email address');
@@ -55,6 +53,7 @@ const createAccount = (email, password, notify) => async (e) => {
 };
 
 export default () => {
+  const [{ socket }] = useGlobal();
   const { notify } = useDispatch();
   const [attemptLogin, setAttemptLogin] = useState(true);
   const [email, setEmail] = useState('');
@@ -70,8 +69,8 @@ export default () => {
   };
 
   const action = attemptLogin
-    ? login(email, password, notify)
-    : createAccount(email, password, notify);
+    ? login(email, password, notify, socket)
+    : createAccount(email, password, notify, socket);
 
   return (
     <div>

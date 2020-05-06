@@ -1,4 +1,5 @@
 import io from 'socket.io-client';
+import { setGlobal } from 'reactn';
 import config from '../../../config';
 
 const socket = io(config.endpoint.socket);
@@ -12,5 +13,7 @@ socket.request = (name, args) =>
       resolve(r);
     });
   });
+
+socket.on('connect', () => setGlobal({ socket }));
 
 export default socket;

@@ -1,8 +1,10 @@
+lerna-debug.log
+
 node_modules*
 .DS_Store*
 .env*
 
-**/log*
-**/mongo-db*
-**/.next*
-**/universal*
+**/log
+**/mongo-db
+**/.next
+**/universal
