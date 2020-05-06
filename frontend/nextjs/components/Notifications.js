@@ -1,22 +1,19 @@
-import useStore from '../../hooks/useStore';
 import { useEffect } from 'react';
+import { useGlobal, useDispatch } from 'reactn';
 
 let timeouts = {};
 
 export default () => {
-  const [{ notifications }, dispatch] = useStore();
+  const [notifications] = useGlobal('notifications');
+  const { removeNotification } = useDispatch();
 
   useEffect(() => {
     const notification = notifications[notifications.length - 1];
     if (!notification) return;
 
     timeouts[notification.key] = setTimeout(() => {
-      dispatch({
-        type: 'removeNotification',
-        payload: {
-          key: notification.key,
-        },
-      });
+      removeNotification(notification.key);
+
       clearTimeout(timeouts[notification.key]);
       delete timeouts[notification.key];
     }, 5000);

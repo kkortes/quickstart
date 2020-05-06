@@ -1,5 +1,5 @@
 import Head from 'next/head';
-import Notifications from '../Notifications';
+import Notifications from './Notifications';
 
 export default ({ children }) => (
   <>
