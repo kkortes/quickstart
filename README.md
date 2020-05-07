@@ -15,9 +15,9 @@ npm run dev
 ## Starting an app individually
 
 ```
-cd frontend <appname>
+cd frontend/<appname>
 OR
-cd backend <appname>
+cd backend/<appname>
 
 npm run dev
 ```

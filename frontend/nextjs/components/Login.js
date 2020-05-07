@@ -6,7 +6,7 @@ import {
   CREATE_ACCOUNT,
 } from '../../../universal/SOCKET_ACTIONS';
 import { validateEmail } from '../../../universal/helpers';
-import { useDispatch, useGlobal, useState } from 'reactn';
+import { useDispatch, useGlobal, useState, setGlobal } from 'reactn';
 
 export default () => {
   const [{ socket }] = useGlobal();

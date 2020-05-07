@@ -2,17 +2,27 @@ import { withInit } from 'reactn';
 import uuid from 'short-uuid';
 import Meta from '../components/Meta';
 import socket from '../common/socket';
+import { storeStateWithDebounce } from '../common/db';
 
 const INITIAL_STATE = {
   socket,
-  username: '',
+  token: '',
+  account: {
+    username: '',
+  },
   notifications: [],
 };
 
 const INITIAL_REDUCERS = {
-  changeUsername: (_store, _dispatch, payload) => ({
-    username: payload,
-  }),
+  accountChanges: async ({ account }, _dispatch, payload) =>
+    storeStateWithDebounce({
+      ...account,
+      ...payload,
+    }),
+  changeUsername: (_store, { accountChanges }, payload) =>
+    accountChanges({
+      username: payload,
+    }),
   clearNotifications: () => ({
     notifications: [],
   }),

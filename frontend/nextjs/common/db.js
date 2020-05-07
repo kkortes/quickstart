@@ -1,5 +1,6 @@
 import { debounce, pickBy, pick } from 'lodash';
-// import config from '../config';
+import { STORE_STATE } from '../../../universal/SOCKET_ACTIONS';
+import { getGlobal } from 'reactn';
 
 let lastStoredState = {};
 
@@ -7,24 +8,27 @@ const isDifferentThanLastStored = (v, k) =>
   JSON.stringify(v) !== JSON.stringify(lastStoredState[k]);
 
 const storeState = async (data) => {
+  const { socket, token } = getGlobal();
+
   const dirtyKeys = Object.keys(pickBy(data, isDifferentThanLastStored));
 
   if (!dirtyKeys.length) return;
 
   const update = pick(data, dirtyKeys);
   const payload = {
-    id: 'someid',
+    id: token,
     update,
   };
 
-  try {
-    console.log(payload);
-    await socket.request('storeState', payload);
-    /// await axios.post(`${config.endpoint.api}/gameState`, payload);
-    lastStoredState = data;
-  } catch (error) {
+  const response = await socket.request(STORE_STATE, payload);
+
+  if (response.error) {
     console.error(error);
+  } else {
+    lastStoredState = data;
   }
+
+  return data;
 };
 
 const storeStateWithDebounce = debounce(storeState, 2000, {
