@@ -17,6 +17,7 @@ import {
 } from '../../../universal/NOTIFICATIONS';
 import cookie from 'js-cookie';
 import Center from './ui/Center';
+import { useEffect } from 'react';
 
 export default () => {
   const [{ socket }] = useGlobal();
@@ -84,6 +85,13 @@ export default () => {
     password,
     rememberMe
   );
+
+  useEffect(() => {
+    if (!attemptLogin) {
+      setEmail('');
+      setPassword('');
+    }
+  }, [attemptLogin]);
 
   // Todo, make "<Crow />" support null returns
   const checkBox = attemptLogin ? (
