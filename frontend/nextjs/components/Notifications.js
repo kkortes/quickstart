@@ -62,7 +62,7 @@ export default () => {
       </TransitionGroup>
 
       <style jsx>{`
-        :global(.icon) {
+        .notifications :global(.icon) {
           margin-right: 14px;
         }
         .content {

@@ -8,20 +8,23 @@ import { useDispatch, useGlobal, useState, setGlobal } from 'reactn';
 import TextInput from './ui/TextInput';
 import Crow from './ui/Crow';
 import Button from './ui/Button';
+import CheckBox from './ui/CheckBox';
 import {
   PASSWORD_MISSING,
   ACCOUNT_LOGGED_IN,
   EMAIL_INVALID,
   ACCOUNT_CREATED,
 } from '../../../universal/NOTIFICATIONS';
+import cookie from 'js-cookie';
 
 export default () => {
   const [{ socket }] = useGlobal();
   const { notify, login } = useDispatch();
   const [attemptLogin, setAttemptLogin] = useState(true);
-  const [email, setEmail] = useState('kim@kortes.se');
-  const [password, setPassword] = useState('k1msuger');
+  const [email, setEmail] = useState(cookie.get('email') || '');
+  const [password, setPassword] = useState(cookie.get('password') || '');
   const [loading, setLoading] = useState(false);
+  const [rememberMe, setRememberMe] = useState(!!cookie.get('rememberMe'));
 
   const onChangeEmail = (e) => setEmail(e.target.value);
   const onChangePassword = (e) => setPassword(e.target.value);
@@ -31,7 +34,7 @@ export default () => {
     setAttemptLogin(!attemptLogin);
   };
 
-  const attempt = (action, email, password) => async (e) => {
+  const attempt = (action, email, password, rememberMe) => async (e) => {
     e.preventDefault();
     if (!validateEmail(email)) {
       notify(EMAIL_INVALID);
@@ -63,6 +66,15 @@ export default () => {
     }
 
     if (action === LOGIN_ACCOUNT) {
+      if (rememberMe) {
+        cookie.set('email', email);
+        cookie.set('password', password);
+        cookie.set('rememberMe', true);
+      } else {
+        cookie.remove('email');
+        cookie.remove('password');
+        cookie.remove('rememberMe');
+      }
       notify(ACCOUNT_LOGGED_IN);
       login(response.token);
     }
@@ -71,7 +83,8 @@ export default () => {
   const action = attempt(
     attemptLogin ? LOGIN_ACCOUNT : CREATE_ACCOUNT,
     email,
-    password
+    password,
+    rememberMe
   );
 
   return (
@@ -94,6 +107,12 @@ export default () => {
               value={password}
               text='Password'
               disabled={loading}
+            />
+            <CheckBox
+              id='agree1'
+              onChange={setRememberMe}
+              value={rememberMe}
+              text='Remember me'
             />
             <Button primary onClick={action} disabled={loading}>
               {attemptLogin ? 'Log in' : 'Create account'}
