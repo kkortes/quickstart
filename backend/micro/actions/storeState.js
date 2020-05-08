@@ -1,3 +1,6 @@
+import { NETWORK_ERROR } from '../../../universal/NOTIFICATIONS.js';
+import { sleep } from '../../../universal/helpers.js';
+
 export default async (body, mongo) => {
   const collection = mongo.db('test').collection('state');
 
@@ -10,5 +13,5 @@ export default async (body, mongo) => {
   if (update.result.ok) {
     return {};
   }
-  return { error: 'Could not store progress' };
+  return NETWORK_ERROR;
 };

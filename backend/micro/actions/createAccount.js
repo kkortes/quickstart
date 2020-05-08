@@ -1,3 +1,5 @@
+import { USER_EXISTS } from '../../../universal/NOTIFICATIONS.js';
+
 export default async ({ email, password }, mongo) => {
   const collection = mongo.db('test').collection('users');
 
@@ -8,9 +10,7 @@ export default async ({ email, password }, mongo) => {
   });
 
   if (user) {
-    return {
-      error: 'User already exists',
-    };
+    return USER_EXISTS;
   } else {
     await collection.insertOne({
       email: LCemail,

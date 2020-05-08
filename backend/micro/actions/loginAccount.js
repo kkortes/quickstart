@@ -1,3 +1,5 @@
+import { PASSWORD_INCORRECT } from '../../../universal/NOTIFICATIONS.js';
+
 export default async ({ email, password }, mongo) => {
   const collection = mongo.db('test').collection('users');
 
@@ -10,11 +12,9 @@ export default async ({ email, password }, mongo) => {
 
   if (user) {
     return {
-      id: user._id,
+      token: user._id.toString(),
     };
   } else {
-    return {
-      error: 'Incorrect password',
-    };
+    return PASSWORD_INCORRECT;
   }
 };

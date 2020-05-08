@@ -1,16 +1,11 @@
 import { useDispatch, useGlobal } from 'reactn';
-import cookie from 'js-cookie';
-import Router from 'next/router';
-import Icon from './Icon';
-
-const logout = () => {
-  cookie.remove('token');
-  Router.push('/');
-};
+import Icon from './ui/Icon';
+import StateChecks from './StateChecks';
+import { ACCOUNT_LOGGED_OUT } from '../../../universal/NOTIFICATIONS';
 
 export default ({ token }) => {
   const [{ socket }] = useGlobal();
-  const { notify, clearNotifications, changeUsername } = useDispatch();
+  const { changeUsername, logout } = useDispatch();
 
   return (
     <div>
@@ -20,9 +15,8 @@ export default ({ token }) => {
       Socket ID: {socket.id}
       <br />
       <input type='text' onChange={(e) => changeUsername(e.target.value)} />
-      <div onClick={() => notify('hey!')}>Add notifications</div>
-      <div onClick={clearNotifications}>Clear notifications</div>
-      <div onClick={logout}>Logout</div>
+      <div onClick={() => logout(ACCOUNT_LOGGED_OUT)}>Logout</div>
+      <StateChecks />
     </div>
   );
 };

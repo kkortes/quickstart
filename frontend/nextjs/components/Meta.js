@@ -55,7 +55,8 @@ export default ({ children }) => (
           font-family: 'Fira Sans Condensed', sans-serif;
           font-size: 1.6rem;
           line-height: 2rem;
-          color: #000;
+          color: #444;
+          background-color: #fafafa;
         }
         *::-webkit-scrollbar {
           width: 10px;
@@ -93,16 +94,18 @@ export default ({ children }) => (
         h4,
         h5,
         h6 {
+          margin-top: 0;
+          margin-bottom: 4px;
           font-size: 1.6rem;
           line-height: 1.6rem;
           letter-spacing: 2px;
           text-transform: uppercase;
         }
         h1 {
+          margin-bottom: 20px;
           font-size: 30px;
           line-height: 30px;
           text-align: center;
-          margin-top: 0;
           letter-spacing: 3px;
         }
       `}

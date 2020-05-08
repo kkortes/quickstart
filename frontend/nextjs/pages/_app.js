@@ -2,7 +2,11 @@ import { withInit } from 'reactn';
 import uuid from 'short-uuid';
 import Meta from '../components/Meta';
 import socket from '../common/socket';
-import { storeStateWithDebounce } from '../common/db';
+import { storeState, storeStateWithDebounce } from '../common/db';
+import cookie from 'js-cookie';
+import Router from 'next/router';
+import { ACCOUNT_LOGGED_OUT } from '../../../universal/NOTIFICATIONS';
+import { REGISTER_TOKEN } from '../../../universal/SOCKET_ACTIONS';
 
 const INITIAL_STATE = {
   socket,
@@ -14,27 +18,56 @@ const INITIAL_STATE = {
 };
 
 const INITIAL_REDUCERS = {
-  accountChanges: async ({ account }, _dispatch, payload) =>
-    storeStateWithDebounce({
+  accountChanges: ({ account }, { notify }, payload) => {
+    const merged = {
       ...account,
       ...payload,
-    }),
-  changeUsername: (_store, { accountChanges }, payload) =>
-    accountChanges({
+    };
+
+    storeStateWithDebounce(merged, notify);
+
+    return {
+      account: merged,
+    };
+  },
+  changeUsername: async (_store, { accountChanges }, payload) => {
+    const store = await accountChanges({
       username: payload,
-    }),
+    });
+
+    return {
+      account: store.account,
+    };
+  },
   clearNotifications: () => ({
     notifications: [],
   }),
   removeNotification: ({ notifications }, _dispatch, payload) => ({
     notifications: notifications.filter(({ key }) => key !== payload),
   }),
-  notify: ({ notifications }, _dispatch, payload) => ({
+  notify: ({ notifications }, _dispatch, { title, text, type }) => ({
     notifications: notifications.concat({
       key: uuid.generate(),
-      title: payload,
+      title,
+      text,
+      type,
     }),
   }),
+  login: (_store, _dispatch, payload) => {
+    cookie.set('token', payload, { expires: 1 });
+    Router.push('/');
+
+    return {
+      token: payload,
+    };
+  },
+  logout: async ({ account, socket }, { notify }, payload) => {
+    socket.emit(REGISTER_TOKEN, '');
+    cookie.remove('token');
+    Router.push('/');
+    notify(payload);
+    return storeState(account, notify);
+  },
 };
 
 const MyApp = ({ Component, pageProps }) => (
