@@ -4,19 +4,14 @@ import PropTypes from 'prop-types';
 
 const borderColor = '#3e2723';
 
-const TextInput = ({ onChange, text, type, disabled, ...props }) => {
-  const [value, setValue] = useState(props.value);
-
+const TextInput = ({ onChange, text, type, disabled, value, ...props }) => {
   return (
     <div>
       <input
         disabled={disabled}
         type={type}
         value={value}
-        onChange={(e) => {
-          onChange(e);
-          setValue(e.target.value);
-        }}
+        onChange={(e) => onChange(e.target.value)}
         className={classNames({
           focus: value,
         })}

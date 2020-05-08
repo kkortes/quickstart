@@ -3,20 +3,28 @@ import Icon from './ui/Icon';
 import StateChecks from './StateChecks';
 import { ACCOUNT_LOGGED_OUT } from '../../../universal/NOTIFICATIONS';
 
+import UsernameInput from './UsernameInput';
+
 export default ({ token }) => {
-  const [{ socket }] = useGlobal();
-  const { changeUsername, logout } = useDispatch();
+  const [
+    {
+      socket,
+      account: { username },
+    },
+  ] = useGlobal();
+  const { logout } = useDispatch();
 
   return (
-    <div>
-      <Icon name='apeegg' size={40} />
-      Logged in as {token}
-      <br />
-      Socket ID: {socket.id}
-      <br />
-      <input type='text' onChange={(e) => changeUsername(e.target.value)} />
-      <div onClick={() => logout(ACCOUNT_LOGGED_OUT)}>Logout</div>
+    <>
+      <div>
+        Logged in as {token}
+        <br />
+        Socket ID: {socket.id}
+        <br />
+        <div onClick={() => logout(ACCOUNT_LOGGED_OUT)}>Logout</div>
+      </div>
+      {!username && <UsernameInput />}
       <StateChecks />
-    </div>
+    </>
   );
 };

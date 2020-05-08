@@ -3,13 +3,15 @@ import {
   CREATE_ACCOUNT,
   STORE_STATE,
   REGISTER_TOKEN,
+  USERNAME_AVAILABILITY,
 } from '../../universal/SOCKET_ACTIONS.js';
 import loginAccount from './actions/loginAccount.js';
 import createAccount from './actions/createAccount.js';
 import storeState from './actions/storeState.js';
 import registerToken from './actions/registerToken.js';
+import usernameAvailability from './actions/usernameAvailability.js';
 
-let users = [];
+let sessions = [];
 
 export default (io, mongo) => {
   io.on('connection', (socket) => {
@@ -19,36 +21,37 @@ export default (io, mongo) => {
         return await fn(result);
       });
 
-    users.push({
+    sessions.push({
       id: socket.id,
       token: '',
     });
 
-    socket.action(LOGIN_ACCOUNT, async (name, func) => {
-      const result = await loginAccount(name, func);
+    socket.action(LOGIN_ACCOUNT, async (name, mongo) => {
+      const result = await loginAccount(name, mongo);
 
       if (result.token) {
-        registerToken(io, socket, users, result.token);
+        registerToken(io, socket, sessions, result.token);
       }
       return result;
     });
 
     socket.action(CREATE_ACCOUNT, createAccount);
     socket.action(STORE_STATE, storeState);
+    socket.action(USERNAME_AVAILABILITY, usernameAvailability);
 
     socket.on(REGISTER_TOKEN, (token) =>
-      registerToken(io, socket, users, token)
+      registerToken(io, socket, sessions, token)
     );
 
     socket.on('disconnect', () => {
-      const userIndex = users.findIndex(({ id }) => id === socket.id);
-      if (userIndex !== 0) {
-        users.splice(userIndex, 1);
+      const sessionIndex = sessions.findIndex(({ id }) => id === socket.id);
+      if (sessionIndex !== 0) {
+        sessions.splice(sessionIndex, 1);
       }
     });
   });
 
   // setInterval(() => {
-  //   console.table(users);
+  //   console.table(sessions);
   // }, 1000);
 };

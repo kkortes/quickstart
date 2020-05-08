@@ -1,16 +1,18 @@
 import { LOGGED_IN_ELSWEHRE } from '../../../universal/SOCKET_ACTIONS.js';
 
-export default (io, socket, users, token) => {
+export default (io, socket, sessions, token) => {
   if (token) {
-    const dupeToken = users.findIndex((user) => user.token === token);
+    const dupeToken = sessions.findIndex(
+      (session) => session.token === token && session.id !== socket.id
+    );
 
     if (dupeToken !== -1) {
-      io.to(users[dupeToken].id).emit(LOGGED_IN_ELSWEHRE);
-      users[dupeToken].token = '';
+      io.to(sessions[dupeToken].id).emit(LOGGED_IN_ELSWEHRE);
+      sessions[dupeToken].token = '';
     }
   }
-  const dupeID = users.findIndex((user) => user.id === socket.id);
+  const dupeID = sessions.findIndex((session) => session.id === socket.id);
   if (dupeID !== -1) {
-    users[dupeID].token = token;
+    sessions[dupeID].token = token;
   }
 };

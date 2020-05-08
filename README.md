@@ -21,3 +21,16 @@ cd backend/<appname>
 
 npm run dev
 ```
+
+### Switch snippet
+
+```
+((type) => {
+  switch (type) {
+    case 'success':
+      return 'something';
+    default:
+      return type;
+  }
+})(type)
+```

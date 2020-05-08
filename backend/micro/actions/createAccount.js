@@ -1,16 +1,17 @@
-import { USER_EXISTS } from '../../../universal/NOTIFICATIONS.js';
+import { ACCOUNT_EXISTS } from '../../../universal/NOTIFICATIONS.js';
+import config from '../../../config/index.js';
 
 export default async ({ email, password }, mongo) => {
-  const collection = mongo.db('test').collection('users');
+  const collection = mongo.db(config.dbName).collection('account');
 
   const LCemail = email.toLowerCase();
 
-  const user = await collection.findOne({
+  const acccount = await collection.findOne({
     email: LCemail,
   });
 
-  if (user) {
-    return USER_EXISTS;
+  if (acccount) {
+    return ACCOUNT_EXISTS;
   } else {
     await collection.insertOne({
       email: LCemail,

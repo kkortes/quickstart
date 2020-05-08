@@ -54,11 +54,13 @@ const INITIAL_REDUCERS = {
     }),
   }),
   login: (_store, _dispatch, payload) => {
-    cookie.set('token', payload, { expires: 1 });
+    const { token, ...account } = payload;
+    cookie.set('token', token, { expires: 1 });
     Router.push('/');
 
     return {
-      token: payload,
+      token,
+      account,
     };
   },
   logout: async ({ account, socket }, { notify }, payload) => {

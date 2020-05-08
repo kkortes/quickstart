@@ -16,6 +16,7 @@ import {
   ACCOUNT_CREATED,
 } from '../../../universal/NOTIFICATIONS';
 import cookie from 'js-cookie';
+import Center from './ui/Center';
 
 export default () => {
   const [{ socket }] = useGlobal();
@@ -25,9 +26,6 @@ export default () => {
   const [password, setPassword] = useState(cookie.get('password') || '');
   const [loading, setLoading] = useState(false);
   const [rememberMe, setRememberMe] = useState(!!cookie.get('rememberMe'));
-
-  const onChangeEmail = (e) => setEmail(e.target.value);
-  const onChangePassword = (e) => setPassword(e.target.value);
 
   const toggleAttemptLogin = (e) => {
     e.preventDefault();
@@ -76,7 +74,7 @@ export default () => {
         cookie.remove('rememberMe');
       }
       notify(ACCOUNT_LOGGED_IN);
-      login(response.token);
+      login(response);
     }
   };
 
@@ -87,33 +85,38 @@ export default () => {
     rememberMe
   );
 
+  // Todo, make "<Crow />" support null returns
+  const checkBox = attemptLogin ? (
+    <CheckBox
+      id='agree1'
+      onChange={setRememberMe}
+      value={rememberMe}
+      text='Remember me'
+    />
+  ) : (
+    []
+  );
+
   return (
     <div className='login'>
-      <div className='card'>
+      <Center>
         <form onSubmit={action}>
           <Crow vertical gutter={14}>
             <TextInput
               type='text'
               name='email'
-              onChange={onChangeEmail}
+              onChange={setEmail}
               value={email}
               text='Email'
-              disabled={loading}
             />
             <TextInput
               type='password'
               name='password'
-              onChange={onChangePassword}
+              onChange={setPassword}
               value={password}
               text='Password'
-              disabled={loading}
             />
-            <CheckBox
-              id='agree1'
-              onChange={setRememberMe}
-              value={rememberMe}
-              text='Remember me'
-            />
+            {checkBox}
             <Button primary onClick={action} disabled={loading}>
               {attemptLogin ? 'Log in' : 'Create account'}
             </Button>
@@ -128,13 +131,13 @@ export default () => {
           )}
           {!attemptLogin && <span>Go back</span>}
         </div>
-      </div>
+      </Center>
       <style jsx>{`
-        .card {
-          padding: 100px;
-          background-color: #fff;
-          box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+        .login {
+          ${loading ? 'pointer-events: none;' : ''}
         }
+      `}</style>
+      <style jsx>{`
         .info {
           margin-top: 20px;
         }

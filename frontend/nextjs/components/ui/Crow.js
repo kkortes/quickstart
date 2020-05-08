@@ -10,7 +10,6 @@ const Crow = ({ wingSpan, gutter, children, ...styles }) => {
   });
 
   const { vertical, horizontal } = styles;
-
   return (
     <div className={classes}>
       {Children.map(children, (child, index) => (
