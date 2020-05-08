@@ -33,6 +33,7 @@ export default async ({ email, password, token }, mongo) => {
     });
     return {
       token,
+      _id: token,
       ...(accountData || {}),
     };
   } else {

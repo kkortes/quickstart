@@ -30,7 +30,7 @@ export default () => {
   };
 
   return (
-    <div className='select-username'>
+    <div className='username-input'>
       <Center>
         <form onSubmit={confirmUsername(username)}>
           <Crow vertical gutter={14}>

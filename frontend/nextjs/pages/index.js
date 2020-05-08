@@ -6,19 +6,10 @@ import { LOGIN_ACCOUNT } from '../../../universal/SOCKET_ACTIONS';
 import Loader from '../components/Loader';
 
 export default ({ token }) => {
-  const {
-    socket,
-    account: { _id },
-  } = getGlobal();
+  const { socket } = getGlobal();
 
   const [loggedIn, setLoggedIn] = useState(false);
   const { login } = useDispatch();
-
-  useEffect(() => {
-    if (_id) {
-      setLoggedIn(true);
-    }
-  }, [_id]);
 
   useEffect(() => {
     if (token) {
