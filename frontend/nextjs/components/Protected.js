@@ -1,5 +1,4 @@
 import { useDispatch, useGlobal } from 'reactn';
-import Icon from './ui/Icon';
 import StateChecks from './StateChecks';
 import { ACCOUNT_LOGGED_OUT } from '../../../universal/NOTIFICATIONS';
 

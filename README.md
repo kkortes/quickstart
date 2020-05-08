@@ -31,10 +31,20 @@ npm run dev
 - ✅ Tab reload and duplicate prevention
 - ✅ Duplicate user session prevention
 - ✅ Notification center
+- ❌ "Eject"-script `npm run eject --scope=<appname>` for easier hosting
 - ❌ Heroku backend hosting setup
 - ❌ Vercel frontend hosting setup
 - ❌ Persistant and safe localStorage
 - ❌ Password recovery via email
+
+### Todo
+
+- Get rid of `proptypes` dependency
+- Get rid of `classnames` dependency
+- Get rid of `uuid` dependency
+- Get rid of `react-transition-group` dependency
+- Make it so that `<Crow />` can handle `null` (not creating white space)
+- Split up `/micro/actions/createAccount.js` into `createAccount` and `recoverAccount`
 
 ### Switch snippet
 
