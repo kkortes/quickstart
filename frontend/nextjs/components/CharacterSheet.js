@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import Button from './ui/Button';
-import Stat from '../common/stat';
 
 // Will be in another file
 const resistances = {
@@ -27,13 +26,6 @@ const characterStats = {
   range: 100,
   ...resistances,
 };
-
-// Will be in another file
-const arrayify = (object) =>
-  Object.keys(object).reduce(
-    (a, key) => [...a, { name: key, value: object[key] }],
-    []
-  );
 
 // Will be in another file
 const getSuffix = (statName) =>
@@ -131,12 +123,12 @@ const getFormula = (statName) =>
 const spaceCamelCase = (statName) => statName.replace(/([A-Z]+)/g, ' $1');
 
 // Could be here
-const transform = (stat, level = 1) => ({
-  ...stat,
-  name: spaceCamelCase(stat.name),
-  suffix: getSuffix(stat.name),
-  max: getMax(stat.name),
-  formula: getFormula(stat.name),
+const transform = ([key, value]) => ({
+  value,
+  name: spaceCamelCase(key),
+  suffix: getSuffix(key),
+  max: getMax(key),
+  formula: getFormula(key),
 });
 
 export default () => {
@@ -151,7 +143,7 @@ export default () => {
       <br />
       <Button onClick={() => setLevel(1)}>Reset level</Button>
 
-      {arrayify(characterStats)
+      {Object.entries(characterStats)
         .map(transform)
         .map(({ name, value, suffix, max, formula }) => (
           <div className='stat' key={name}>
