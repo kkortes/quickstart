@@ -11,7 +11,7 @@ export default ({ children }) => (
         href='/static/favicon.ico'
       />
       <link
-        href='https://fonts.googleapis.com/css?family=Bree+Serif|Fira+Sans+Condensed&display=swap'
+        href='https://fonts.googleapis.com/css?family=Bree+Serif|Fira+Sans+Condensed|Volkhov&display=swap'
         rel='stylesheet'
       />
       <link href='./static/icomoon/style.css' rel='stylesheet' />

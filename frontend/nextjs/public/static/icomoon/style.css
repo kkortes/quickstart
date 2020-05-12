@@ -1,10 +1,10 @@
 @font-face {
   font-family: 'icomoon';
-  src:  url('fonts/icomoon.eot?v2fj2d');
-  src:  url('fonts/icomoon.eot?v2fj2d#iefix') format('embedded-opentype'),
-    url('fonts/icomoon.ttf?v2fj2d') format('truetype'),
-    url('fonts/icomoon.woff?v2fj2d') format('woff'),
-    url('fonts/icomoon.svg?v2fj2d#icomoon') format('svg');
+  src:  url('fonts/icomoon.eot?l5qili');
+  src:  url('fonts/icomoon.eot?l5qili#iefix') format('embedded-opentype'),
+    url('fonts/icomoon.ttf?l5qili') format('truetype'),
+    url('fonts/icomoon.woff?l5qili') format('woff'),
+    url('fonts/icomoon.svg?l5qili#icomoon') format('svg');
   font-weight: normal;
   font-style: normal;
   font-display: block;
@@ -25,20 +25,243 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
-.icon-info:before {
-  content: "\e904";
+.icon-element-earth:before {
+  content: "\e926";
+}
+.icon-element-fire:before {
+  content: "\e927";
+}
+.icon-element-frost:before {
+  content: "\e928";
+}
+.icon-element-lightning:before {
+  content: "\e92d";
+}
+.icon-element-nature:before {
+  content: "\e92e";
+}
+.icon-element-void:before {
+  content: "\e931";
+}
+.icon-element-water:before {
+  content: "\e936";
+}
+.icon-dodge:before {
+  content: "\e925";
+}
+.icon-berserker:before {
+  content: "\e922";
+}
+.icon-coin:before {
+  content: "\e923";
+}
+.icon-winner:before {
+  content: "\e924";
+}
+.icon-assassin:before {
+  content: "\e93f";
+}
+.icon-dwarf:before {
+  content: "\e941";
+}
+.icon-elf:before {
+  content: "\e942";
+}
+.icon-human:before {
+  content: "\e943";
+}
+.icon-mage:before {
+  content: "\e944";
+}
+.icon-soldier:before {
+  content: "\e945";
+}
+.icon-undead:before {
+  content: "\e946";
+}
+.icon-duel:before {
+  content: "\e93c";
+}
+.icon-enchant:before {
+  content: "\e93a";
+}
+.icon-connection:before {
+  content: "\e930";
+}
+.icon-fire:before {
+  content: "\e91e";
+  color: #f7941d;
+}
+.icon-frost:before {
+  content: "\e911";
+  color: #2fbbec;
+}
+.icon-nature:before {
+  content: "\e916";
+  color: #abcf39;
+}
+.icon-void:before {
+  content: "\e918";
+  color: #aa2eb2;
+}
+.icon-armor-broken:before {
+  content: "\e92c";
+}
+.icon-upgrade:before {
+  content: "\e917";
+}
+.icon-dungeon:before {
+  content: "\e920";
+}
+.icon-character:before {
+  content: "\e929";
+}
+.icon-research:before {
+  content: "\e914";
+}
+.icon-armor:before {
+  content: "\e910";
+}
+.icon-damage:before {
+  content: "\e90f";
+}
+.icon-gather:before {
+  content: "\e90e";
+}
+.icon-trophy:before {
+  content: "\e913";
+}
+.icon-critical:before {
+  content: "\e90d";
+}
+.icon-skull:before {
+  content: "\e90a";
 }
 .icon-apeegg:before {
   content: "\e902";
+}
+.icon-health-damaged:before {
+  content: "\e93d";
+}
+.icon-health:before {
+  content: "\e93e";
+}
+.icon-cog:before {
+  content: "\e933";
+}
+.icon-carving:before {
+  content: "\e932";
+}
+.icon-flag:before {
+  content: "\e92a";
+}
+.icon-star:before {
+  content: "\e93b";
+}
+.icon-quill:before {
+  content: "\e938";
+}
+.icon-audio-off:before {
+  content: "\e934";
+}
+.icon-audio-on:before {
+  content: "\e935";
+}
+.icon-arrow-right:before {
+  content: "\e908";
+}
+.icon-arrow-left:before {
+  content: "\e909";
+}
+.icon-arrow-down:before {
+  content: "\e90b";
+}
+.icon-arrow-up:before {
+  content: "\e90c";
+}
+.icon-database:before {
+  content: "\e912";
+}
+.icon-menu1:before {
+  content: "\e9bd";
+}
+.icon-plus:before {
+  content: "\ea0a";
+}
+.icon-cross:before {
+  content: "\ea0f";
+}
+.icon-check:before {
+  content: "\ea10";
+}
+.icon-book:before {
+  content: "\e91f";
+}
+.icon-library:before {
+  content: "\e921";
+}
+.icon-memory:before {
+  content: "\e979";
+}
+.icon-craft:before {
+  content: "\e996";
+}
+.icon-block:before {
+  content: "\e9b4";
+}
+.icon-quests:before {
+  content: "\e9ba";
+}
+.icon-explore:before {
+  content: "\e9ca";
+}
+.icon-refresh:before {
+  content: "\ea2e";
 }
 .icon-success:before {
   content: "\e905";
 }
 .icon-error:before {
-  content: "\e903";
+  content: "\e906";
 }
-.icon-cog:before {
+.icon-cog1:before {
   content: "\e901";
+}
+.icon-claim:before {
+  content: "\e92f";
+}
+.icon-chevron-up:before {
+  content: "\e91a";
+}
+.icon-chevron-right:before {
+  content: "\e91b";
+}
+.icon-chevron-left:before {
+  content: "\e91c";
+}
+.icon-chevron-down:before {
+  content: "\e91d";
+}
+.icon-chain:before {
+  content: "\e937";
+}
+.icon-resign:before {
+  content: "\e92b";
+}
+.icon-stopwatch:before {
+  content: "\e919";
+}
+.icon-market:before {
+  content: "\e915";
+}
+.icon-lock-closed:before {
+  content: "\e907";
+}
+.icon-info:before {
+  content: "\e904";
+}
+.icon-socketing:before {
+  content: "\e903";
 }
 .icon-menu:before {
   content: "\e900";

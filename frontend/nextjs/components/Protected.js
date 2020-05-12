@@ -3,6 +3,8 @@ import StateChecks from './StateChecks';
 import { ACCOUNT_LOGGED_OUT } from '../../../universal/NOTIFICATIONS';
 
 import UsernameInput from './UsernameInput';
+import CardPage from './CardPage';
+import CharacterSheet from './CharacterSheet';
 
 export default ({ token }) => {
   const [
@@ -23,6 +25,8 @@ export default ({ token }) => {
         <div onClick={() => logout(ACCOUNT_LOGGED_OUT)}>Logout</div>
       </div>
       {!username && <UsernameInput />}
+      {/* {username && <CardPage />} */}
+      {username && <CharacterSheet />}
       <StateChecks />
     </>
   );
