@@ -2,6 +2,6 @@ export default {
   env: 'production',
   debug: false,
   endpoint: {
-    socket: '',
+    socket: 'http://localhost:3001',
   },
 };

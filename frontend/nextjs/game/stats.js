@@ -22,7 +22,7 @@ const getMax = (statName) =>
       case 'armor':
       case 'dodgeChance':
       case 'blockChance':
-        return '95%';
+        return '99%';
       case 'criticalDamage':
         return '250%';
       default:
@@ -34,55 +34,62 @@ const getFormula = (statName) =>
   ((statName) => {
     switch (statName) {
       case 'health':
-        return {
-          present: '(tier * 5) * 3',
-          calculate: (level = 1) => {
-            return level * 5 * 3;
-          },
-        };
+        return 'tier * 3';
       case 'damage':
-        return {
-          present: '(tier * 5)',
-          calculate: (level = 1) => {
-            return level * 5;
-          },
-        };
+        return 'tier';
       case 'dodgeChance':
       case 'armor':
       case 'blockChance':
-        return {
-          present: '(0.95 * (level * 5)) / (level * 5 + 400)',
-          calculate: (level = 1) => {
-            const calculated = (0.95 * (level * 5)) / (level * 5 + 400);
-            return `${(calculated * 100).toFixed(2)}%`;
-          },
-        };
-      case 'criticalChance':
-        return {
-          present: '(1.00 * (level * 5)) / (level * 5 + 400)',
-          calculate: (level = 1) => {
-            const calculated = (1 * (level * 5)) / (level * 5 + 400);
-            return `${(calculated * 100).toFixed(2)}%`;
-          },
-        };
-      case 'criticalDamage':
-      case 'attackSpeed':
-      case 'movementSpeed':
-      case 'range':
-        return {
-          present: '(1.00 * (level * 5)) / (level * 5 + 400)',
-          calculate: (level = 1) => {
-            const calculated = (1 * (level * 5)) / (level * 5 + 400);
-            return `${(calculated * 100).toFixed(2)}%`;
-          },
+        return '0.99 * tier / (tier + 98)';
+      default:
+        return 'tier / (tier + 98)';
+    }
+  })(statName);
+
+const valueByTier = (statName) =>
+  ((statName) => {
+    switch (statName) {
+      case 'health':
+        return (tier) => tier * 3;
+      case 'damage':
+        return (tier) => tier;
+      case 'dodgeChance':
+      case 'armor':
+      case 'blockChance':
+        return (tier, prettyPrint) => {
+          const calculation = (0.99 * tier) / (tier + 98);
+          return prettyPrint
+            ? (calculation * 100).toFixed(2) + '%'
+            : calculation;
         };
       default:
-        return {
-          present: '((level * 5)) / (level * 5 + 400)',
-          calculate: (level = 1) => {
-            const calculated = (level * 5) / (level * 5 + 400);
-            return `${(calculated * 100).toFixed(2)}%`;
-          },
+        return (tier, prettyPrint) => {
+          const calculation = tier / (tier + 98);
+          return prettyPrint
+            ? (calculation * 100).toFixed(2) + '%'
+            : calculation;
+        };
+    }
+  })(statName);
+
+const tierByValue = (statName) =>
+  ((statName) => {
+    switch (statName) {
+      case 'health':
+        return (value) => value / 3;
+      case 'damage':
+        return (value) => value;
+      case 'dodgeChance':
+      case 'armor':
+      case 'blockChance':
+        return (value, prettyPrint) => {
+          const calculation = (9800 * value) / (99 - 100 * value);
+          return prettyPrint ? Math.round(calculation) : calculation;
+        };
+      default:
+        return (value, prettyPrint) => {
+          const calculation = (98 * value) / (1 - value);
+          return prettyPrint ? Math.round(calculation) : calculation;
         };
     }
   })(statName);
@@ -95,6 +102,8 @@ const transform = ([key, value]) => ({
   suffix: getSuffix(key),
   max: getMax(key),
   formula: getFormula(key),
+  valueByTier: valueByTier(key),
+  tierByValue: tierByValue(key),
 });
 
 export { transform };

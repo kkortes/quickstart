@@ -5,12 +5,19 @@ import socket from '../common/socket';
 import { storeState, storeStateWithDebounce } from '../common/db';
 import cookie from 'js-cookie';
 import Router from 'next/router';
-import { ACCOUNT_LOGGED_OUT } from '../../../universal/NOTIFICATIONS';
 import { REGISTER_TOKEN } from '../../../universal/SOCKET_ACTIONS';
 
 const INITIAL_STATE = {
   socket,
   token: '',
+  fromCenter: {
+    vertical: 0,
+    horizontal: 0,
+  },
+  position: {
+    x: 0,
+    y: 0,
+  },
   account: {
     username: '',
   },
@@ -18,6 +25,12 @@ const INITIAL_STATE = {
 };
 
 const INITIAL_REDUCERS = {
+  setPosition: (_store, _dispatch, payload) => ({
+    position: payload,
+  }),
+  setFromCenter: (_store, _dispatch, payload) => ({
+    fromCenter: payload,
+  }),
   accountChanges: ({ account }, { notify }, payload) => {
     const merged = {
       ...account,

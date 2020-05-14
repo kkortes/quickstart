@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import Button from './ui/Button';
-import stats from '../definitions/stats';
+import { transform } from '../game/stats';
 
 const resistances = {
   void: 0,
@@ -13,8 +13,8 @@ const resistances = {
 };
 
 const characterStats = {
-  health: 15,
-  damage: 5,
+  health: 3,
+  damage: 1,
   armor: 0,
   dodgeChance: 0,
   blockChance: 0,
@@ -25,14 +25,6 @@ const characterStats = {
   range: 100,
   ...resistances,
 };
-
-const spaceCamelCase = (statName) => statName.replace(/([A-Z]+)/g, ' $1');
-
-const transform = ([key, value]) => ({
-  value,
-  name: spaceCamelCase(key),
-  ...stats[key],
-});
 
 export default () => {
   const [tier, setTier] = useState(1);
@@ -46,21 +38,39 @@ export default () => {
       <br />
       <Button onClick={() => setTier(1)}>Reset tier</Button>
 
+      <div className='stat headline'>
+        <div className='name'>Stat</div>
+        <div className='value'>Value</div>
+        <div className='max'>Max</div>
+        <div className='formula'>Formula</div>
+        <div className='valueByTier'>ValueByTier</div>
+        <div className='tierByValue'>TierByValue</div>
+      </div>
+
       {Object.entries(characterStats)
         .map(transform)
-        .map(({ name, value, suffix, max, formula, valueByTier }) => (
-          <div className='stat' key={name}>
-            <div className='name'>{name}</div>
-            <div className='value'>
-              {value}
-              {suffix}
+        .map(
+          ({ name, value, suffix, max, formula, valueByTier, tierByValue }) => (
+            <div className='stat' key={name}>
+              <div className='name'>{name}</div>
+              <div className='value'>
+                {value}
+                {suffix}
+              </div>
+              <div className='max'>{max}</div>
+              <div className='formula'>{formula}</div>
+              <div className='valueByTier'>{valueByTier(tier, true)}</div>
+              <div className='tierByValue'>
+                {tierByValue(valueByTier(tier), true)}
+              </div>
             </div>
-            <div className='max'>max {max}</div>
-            <div className='formula'>{formula}</div>
-            <div className='valueByTier'>{valueByTier(tier)}</div>
-          </div>
-        ))}
+          )
+        )}
       <style jsx>{`
+        .headline {
+          font-weight: 600;
+          margin-bottom: 8px;
+        }
         .stat {
           display: flex;
         }
@@ -82,12 +92,15 @@ export default () => {
         .valueByTier {
           flex: 1;
         }
+        .tierByValue {
+          flex: 1;
+        }
         .name:first-letter {
           text-transform: uppercase;
         }
         .character-sheet {
           margin: 0 auto;
-          width: 900px;
+          width: 1000px;
         }
       `}</style>
     </div>

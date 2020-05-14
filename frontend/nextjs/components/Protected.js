@@ -5,6 +5,9 @@ import { ACCOUNT_LOGGED_OUT } from '../../../universal/NOTIFICATIONS';
 import UsernameInput from './UsernameInput';
 import CardPage from './CardPage';
 import CharacterSheet from './CharacterSheet';
+import World from './World';
+import CenterIndicator from './CenterIndicator';
+import Movement from './Movement';
 
 export default ({ token }) => {
   const [
@@ -26,8 +29,11 @@ export default ({ token }) => {
       </div>
       {!username && <UsernameInput />}
       {/* {username && <CardPage />} */}
-      {username && <CharacterSheet />}
+      {/* {username && <CharacterSheet />} */}
+      {username && <World />}
       <StateChecks />
+      <CenterIndicator />
+      <Movement />
     </>
   );
 };
