@@ -8,3 +8,5 @@ node_modules*
 **/mongo-db
 **/.next
 **/universal
+**/config
+.vercel

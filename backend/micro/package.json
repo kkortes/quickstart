@@ -6,7 +6,9 @@
   "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "NODE_ENV=development nodemon --watch ./"
+    "dev": "NODE_ENV=development nodemon --watch ./",
+    "link": "(exec rm -Rf universal) && (exec ln -s ../../universal ./universal) && (exec rm -Rf config) && (exec ln -s ../../config ./config)",
+    "eject": "(exec rm -Rf universal) && (exec cp -r ../../universal/ ./universal) && (exec rm -Rf config) && (exec cp -r ../../config/ ./config)"
   },
   "author": "",
   "license": "ISC",
