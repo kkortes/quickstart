@@ -9,7 +9,8 @@
     "dev": "lerna run dev --parallel",
     "new-version": "lerna version --conventional-commits --yes",
     "diff": "lerna diff",
-    "bootstrap": "lerna bootstrap; lerna run link;"
+    "bootstrap": "lerna bootstrap; lerna run link;",
+    "eject": "lerna run eject;"
   },
   "devDependencies": {
     "babel-eslint": "^10.1.0",

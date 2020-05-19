@@ -31,7 +31,7 @@ npm run dev
 - ✅ Tab reload and duplicate prevention
 - ✅ Duplicate user session prevention
 - ✅ Notification center
-- ❌ "Eject"-script `npm run eject --scope=<appname>` for easier hosting
+- ✅ "Eject"-script `npm run eject` for easier hosting
 - ❌ Heroku backend hosting setup
 - ❌ Vercel frontend hosting setup
 - ❌ Persistant and safe localStorage
