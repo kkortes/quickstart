@@ -7,7 +7,7 @@ import CharacterSheet from './CharacterSheet';
 import World from './game/World';
 import Player from './game/Player';
 import Movement from './game/Movement';
-import config from '../../../config';
+import config from '../config';
 import Debug from './Debug';
 import TopBar from './TopBar';
 

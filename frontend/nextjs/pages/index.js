@@ -5,14 +5,6 @@ import { useEffect, setGlobal, useDispatch, useState, getGlobal } from 'reactn';
 import { LOGIN_ACCOUNT } from '../universal/SOCKET_ACTIONS';
 import Loader from '../components/Loader';
 
-// export default () => (
-//   <>
-//     <World />
-//     <Player />
-//     <Movement />
-//   </>
-// );
-
 export default ({ token }) => {
   const {
     socket,
