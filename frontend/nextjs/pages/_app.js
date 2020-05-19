@@ -20,6 +20,12 @@ const INITIAL_STATE = {
   },
   account: {
     username: '',
+    equipment: {
+      armor: {},
+      mainHand: {},
+      offHand: {},
+      accessory: {},
+    },
   },
   notifications: [],
 };
@@ -28,7 +34,7 @@ const INITIAL_REDUCERS = {
   setPosition: (_store, _dispatch, payload) => ({
     position: payload,
   }),
-  setFromCenter: ({ fromCenter }, _dispatch, payload) => ({
+  setFromCenter: (_store, _dispatch, payload) => ({
     fromCenter: payload,
   }),
   accountChanges: ({ account }, { notify }, payload) => {
@@ -66,14 +72,17 @@ const INITIAL_REDUCERS = {
       type,
     }),
   }),
-  login: (_store, _dispatch, payload) => {
-    const { token, ...account } = payload;
+  login: ({ account }, _dispatch, payload) => {
+    const { token, ...dbData } = payload;
     cookie.set('token', token, { expires: 1 });
     Router.push('/');
 
     return {
       token,
-      account,
+      account: {
+        ...account,
+        ...dbData,
+      },
     };
   },
   logout: async ({ account, socket }, { notify }, payload) => {

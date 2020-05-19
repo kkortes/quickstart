@@ -9,7 +9,7 @@ import {
   TILE_SIZE,
   WORLD_SIZE,
 } from '../../constants/WORLD';
-import makeTile from './makeTile';
+import makeTile from '../../game/makeTile';
 const { times } = lodash;
 
 // whyDidYouRender(React, {

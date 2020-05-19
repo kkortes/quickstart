@@ -2,14 +2,9 @@ import { useGlobal } from 'reactn';
 import StateChecks from './StateChecks';
 
 import UsernameInput from './UsernameInput';
-import CardPage from './CardPage';
-import CharacterSheet from './CharacterSheet';
-import World from './game/World';
-import Player from './game/Player';
-import Movement from './game/Movement';
 import config from '../config';
 import Debug from './Debug';
-import TopBar from './TopBar';
+import Interface from './game/Interface';
 
 export default ({ token }) => {
   const [
@@ -21,13 +16,10 @@ export default ({ token }) => {
 
   return (
     <>
-      {username && <World />}
-      {username && <Player />}
-      <TopBar />
-      {config.debug && <Debug token={token} socket={socket} />}
+      {username && <Interface />}
       {!username && <UsernameInput />}
+      {config.debug && <Debug token={token} socket={socket} />}
       <StateChecks />
-      <Movement />
     </>
   );
 };

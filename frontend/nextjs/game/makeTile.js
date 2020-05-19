@@ -1,6 +1,6 @@
-import { TILE_AMOUNT } from '../../constants/WORLD';
+import { TILE_AMOUNT } from '../constants/WORLD';
 import SimplexNoise from 'simplex-noise';
-import { randomNumber } from '../../universal/helpers';
+import { randomNumber } from '../universal/helpers';
 import seedrandom from 'seedrandom';
 
 const simplex = new SimplexNoise('testar');
@@ -30,6 +30,7 @@ const biomes = {
     generate: (seed, mod = 0) => ({
       x: randomNumber(0, 3, seed) * 200,
       y: getRow(10 + mod),
+      a,
     }),
   },
   water: {
