@@ -1,33 +1,11 @@
 import { useState } from 'react';
 import Button from './ui/Button';
 import { transform } from '../game/stats';
-
-const resistances = {
-  void: 0,
-  fire: 0,
-  lightning: 0,
-  nature: 0,
-  earth: 0,
-  water: 0,
-  frost: 0,
-};
-
-const characterStats = {
-  health: 3,
-  damage: 1,
-  armor: 0,
-  dodgeChance: 0,
-  blockChance: 0,
-  criticalChance: 0,
-  criticalDamage: 150,
-  attackSpeed: 100,
-  movementSpeed: 100,
-  range: 100,
-  ...resistances,
-};
+import { STATS } from '../constants/INITIALS';
 
 export default () => {
   const [tier, setTier] = useState(1);
+
   return (
     <div className='character-sheet'>
       <h2>Current tier is: {tier}</h2>
@@ -47,16 +25,14 @@ export default () => {
         <div className='tierByValue'>TierByValue</div>
       </div>
 
-      {Object.entries(characterStats)
+      {Object.entries(STATS)
         .map(transform)
+        .filter(({ key }) => key !== 'resistances')
         .map(
-          ({ name, value, suffix, max, formula, valueByTier, tierByValue }) => (
+          ({ name, prettyValue, max, formula, valueByTier, tierByValue }) => (
             <div className='stat' key={name}>
               <div className='name'>{name}</div>
-              <div className='value'>
-                {value}
-                {suffix}
-              </div>
+              <div className='value'>{prettyValue}</div>
               <div className='max'>{max}</div>
               <div className='formula'>{formula}</div>
               <div className='valueByTier'>{valueByTier(tier, true)}</div>
@@ -95,12 +71,10 @@ export default () => {
         .tierByValue {
           flex: 1;
         }
-        .name:first-letter {
-          text-transform: uppercase;
-        }
         .character-sheet {
           margin: 0 auto;
           width: 1000px;
+          background: #fff;
         }
       `}</style>
     </div>

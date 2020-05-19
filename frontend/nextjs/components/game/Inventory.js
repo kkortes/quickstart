@@ -1,14 +1,24 @@
 import { useGlobal } from 'reactn';
+import { transform } from '../../game/stats';
+import lodash from 'lodash';
+const { isEmpty } = lodash;
 
 export default () => {
-  const [{ account }] = useGlobal();
-  console.log(account);
-  return null;
+  const [
+    {
+      account: { equipment },
+    },
+  ] = useGlobal();
+
   return (
     <div className='inventory'>
-      {Object.entries(equipment).map(([key, value]) => (
-        <div className={`${key}`}>{value.name}</div>
-      ))}
+      {Object.entries(equipment)
+        .map(transform)
+        .map(({ name, key, value }) => (
+          <div key={key} className={`${name}`}>
+            {name} {!isEmpty(value) ? value.name : 'n/a'}
+          </div>
+        ))}
       <style jsx>{`
         .inventory {
           position: fixed;

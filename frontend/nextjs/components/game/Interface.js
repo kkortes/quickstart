@@ -3,6 +3,7 @@ import Player from './Player';
 import TopBar from '../TopBar';
 import Movement from './Movement';
 import Inventory from './Inventory';
+import Stats from './Stats';
 
 export default () => (
   <>
@@ -11,5 +12,6 @@ export default () => (
     <TopBar />
     <Movement />
     <Inventory />
+    <Stats />
   </>
 );

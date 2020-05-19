@@ -1,11 +1,11 @@
-const getSuffix = (statName) =>
+const prettyValue = (statName, value) =>
   ((statName) => {
     switch (statName) {
       case 'damage':
       case 'health':
-        return '';
+        return value;
       default:
-        return '%';
+        return `${value * 100}%`;
     }
   })(statName);
 
@@ -94,12 +94,16 @@ const tierByValue = (statName) =>
     }
   })(statName);
 
-const spaceCamelCase = (statName) => statName.replace(/([A-Z]+)/g, ' $1');
+const spaceCamelCase = (statName) => {
+  const name = statName.replace(/([A-Z]+)/g, ' $1');
+  return name.charAt(0).toUpperCase() + name.slice(1);
+};
 
 const transform = ([key, value]) => ({
   value,
+  key,
   name: spaceCamelCase(key),
-  suffix: getSuffix(key),
+  prettyValue: prettyValue(key, value),
   max: getMax(key),
   formula: getFormula(key),
   valueByTier: valueByTier(key),

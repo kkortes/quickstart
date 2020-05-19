@@ -6,6 +6,7 @@ import { storeState, storeStateWithDebounce } from '../common/db';
 import cookie from 'js-cookie';
 import Router from 'next/router';
 import { REGISTER_TOKEN } from '../universal/SOCKET_ACTIONS';
+import { EQUIPMENT, STATS } from '../constants/INITIALS';
 
 const INITIAL_STATE = {
   socket,
@@ -20,17 +21,25 @@ const INITIAL_STATE = {
   },
   account: {
     username: '',
-    equipment: {
-      armor: {},
-      mainHand: {},
-      offHand: {},
-      accessory: {},
-    },
+    equipment: EQUIPMENT,
+    stats: STATS,
   },
   notifications: [],
 };
 
 const INITIAL_REDUCERS = {
+  setStat: async ({ account }, { accountChanges }, payload) => {
+    const store = await accountChanges({
+      ...account,
+      stats: {
+        ...account.stats,
+        [payload.key]: payload.value,
+      },
+    });
+    return {
+      account: store.account,
+    };
+  },
   setPosition: (_store, _dispatch, payload) => ({
     position: payload,
   }),
@@ -90,7 +99,8 @@ const INITIAL_REDUCERS = {
     cookie.remove('token');
     Router.push('/');
     notify(payload);
-    return storeState(account, notify);
+    await storeState(account, notify);
+    return INITIAL_STATE;
   },
 };
 

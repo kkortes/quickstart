@@ -4,7 +4,15 @@ import { TILE_SIZE } from '../../constants/WORLD';
 import useInterval from '../../hooks/useInterval';
 
 export default () => {
-  const [{ fromCenter, position }] = useGlobal();
+  const [
+    {
+      fromCenter,
+      position,
+      account: {
+        stats: { movementSpeed },
+      },
+    },
+  ] = useGlobal();
   const { setFromCenter, setPosition } = useDispatch();
 
   const up = useKeyPress('w');
@@ -18,7 +26,7 @@ export default () => {
       const h = up || down;
       const v = right || left;
 
-      const value = h && v ? 5 : 5;
+      const value = (h && v ? 5 : 5) * movementSpeed;
 
       const { vertical, horizontal } = fromCenter;
 

@@ -5,6 +5,7 @@ import UsernameInput from './UsernameInput';
 import config from '../config';
 import Debug from './Debug';
 import Interface from './game/Interface';
+import CharacterSheet from './CharacterSheet';
 
 export default ({ token }) => {
   const [
@@ -17,6 +18,7 @@ export default ({ token }) => {
   return (
     <>
       {username && <Interface />}
+      {/* {username && <CharacterSheet />} */}
       {!username && <UsernameInput />}
       {config.debug && <Debug token={token} socket={socket} />}
       <StateChecks />
