@@ -6,7 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "./scripts/mongo",
-    "stop": "kill -2 `pgrep mongo`;"
+    "stop": "kill -2 `pgrep mongo`;",
+    "link": "exec ln -sfn ../../universal ./universal & exec ln -sfn ../../config ./config"
   },
   "author": "",
   "license": "ISC",

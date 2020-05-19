@@ -1,4 +1,4 @@
-import { LOGGED_IN_ELSWEHRE } from '../../../universal/SOCKET_ACTIONS.js';
+import { LOGGED_IN_ELSWEHRE } from '../universal/SOCKET_ACTIONS.js';
 
 export default (io, socket, sessions, token) => {
   if (token) {

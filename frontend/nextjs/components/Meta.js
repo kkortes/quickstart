@@ -34,8 +34,6 @@ export default ({ children }) => (
           flex-direction: column;
           overflow-y: scroll;
           overflow-x: hidden;
-          padding: 20px 15px 90px 15px;
-          padding-bottom: 250px;
           overflow: hidden;
         }
       `}

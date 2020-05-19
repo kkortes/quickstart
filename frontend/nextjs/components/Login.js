@@ -1,9 +1,6 @@
 import sha1 from 'sha1';
-import {
-  LOGIN_ACCOUNT,
-  CREATE_ACCOUNT,
-} from '../../../universal/SOCKET_ACTIONS';
-import { validateEmail } from '../../../universal/helpers';
+import { LOGIN_ACCOUNT, CREATE_ACCOUNT } from '../universal/SOCKET_ACTIONS';
+import { validateEmail } from '../universal/helpers';
 import { useDispatch, useGlobal, useState, setGlobal } from 'reactn';
 import TextInput from './ui/TextInput';
 import Crow from './ui/Crow';
@@ -14,7 +11,7 @@ import {
   ACCOUNT_LOGGED_IN,
   EMAIL_INVALID,
   ACCOUNT_CREATED,
-} from '../../../universal/NOTIFICATIONS';
+} from '../universal/NOTIFICATIONS';
 import cookie from 'js-cookie';
 import Center from './ui/Center';
 import { useEffect } from 'react';

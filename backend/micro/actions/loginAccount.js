@@ -1,6 +1,6 @@
-import { PASSWORD_INCORRECT } from '../../../universal/NOTIFICATIONS.js';
+import { PASSWORD_INCORRECT } from '../universal/NOTIFICATIONS.js';
 import config from '../../../config/index.js';
-import { sleep } from '../../../universal/helpers.js';
+import { sleep } from '../universal/helpers.js';
 import mongodb from 'mongodb';
 const { ObjectID } = mongodb;
 

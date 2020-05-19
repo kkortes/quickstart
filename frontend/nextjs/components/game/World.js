@@ -39,6 +39,11 @@ const World = () => {
       <div className='world' style={transformation(fromCenter)}>
         <Tiles tiles={tiles} TILE_SIZE={TILE_SIZE} />
       </div>
+      <div className='fog'>
+        <div className='top' />
+        <div className='right' />
+        <div className='left' />
+      </div>
       <style jsx>{`
         .world-frame {
           perspective: ${PERSPECTIVE};
@@ -62,6 +67,41 @@ const World = () => {
           position: fixed;
           top: 50%;
           left: 50%;
+        }
+        .fog {
+          position: fixed;
+          top: 50%;
+          right: 0;
+          left: 50%;
+          bottom: 0;
+          pointer-events: none;
+          transform: rotateX(20deg) translate(-50%, -50%);
+          width: ${WORLD_SIZE * 1.2}px;
+          height: ${WORLD_SIZE}px;
+        }
+        .top {
+          position: absolute;
+          top: 0;
+          bottom: 90%;
+          left: 0;
+          right: 0;
+          background: linear-gradient(#000000 90%, transparent);
+        }
+        .left {
+          position: absolute;
+          top: 0;
+          bottom: 0;
+          left: 82.5%;
+          right: 0;
+          background: linear-gradient(to right, transparent, #000000 10%);
+        }
+        .right {
+          position: absolute;
+          top: 0;
+          bottom: 0;
+          left: 0;
+          right: 82.5%;
+          background: linear-gradient(to left, transparent, #000000 10%);
         }
       `}</style>
     </div>

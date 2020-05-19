@@ -5,7 +5,7 @@ import socket from '../common/socket';
 import { storeState, storeStateWithDebounce } from '../common/db';
 import cookie from 'js-cookie';
 import Router from 'next/router';
-import { REGISTER_TOKEN } from '../../../universal/SOCKET_ACTIONS';
+import { REGISTER_TOKEN } from '../universal/SOCKET_ACTIONS';
 
 const INITIAL_STATE = {
   socket,

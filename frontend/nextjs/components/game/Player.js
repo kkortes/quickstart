@@ -51,6 +51,7 @@ export default () => (
         right: 0;
         left: 0;
         bottom: 0;
+        pointer-events: none;
       }
     `}</style>
   </div>

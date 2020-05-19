@@ -6,7 +6,8 @@
   "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "NODE_ENV=development nodemon --watch ./"
+    "dev": "NODE_ENV=development nodemon --watch ./",
+    "link": "exec ln -sfn ../../universal ./universal & exec ln -sfn ../../config ./config"
   },
   "author": "",
   "license": "ISC",

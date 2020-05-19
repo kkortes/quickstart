@@ -26,6 +26,7 @@ export default ({ text }) => (
         h1 {
           text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.5);
           margin: 0;
+          color: #fff;
         }
         .lds-ellipsis {
           display: inline-block;

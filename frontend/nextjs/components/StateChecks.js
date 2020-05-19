@@ -1,10 +1,10 @@
 import { useGlobal, useDispatch, useEffect } from 'reactn';
-import { LOGGED_IN_ELSWEHRE } from '../../../universal/SOCKET_ACTIONS';
+import { LOGGED_IN_ELSWEHRE } from '../universal/SOCKET_ACTIONS';
 import {
   ACCOUNT_LOGGED_IN_ELSEWHERE,
   ACCOUNT_LOGGED_OUT,
-} from '../../../universal/NOTIFICATIONS';
-import config from '../../../config';
+} from '../universal/NOTIFICATIONS';
+import config from '../config';
 
 export default () => {
   const [{ socket }] = useGlobal();
