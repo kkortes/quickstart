@@ -28,7 +28,7 @@ const INITIAL_REDUCERS = {
   setPosition: (_store, _dispatch, payload) => ({
     position: payload,
   }),
-  setFromCenter: (_store, _dispatch, payload) => ({
+  setFromCenter: ({ fromCenter }, _dispatch, payload) => ({
     fromCenter: payload,
   }),
   accountChanges: ({ account }, { notify }, payload) => {

@@ -11,39 +11,38 @@ const colors = {
   earth: '#c2733e',
 };
 
-export default ({ image, name, text, cost, index }) =>
-  console.log(text) || (
-    <div className='card'>
-      <div className='inner'>
-        <div
-          className='background-image'
-          style={{ backgroundImage: `url(${image})` }}
-        />
+export default ({ image, name, text, cost, index }) => (
+  <div className='card'>
+    <div className='inner'>
+      <div
+        className='background-image'
+        style={{ backgroundImage: `url(${image})` }}
+      />
 
-        <div className='text-box'>
-          <div className='image' style={{ backgroundImage: `url(${image})` }} />
-          <div className='text'>{text}</div>
-        </div>
-
-        <div className='name'>{name}</div>
-        <div className='type'>
-          <Crow vertical gutter={4}>
-            <Icon name='dungeon' size={30} color='#fff' />
-            {cost.map((c, i) => (
-              <div className='icon-cost' style={{ backgroundColor: colors[c] }}>
-                <Icon
-                  key={`cost_${i}`}
-                  name={`element-${c}`}
-                  color='#fff'
-                  size={20}
-                />
-              </div>
-            ))}
-          </Crow>
-        </div>
+      <div className='text-box'>
+        <div className='image' style={{ backgroundImage: `url(${image})` }} />
+        <div className='text'>{text}</div>
       </div>
-      <div className='stats'>3 / 2 / 0</div>
-      {/* <div className='attack'>
+
+      <div className='name'>{name}</div>
+      <div className='type'>
+        <Crow vertical gutter={4}>
+          <Icon name='dungeon' size={30} color='#fff' />
+          {cost.map((c, i) => (
+            <div className='icon-cost' style={{ backgroundColor: colors[c] }}>
+              <Icon
+                key={`cost_${i}`}
+                name={`element-${c}`}
+                color='#fff'
+                size={20}
+              />
+            </div>
+          ))}
+        </Crow>
+      </div>
+    </div>
+    <div className='stats'>3 / 2 / 0</div>
+    {/* <div className='attack'>
       3
       <Icon name='damage' size={30} color='silver' />
     </div>
@@ -55,7 +54,7 @@ export default ({ image, name, text, cost, index }) =>
       0
       <Icon name='armor' size={30} color='gray' />
     </div> */}
-      <style jsx>{`
+    <style jsx>{`
       .stats {
         position absolute;
         bottom: 6px;
@@ -160,5 +159,5 @@ export default ({ image, name, text, cost, index }) =>
         overflow: hidden;
       }
     `}</style>
-    </div>
-  );
+  </div>
+);

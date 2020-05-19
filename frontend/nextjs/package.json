@@ -23,8 +23,10 @@
     "react-dom": "^16.13.1",
     "react-transition-group": "^4.4.1",
     "reactn": "^2.2.7",
+    "seedrandom": "^3.0.5",
     "sha1": "^1.1.1",
     "short-uuid": "^3.1.1",
+    "simplex-noise": "^2.4.0",
     "socket.io-client": "^2.3.0"
   }
 }

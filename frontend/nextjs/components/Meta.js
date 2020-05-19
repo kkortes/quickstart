@@ -36,6 +36,7 @@ export default ({ children }) => (
           overflow-x: hidden;
           padding: 20px 15px 90px 15px;
           padding-bottom: 250px;
+          overflow: hidden;
         }
       `}
     </style>
@@ -56,7 +57,7 @@ export default ({ children }) => (
           font-size: 1.6rem;
           line-height: 2rem;
           color: #444;
-          background-color: #fafafa;
+          background-color: black;
         }
         *::-webkit-scrollbar {
           width: 10px;

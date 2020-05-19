@@ -1,0 +1,7 @@
+const PERSPECTIVE = '700px';
+const ROTATEX = '20deg';
+const TILE_AMOUNT = 169;
+const TILE_SIZE = 200;
+const WORLD_SIZE = Math.sqrt(TILE_AMOUNT) * TILE_SIZE;
+
+export { PERSPECTIVE, ROTATEX, TILE_AMOUNT, TILE_SIZE, WORLD_SIZE };
