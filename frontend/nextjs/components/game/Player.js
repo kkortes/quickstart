@@ -26,8 +26,8 @@ export default () => {
           perspective: ${PERSPECTIVE};
         }
         .radius {
-          width: ${RANGE_RADIUS * range * 2}px;
-          height: ${RANGE_RADIUS * range * 2}px;
+          width: ${RANGE_RADIUS * (range + 1) * 2}px;
+          height: ${RANGE_RADIUS * (range + 1) * 2}px;
         }
       `}</style>
       <style jsx>{`

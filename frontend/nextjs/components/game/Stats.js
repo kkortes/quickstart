@@ -1,6 +1,7 @@
 import { useGlobal, useDispatch } from 'reactn';
 import { transform } from '../../game/stats';
 import TextInput from '../ui/TextInput';
+import Crow from '../ui/Crow';
 
 export default () => {
   const [
@@ -12,51 +13,58 @@ export default () => {
 
   return (
     <div className='stats'>
-      {Object.entries(stats)
-        .map(transform)
-        .filter(({ key }) => key !== 'resistances')
-        .map(({ name, key, value, prettyValue }) => {
-          return (
-            <div key={key} className={`stat ${name}`}>
-              <div>
-                {name} {prettyValue}
+      <Crow horizontal gutter={8}>
+        {Object.entries(stats)
+          .map(transform)
+          .filter(({ key }) => key !== 'resistances')
+          .map(({ name, key, value, prettyValue, tierByValue }) => {
+            const extra =
+              key !== 'health' && key !== 'damage'
+                ? tierByValue(value, true) * 5
+                : '';
+            return (
+              <div key={key} className={`stat ${name}`}>
+                <div>{name}</div>
+                <div>
+                  {prettyValue} {extra}
+                </div>
+                <div className='input'>
+                  <TextInput
+                    type='text'
+                    name={key}
+                    onChange={(value) =>
+                      setStat({
+                        value: value.replace(/[^0-9\.]/g, ''),
+                        key,
+                      })
+                    }
+                    value={value + ''}
+                  />
+                </div>
               </div>
-              <div className='input'>
-                <TextInput
-                  type='text'
-                  name={key}
-                  onChange={(value) =>
-                    setStat({
-                      value: value.replace(/[^0-9\.]/g, ''),
-                      key,
-                    })
-                  }
-                  value={value}
-                  text={name}
-                />
-              </div>
-            </div>
-          );
-        })}
+            );
+          })}
+      </Crow>
       <style jsx>{`
         .input {
-          overflow: hidden;
+          width: 50px;
         }
         .input :global(input) {
           color: #fff;
         }
+        .stat {
+          text-align: center;
+        }
         .stats {
           position: fixed;
-          bottom: 40px;
+          top: 40px;
           right: 0;
-          width: 500px;
+          left: 0;
           background: rgba(0, 0, 0, 0.9);
           color: #fff;
           padding: 10px;
-        }
-        .stat {
           display: flex;
-          justify-content: space-between;
+          flex-direction: row;
         }
       `}</style>
     </div>

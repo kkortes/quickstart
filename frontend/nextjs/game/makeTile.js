@@ -1,7 +1,6 @@
 import { TILE_AMOUNT } from '../constants/WORLD';
 import SimplexNoise from 'simplex-noise';
-import { randomNumber } from '../universal/helpers';
-import seedrandom from 'seedrandom';
+import randomNumber from '../common/randomNumber';
 
 const simplex = new SimplexNoise('testar');
 
@@ -48,39 +47,37 @@ const biomes = {
 };
 
 const generateBackground = (noise) => {
-  const seed = seedrandom(noise)();
-
-  let position = biomes.nature.generate(seed);
+  let position = biomes.nature.generate(noise);
 
   if (noise < 1) {
-    position = biomes.nature.generate(seed, -1);
+    position = biomes.nature.generate(noise, -1);
   }
   if (noise < 0.8) {
-    position = biomes.nature.generate(seed, -1);
+    position = biomes.nature.generate(noise, -1);
   }
   if (noise < 0.6) {
-    position = biomes.nature.generate(seed, +1);
+    position = biomes.nature.generate(noise, +1);
   }
   if (noise < 0.4) {
-    position = biomes.nature.generate(seed, +1);
+    position = biomes.nature.generate(noise, +1);
   }
   if (noise < 0.2) {
-    position = biomes.nature.generate(seed);
+    position = biomes.nature.generate(noise);
   }
   if (noise < 0) {
-    position = biomes.nature.generate(seed);
+    position = biomes.nature.generate(noise);
   }
   if (noise < -0.2) {
-    position = biomes.nature.generate(seed);
+    position = biomes.nature.generate(noise);
   }
   if (noise < -0.4) {
-    position = biomes.nature.generate(seed);
+    position = biomes.nature.generate(noise);
   }
   if (noise < -0.6) {
-    position = biomes.nature.generate(seed, +1);
+    position = biomes.nature.generate(noise, +1);
   }
   if (noise < -0.8) {
-    position = biomes.nature.generate(seed, -1);
+    position = biomes.nature.generate(noise, -1);
   }
 
   return {

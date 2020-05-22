@@ -22,7 +22,7 @@ export default () => {
       <style jsx>{`
         .inventory {
           position: fixed;
-          bottom: 40px;
+          bottom: 127px;
           left: 0;
           width: 500px;
           background: rgba(0, 0, 0, 0.9);

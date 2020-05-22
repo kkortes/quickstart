@@ -9,16 +9,16 @@ const RESISTANCES = {
 };
 
 const STATS = {
-  health: 3,
-  damage: 1,
-  armor: 0.01,
-  dodgeChance: 0.01,
-  blockChance: 0.01,
-  criticalChance: 0.01,
-  criticalDamage: 1.5,
-  attackSpeed: 1,
-  movementSpeed: 1,
-  range: 1,
+  health: 0,
+  damage: 0,
+  armor: 0,
+  dodgeChance: 0,
+  blockChance: 0,
+  criticalChance: 0,
+  criticalDamage: 0,
+  attackSpeed: 0,
+  movementSpeed: 0,
+  range: 0,
   resistances: RESISTANCES,
 };
 

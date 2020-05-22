@@ -18,7 +18,7 @@ const { times } = lodash;
 //   diffNameColor: 'darkturquoise',
 // });
 
-const transformation = ({ horizontal, vertical, reset }) => ({
+const transformation = ({ horizontal, vertical }) => ({
   transform: `rotateX(${ROTATEX}) translate3d(-${
     WORLD_SIZE / 2 - horizontal
   }px, -${WORLD_SIZE / 2 - vertical}px, 0px)`,
@@ -28,10 +28,8 @@ const transformation = ({ horizontal, vertical, reset }) => ({
 const World = () => {
   const [{ fromCenter, position }] = useGlobal();
 
-  const tiles = useMemo(
-    () =>
-      times(TILE_AMOUNT, (index) => makeTile(index, position.x, position.y)),
-    [position]
+  const tiles = useMemo(() =>
+    times(TILE_AMOUNT, (index) => makeTile(index, fromCenter.x, fromCenter.y))
   );
 
   return (
@@ -39,11 +37,11 @@ const World = () => {
       <div className='world' style={transformation(fromCenter)}>
         <Tiles tiles={tiles} TILE_SIZE={TILE_SIZE} />
       </div>
-      <div className='fog'>
+      {/* <div className='fog'>
         <div className='top' />
         <div className='right' />
         <div className='left' />
-      </div>
+      </div> */}
       <style jsx>{`
         .world-frame {
           perspective: ${PERSPECTIVE};
@@ -81,7 +79,7 @@ const World = () => {
         }
         .top {
           position: absolute;
-          top: 0;
+          top: -15%;
           bottom: 90%;
           left: 0;
           right: 0;

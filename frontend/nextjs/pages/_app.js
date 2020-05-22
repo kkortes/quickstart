@@ -11,42 +11,61 @@ import { EQUIPMENT, STATS } from '../constants/INITIALS';
 const INITIAL_STATE = {
   socket,
   token: '',
+  enitityInfo: undefined,
+  worldTier: 1,
   fromCenter: {
     vertical: 0,
     horizontal: 0,
-  },
-  position: {
     x: 0,
     y: 0,
   },
+  drops: [],
   account: {
     username: '',
     equipment: EQUIPMENT,
     stats: STATS,
+    picks: [],
+    position: {
+      x: 0,
+      y: 0,
+    },
   },
   notifications: [],
 };
 
 const INITIAL_REDUCERS = {
-  setStat: async ({ account }, { accountChanges }, payload) => {
-    const store = await accountChanges({
+  pickUpEntity: ({ account, drops }, _dispatch, payload) => ({
+    account: {
       ...account,
+      picks: [...account.picks, payload.pickId],
+    },
+    drops: [
+      ...drops,
+      {
+        ref: payload.entityRef,
+        id: new Date().getTime(),
+      },
+    ],
+  }),
+  setPosition: async (_store, { accountChanges }, payload) =>
+    accountChanges({ position: payload }),
+  setEntityInfo: (_store, _dispatch, payload) => ({
+    entityInfo: payload,
+  }),
+  setStat: async ({ account }, { accountChanges }, payload) =>
+    accountChanges({
       stats: {
         ...account.stats,
-        [payload.key]: payload.value,
+        [payload.key]:
+          parseFloat(payload.value) + '' === payload.value
+            ? parseFloat(payload.value)
+            : payload.value,
       },
-    });
-    return {
-      account: store.account,
-    };
-  },
-  setPosition: (_store, _dispatch, payload) => ({
-    position: payload,
-  }),
+    }),
   setFromCenter: (_store, _dispatch, payload) => ({
     fromCenter: payload,
   }),
-  accountChanges: ({ account }, { notify }, payload) => {
+  accountChanges: async ({ account }, { notify }, payload) => {
     const merged = {
       ...account,
       ...payload,
@@ -58,15 +77,10 @@ const INITIAL_REDUCERS = {
       account: merged,
     };
   },
-  changeUsername: async (_store, { accountChanges }, payload) => {
-    const store = await accountChanges({
+  changeUsername: async (_store, { accountChanges }, payload) =>
+    accountChanges({
       username: payload,
-    });
-
-    return {
-      account: store.account,
-    };
-  },
+    }),
   clearNotifications: () => ({
     notifications: [],
   }),

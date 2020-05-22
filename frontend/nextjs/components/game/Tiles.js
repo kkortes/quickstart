@@ -5,17 +5,22 @@ whyDidYouRender(React, {
   titleColor: 'green',
   diffNameColor: 'darkturquoise',
 });
+import { isEmpty } from 'lodash';
+import EntityLink from './EntityLink';
+import { entityOnLocation } from '../../game/entities';
 
 const Tiles = ({ tiles, TILE_SIZE }) => (
   <>
     {tiles.map(({ x, y, style }) => {
+      const entity = entityOnLocation(x, y);
+
       return (
         <div key={`tile_${x}_${y}`} className='tile'>
           <div className='background' style={style} />
           <div className='inner'>
-            {x}, {y}
-            <br />
-            {style.backgroundPosition}
+            {/* {x}, {y}
+            <br /> */}
+            {!isEmpty(entity) ? <EntityLink entity={entity} /> : ''}
           </div>
         </div>
       );
@@ -50,7 +55,6 @@ const Tiles = ({ tiles, TILE_SIZE }) => (
         position: relative;
         text-shadow: 0.5px 0.5px 0.5px rgba(0, 0, 0, 0.9);
         font-weight: 600;
-        opacity: 0;
       }
       .tile:hover .inner {
         opacity: 1;

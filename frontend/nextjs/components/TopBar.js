@@ -3,12 +3,14 @@ import { useDispatch, useGlobal } from 'reactn';
 
 export default () => {
   const { logout } = useDispatch();
-  const [
-    {
+  const [store] = useGlobal();
+  const {
+    account: {
+      username,
       position: { x, y },
-      account: { username },
     },
-  ] = useGlobal();
+  } = store;
+
   return (
     <div className='top-bar'>
       <div>

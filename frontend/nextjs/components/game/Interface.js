@@ -4,6 +4,8 @@ import TopBar from '../TopBar';
 import Movement from './Movement';
 import Inventory from './Inventory';
 import Stats from './Stats';
+import Drops from './Drops';
+import EntityInfo from './EntityInfo';
 
 export default () => (
   <>
@@ -13,5 +15,7 @@ export default () => (
     <Movement />
     <Inventory />
     <Stats />
+    <Drops />
+    <EntityInfo />
   </>
 );
