@@ -8,7 +8,7 @@ const entityOnLocation = (x, y) => {
     account: { picks },
   } = getGlobal();
 
-  if (picks.includes(`${x}${y}${worldTier}`)) return {};
+  if (picks.includes(`${x}_${y}_${worldTier}`)) return {};
 
   const entity =
     randomNumber(0, 99, `${x}_${y}_item`) === 0

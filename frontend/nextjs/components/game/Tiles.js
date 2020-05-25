@@ -1,10 +1,10 @@
 import React, { memo } from 'reactn';
-import whyDidYouRender from '@welldone-software/why-did-you-render';
-whyDidYouRender(React, {
-  onlyLogs: false,
-  titleColor: 'green',
-  diffNameColor: 'darkturquoise',
-});
+// import whyDidYouRender from '@welldone-software/why-did-you-render';
+// whyDidYouRender(React, {
+//   onlyLogs: false,
+//   titleColor: 'green',
+//   diffNameColor: 'darkturquoise',
+// });
 import { isEmpty } from 'lodash';
 import EntityLink from './EntityLink';
 import { entityOnLocation } from '../../game/entities';
@@ -63,6 +63,6 @@ const Tiles = ({ tiles, TILE_SIZE }) => (
   </>
 );
 
-Tiles.whyDidYouRender = true;
+// Tiles.whyDidYouRender = true;
 
 export default memo(Tiles);

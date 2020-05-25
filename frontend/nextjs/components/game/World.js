@@ -22,11 +22,10 @@ const transformation = ({ horizontal, vertical }) => ({
   transform: `rotateX(${ROTATEX}) translate3d(-${
     WORLD_SIZE / 2 - horizontal
   }px, -${WORLD_SIZE / 2 - vertical}px, 0px)`,
-  // transition: !reset ? 'transform 60ms linear' : '',
 });
 
 const World = () => {
-  const [{ fromCenter, position }] = useGlobal();
+  const [{ fromCenter }] = useGlobal();
 
   const tiles = useMemo(() =>
     times(TILE_AMOUNT, (index) => makeTile(index, fromCenter.x, fromCenter.y))

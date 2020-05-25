@@ -28,7 +28,7 @@ export default () => {
       const h = up || down;
       const v = right || left;
 
-      const value = (h && v ? 10 : 10) * (movementSpeed + 1);
+      const value = (h && v ? 5 : 5) * (movementSpeed + 1);
 
       const { vertical, horizontal, x, y } = fromCenter;
 
@@ -45,7 +45,7 @@ export default () => {
           if (!isEmpty(entity)) {
             pickUpEntity({
               entityRef: entity.ref,
-              pickId: `${newX}${newY}${entity.tier}`,
+              pickId: `${newX}_${newY}_${entity.tier}`,
             });
           }
 
@@ -56,18 +56,6 @@ export default () => {
       }
 
       if (HM <= -1 || HM >= 1 || VM <= -1 || VM >= 1) {
-        // const { playerX, playerY } = {
-        //   playerX:
-        //     horizontal < -(TILE_SIZE / 2)
-        //       ? x + 1
-        //       : horizontal > TILE_SIZE / 2
-        //       ? x - 1
-        //       : x,
-        //   playerY,
-        // };
-
-        // setPosition({ x, y });
-
         setFromCenter({
           horizontal: 0 + (horizontal % TILE_SIZE),
           vertical: 0 + (vertical % TILE_SIZE),
@@ -83,7 +71,7 @@ export default () => {
         });
       }
     },
-    isMoving ? 20 : null
+    isMoving ? 10 : null
   );
 
   return null;
