@@ -4,6 +4,7 @@ import { TILE_SIZE } from '../../constants/WORLD';
 import useInterval from '../../hooks/useInterval';
 import { entityOnLocation } from '../../game/entities';
 import { isEmpty } from 'lodash';
+import { useEffect } from 'react';
 
 export default () => {
   const [
@@ -28,7 +29,7 @@ export default () => {
       const h = up || down;
       const v = right || left;
 
-      const value = (h && v ? 5 : 5) * (movementSpeed + 1);
+      const value = (h && v ? 10 : 10) * (movementSpeed + 1);
 
       const { vertical, horizontal, x, y } = fromCenter;
 
