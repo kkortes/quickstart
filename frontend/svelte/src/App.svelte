@@ -1,5 +1,8 @@
 <script>
-  let name = "world";
+  import World from "./World.svelte";
+  import Movement from "./Movement.svelte";
 </script>
 
-<h1>Hello {name}!</h1>
+<Movement>
+  <World />
+</Movement>
