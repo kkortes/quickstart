@@ -8,8 +8,9 @@ whyDidYouRender(React, {
 import { isEmpty } from 'lodash';
 import EntityLink from './EntityLink';
 import { entityOnLocation } from '../../game/entities';
+import { TILE_SIZE, WORLD_SIZE } from '../../constants/WORLD';
 
-const Tiles = ({ tiles, TILE_SIZE }) => (
+const Tiles = ({ tiles }) => (
   <>
     {tiles.map(({ x, y, style }) => {
       const entity = entityOnLocation(x, y);
@@ -18,8 +19,7 @@ const Tiles = ({ tiles, TILE_SIZE }) => (
         <div key={`tile_${x}_${y}`} className='tile'>
           <div className='background' style={style} />
           <div className='inner'>
-            {/* {x}, {y}
-            <br /> */}
+            {x}, {y}
             {!isEmpty(entity) ? <EntityLink entity={entity} /> : ''}
           </div>
         </div>
@@ -30,7 +30,6 @@ const Tiles = ({ tiles, TILE_SIZE }) => (
         .tile {
           width: ${TILE_SIZE}px;
           height: ${TILE_SIZE}px;
-        }
       `}
     </style>
     <style jsx>{`
@@ -55,6 +54,7 @@ const Tiles = ({ tiles, TILE_SIZE }) => (
         position: relative;
         text-shadow: 0.5px 0.5px 0.5px rgba(0, 0, 0, 0.9);
         font-weight: 600;
+        font-size: 50px;
       }
       .tile:hover .inner {
         opacity: 1;

@@ -5,7 +5,7 @@
   "main": "pages/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "_dev": "next",
+    "dev": "next",
     "build": "next build",
     "start": "next start",
     "link": "(exec rm -Rf universal) && (exec ln -s ../../universal ./universal) && (exec rm -Rf config) && (exec ln -s ../../config ./config)",

@@ -1,6 +1,12 @@
 <script>
-  import { TILE_SIZE } from "../constants/WORLD";
+  import { TILE_SIZE, WORLD_SIZE } from "../constants/WORLD";
   export let tiles;
+
+  import { getContext } from "svelte";
+  import { key } from "./fromCenter.js";
+  let fromCenter = getContext(key);
+
+  $: iteratableTiles = Object.entries(tiles);
 </script>
 
 <style>
@@ -20,20 +26,24 @@
     align-items: center;
     background-size: cover;
     color: #fff;
+    position: fixed;
   }
   .inner {
     position: relative;
     text-shadow: 0.5px 0.5px 0.5px rgba(0, 0, 0, 0.9);
     font-weight: 600;
+    font-size: 30px;
   }
   .tile:hover .inner {
     opacity: 1;
   }
 </style>
 
-{#each tiles as { x, y, style, id } (id)}
-  <div class="tile" style={`width: ${TILE_SIZE}px;height: ${TILE_SIZE}px;`}>
+{#each iteratableTiles as [key, { x, y, style, id, zIndex }] (id)}
+  <div
+    class="tile"
+    style={`width: ${TILE_SIZE}px;height: ${TILE_SIZE}px; z-index: ${zIndex}; top: ${(y - $fromCenter.y) * TILE_SIZE + WORLD_SIZE / 2 - TILE_SIZE / 2 + TILE_SIZE}px; left: ${(x - $fromCenter.x) * TILE_SIZE + WORLD_SIZE / 2 - TILE_SIZE / 2}px;`}>
     <div class="background" {style} />
-    {(x, y)}
+    <div class="inner">{x}, {y}</div>
   </div>
 {/each}

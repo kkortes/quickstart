@@ -40,7 +40,6 @@
       const value = h && v ? 10 : 10;
 
       const { vertical, horizontal, x, y } = $fromCenter;
-
       const HM = horizontal / TILE_SIZE;
       const VM = vertical / TILE_SIZE;
 

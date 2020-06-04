@@ -29,7 +29,7 @@ export default () => {
       const h = up || down;
       const v = right || left;
 
-      const value = (h && v ? 10 : 10) * (movementSpeed + 1);
+      const value = (h && v ? 2.5 : 2.5) * (movementSpeed + 1);
 
       const { vertical, horizontal, x, y } = fromCenter;
 

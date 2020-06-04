@@ -34,7 +34,7 @@ const World = () => {
   return (
     <div className='world-frame'>
       <div className='world' style={transformation(fromCenter)}>
-        <Tiles tiles={tiles} TILE_SIZE={TILE_SIZE} />
+        <Tiles tiles={tiles} />
       </div>
       {/* <div className='fog'>
         <div className='top' />
