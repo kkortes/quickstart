@@ -15,6 +15,7 @@
   let fromCenter = getContext(key);
 
   $: tiles = makeTiles($fromCenter.x, $fromCenter.y);
+  $: offsetLeft = -(WORLD_SIZE / 2 - $fromCenter.horizontal);
 </script>
 
 <style>
@@ -40,8 +41,8 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 50px;
-    height: 50px;
+    width: 150px;
+    height: 150px;
     border: 3px solid pink;
     border-radius: 50%;
     color: #fff;
@@ -49,6 +50,9 @@
     justify-content: center;
     align-items: center;
     text-align: center;
+    font-size: 20px;
+    background: black;
+    text-shadow: 0.5px 0.5px 0.5px rgba(0, 0, 0, 0.9);
   }
 </style>
 
@@ -59,9 +63,16 @@
 <div class="world-frame" style={`perspective: ${PERSPECTIVE};`}>
   <div
     class="world"
-    style={`width: ${WORLD_SIZE}px;height: ${WORLD_SIZE}px;transform: rotateX(${ROTATEX}) translate3d(-${WORLD_SIZE / 2 - $fromCenter.horizontal}px, -${WORLD_SIZE / 2 - $fromCenter.vertical}px, 0px);`}>
+    style={`width: ${WORLD_SIZE}px;height: ${WORLD_SIZE}px;transform: rotateX(${ROTATEX}) translate3d(${offsetLeft}px, ${-(WORLD_SIZE / 2 - $fromCenter.vertical)}px, 0px);`}>
     <Tiles {tiles} />
   </div>
 </div>
 
-<div class="player">X:{$fromCenter.x} Y:{$fromCenter.y}</div>
+<div class="player">
+  X:{$fromCenter.x} Y:{$fromCenter.y}
+  <br />
+  <br />
+  Horizontal: {$fromCenter.horizontal}
+  <br />
+  Vertical: {$fromCenter.vertical}
+</div>
