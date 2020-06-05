@@ -9,12 +9,13 @@ export default () => {
       username,
       position: { x, y },
     },
+    fromCenter: { horizontal, vertical },
   } = store;
 
   return (
     <div className='top-bar'>
       <div>
-        {username} X:{x} Y:{y}
+        {username} X:{x} Y:{y} Vertical: {vertical} Horizontal: {horizontal}
       </div>
       <div onClick={() => logout(ACCOUNT_LOGGED_OUT)}>Logout</div>
 

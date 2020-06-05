@@ -16,6 +16,7 @@
 
   $: tiles = makeTiles($fromCenter.x, $fromCenter.y);
   $: offsetLeft = -(WORLD_SIZE / 2 - $fromCenter.horizontal);
+  $: offsetRight = -(WORLD_SIZE / 2 - $fromCenter.vertical);
 </script>
 
 <style>
@@ -32,9 +33,6 @@
     position: fixed;
     top: 50%;
     left: 50%;
-  }
-  button {
-    position: relative;
   }
   .player {
     position: fixed;
@@ -56,17 +54,17 @@
   }
 </style>
 
-<!-- <Canvas>
+<Canvas>
   <Grid />
-</Canvas> -->
+</Canvas>
 
-<div class="world-frame" style={`perspective: ${PERSPECTIVE};`}>
+<!-- <div class="world-frame" style={`perspective: ${PERSPECTIVE};`}>
   <div
     class="world"
-    style={`width: ${WORLD_SIZE}px;height: ${WORLD_SIZE}px;transform: rotateX(${ROTATEX}) translate3d(${offsetLeft}px, ${-(WORLD_SIZE / 2 - $fromCenter.vertical)}px, 0px);`}>
+    style={`width: ${WORLD_SIZE}px;height: ${WORLD_SIZE}px;transform: rotateX(${ROTATEX}) translate3d(${offsetLeft}px, ${offsetRight}px, 0px);`}>
     <Tiles {tiles} />
   </div>
-</div>
+</div> -->
 
 <div class="player">
   X:{$fromCenter.x} Y:{$fromCenter.y}

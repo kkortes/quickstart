@@ -1,16 +1,8 @@
 //import whyDidYouRender from '@welldone-software/why-did-you-render';
-import lodash from 'lodash';
-import React, { useGlobal, memo, useMemo } from 'reactn';
+import React, { useGlobal, memo, useState, useEffect, useRef } from 'reactn';
 import Tiles from './Tiles';
-import {
-  ROTATEX,
-  PERSPECTIVE,
-  TILE_AMOUNT,
-  TILE_SIZE,
-  WORLD_SIZE,
-} from '../../constants/WORLD';
-import makeTile from '../../game/makeTile';
-const { times } = lodash;
+import { ROTATEX, PERSPECTIVE, WORLD_SIZE } from '../../constants/WORLD';
+import { regenerate } from '../../game/tiles';
 
 // whyDidYouRender(React, {
 //   onlyLogs: false,
@@ -18,7 +10,7 @@ const { times } = lodash;
 //   diffNameColor: 'darkturquoise',
 // });
 
-const transformation = ({ horizontal, vertical }) => ({
+const transformation = ({ vertical, horizontal }) => ({
   transform: `rotateX(${ROTATEX}) translate3d(-${
     WORLD_SIZE / 2 - horizontal
   }px, -${WORLD_SIZE / 2 - vertical}px, 0px)`,
@@ -26,10 +18,27 @@ const transformation = ({ horizontal, vertical }) => ({
 
 const World = () => {
   const [{ fromCenter }] = useGlobal();
+  const [tiles, setTiles] = useState({});
+  const refX = useRef();
+  const refY = useRef();
 
-  const tiles = useMemo(() =>
-    times(TILE_AMOUNT, (index) => makeTile(index, fromCenter.x, fromCenter.y))
-  );
+  useEffect(() => {
+    const newTiles = regenerate(
+      tiles,
+      refX.current,
+      refY.current,
+      fromCenter.x,
+      fromCenter.y
+    );
+
+    refX.current = fromCenter.x;
+    refY.current = fromCenter.y;
+    setTiles(newTiles);
+  }, [fromCenter.x, fromCenter.y]);
+
+  // const tiles = useMemo(() =>
+  //   times(TILE_AMOUNT, (index) => makeTile(index, fromCenter.x, fromCenter.y))
+  // );
 
   return (
     <div className='world-frame'>

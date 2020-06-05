@@ -1,6 +1,6 @@
 const PERSPECTIVE = '700px';
 const ROTATEX = '20deg';
-const TILE_AMOUNT = 9; //9, 25, 169
+const TILE_AMOUNT = 169; //9, 25, 169
 const TILE_SIZE = 200;
 const WORLD_SIZE = Math.sqrt(TILE_AMOUNT) * TILE_SIZE;
 

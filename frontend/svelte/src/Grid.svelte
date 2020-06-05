@@ -17,35 +17,30 @@
   renderable(props => {
     const { context, width, height } = props;
     context.clearRect(0, 0, width, height);
+
     if (color) {
       context.fillStyle = color;
       context.fillRect(0, 0, width, height);
     }
 
-    Object.entries(makeTiles($fromCenter.x, $fromCenter.y)).map(
-      ([_key, value]) => {
-        const { spriteCordinates, x, y } = value;
-        context.drawImage(
-          sprite,
-          spriteCordinates.x,
-          spriteCordinates.y,
-          200,
-          400,
-          x * 200 +
-            width / 2 -
-            100 -
-            $fromCenter.x * 200 +
-            $fromCenter.horizontal,
-          y * 200 +
-            height / 2 -
-            300 -
-            $fromCenter.y * 200 +
-            $fromCenter.vertical,
-          200,
-          400
-        );
-      }
-    );
+    Object.values(makeTiles($fromCenter.x, $fromCenter.y)).forEach(value => {
+      const { spriteCordinates, x, y } = value;
+      context.drawImage(
+        sprite,
+        spriteCordinates.x,
+        spriteCordinates.y,
+        200,
+        400,
+        x * 200 +
+          width / 2 -
+          100 -
+          $fromCenter.x * 200 +
+          $fromCenter.horizontal,
+        y * 200 + height / 2 - 300 - $fromCenter.y * 200 + $fromCenter.vertical,
+        200,
+        400
+      );
+    });
   });
 </script>
 

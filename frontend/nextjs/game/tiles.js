@@ -1,6 +1,9 @@
 import { TILE_AMOUNT } from '../constants/WORLD';
 import SimplexNoise from 'simplex-noise';
 import randomNumber from '../common/randomNumber';
+import lodash from 'lodash';
+import produce from 'immer';
+const { times, isEmpty, range } = lodash;
 
 const simplex = new SimplexNoise('testar');
 
@@ -88,13 +91,7 @@ const generateBackground = (noise) => {
   };
 };
 
-export default (index, xOffset, yOffset) => {
-  const tiles = Math.sqrt(TILE_AMOUNT);
-  const column = (index % tiles) - (tiles - 1) / 2;
-  const row = Math.floor(index / tiles) - (tiles - 1) / 2;
-
-  const x = column + xOffset;
-  const y = row + yOffset;
+const makeTile = (x, y) => {
   const noise = simplex.noise2D(x / 10, y / 10);
 
   return {
@@ -103,3 +100,44 @@ export default (index, xOffset, yOffset) => {
     style: generateBackground(noise),
   };
 };
+
+const makeInitialTiles = (xOffset, yOffset) =>
+  times(TILE_AMOUNT, (index) => {
+    const tiles = Math.sqrt(TILE_AMOUNT);
+    const column = (index % tiles) - (tiles - 1) / 2;
+    const row = Math.floor(index / tiles) - (tiles - 1) / 2;
+
+    const x = column + xOffset;
+    const y = row + yOffset;
+
+    return makeTile(x, y);
+  }).reduce((a, tile) => ({ ...a, [`${tile.x}_${tile.y}`]: tile }), {});
+
+const regenerate = (tiles, oX, oY, x, y) =>
+  isEmpty(tiles)
+    ? makeInitialTiles(x, y)
+    : produce(tiles, (tempTiles) => {
+        const WORLD_LENGTH = Math.sqrt(TILE_AMOUNT);
+        const lessHalf = Math.floor(WORLD_LENGTH / 2);
+        const greaterHalf = Math.ceil(WORLD_LENGTH / 2);
+        if (oX !== x) {
+          range(y - lessHalf, y + greaterHalf).forEach((y) => {
+            const addX = x - (oX > x ? lessHalf : -lessHalf);
+            tempTiles[`${addX}_${y}`] = makeTile(addX, y);
+
+            const removeX = x + (oX > x ? greaterHalf : -greaterHalf);
+            delete tempTiles[`${removeX}_${y}`];
+          });
+        }
+        if (oY !== y) {
+          range(x - lessHalf, x + greaterHalf).forEach((x) => {
+            const addY = y - (oY > y ? lessHalf : -lessHalf);
+            tempTiles[`${x}_${addY}`] = makeTile(x, addY);
+
+            const removeY = y + (oY > y ? greaterHalf : -greaterHalf);
+            delete tempTiles[`${x}_${removeY}`];
+          });
+        }
+      });
+
+export { makeTile, makeInitialTiles, regenerate };
