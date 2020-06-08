@@ -84,10 +84,14 @@ const generateBackground = (noise) => {
   }
 
   return {
-    backgroundImage: 'url(./static/world-map-min.png)',
+    backgroundImage: 'url(./static/world-map.png)',
     backgroundPosition: `-${position.x}px -${position.y}px`,
     height: '200%',
     background: position,
+    spriteCordinates: {
+      x: position.x,
+      y: position.y,
+    },
   };
 };
 
@@ -98,6 +102,7 @@ const makeTile = (x, y) => {
     x,
     y,
     style: generateBackground(noise),
+    zIndex: y,
   };
 };
 

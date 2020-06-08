@@ -10,6 +10,7 @@
     props,
     time
   } from "../game/game.js";
+  import { WORLD_SIZE, ROTATEX } from "../constants/WORLD.js";
 
   let frame,
     canvas,
@@ -89,9 +90,18 @@
   };
 </script>
 
+<style>
+  canvas {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+  }
+</style>
+
 <canvas
   bind:this={canvas}
-  width={$width + $pixelRatio}
-  height={$height + $pixelRatio} />
+  width={WORLD_SIZE * $pixelRatio}
+  height={WORLD_SIZE * $pixelRatio}
+  style={`transform: rotateX(${ROTATEX}) translate3d(-50%, -50%, 0px);`} />
 <svelte:window on:resize|passive={handleResize} />
 <slot />

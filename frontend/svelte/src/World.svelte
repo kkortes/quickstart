@@ -54,17 +54,16 @@
   }
 </style>
 
-<Canvas>
-  <Grid />
-</Canvas>
-
-<!-- <div class="world-frame" style={`perspective: ${PERSPECTIVE};`}>
-  <div
+<div class="world-frame" style={`perspective: ${PERSPECTIVE};`}>
+  <Canvas>
+    <Grid />
+  </Canvas>
+  <!-- <div
     class="world"
     style={`width: ${WORLD_SIZE}px;height: ${WORLD_SIZE}px;transform: rotateX(${ROTATEX}) translate3d(${offsetLeft}px, ${offsetRight}px, 0px);`}>
     <Tiles {tiles} />
-  </div>
-</div> -->
+  </div> -->
+</div>
 
 <div class="player">
   X:{$fromCenter.x} Y:{$fromCenter.y}

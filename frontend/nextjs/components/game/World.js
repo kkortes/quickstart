@@ -1,6 +1,7 @@
 //import whyDidYouRender from '@welldone-software/why-did-you-render';
 import React, { useGlobal, memo, useState, useEffect, useRef } from 'reactn';
 import Tiles from './Tiles';
+import Canvas from './Canvas';
 import { ROTATEX, PERSPECTIVE, WORLD_SIZE } from '../../constants/WORLD';
 import { regenerate } from '../../game/tiles';
 
@@ -11,9 +12,9 @@ import { regenerate } from '../../game/tiles';
 // });
 
 const transformation = ({ vertical, horizontal }) => ({
-  transform: `rotateX(${ROTATEX}) translate3d(-${
-    WORLD_SIZE / 2 - horizontal
-  }px, -${WORLD_SIZE / 2 - vertical}px, 0px)`,
+  transform: `rotateX(${ROTATEX}) translate3d(${
+    -(WORLD_SIZE / 2) + horizontal
+  }px, ${-(WORLD_SIZE / 2) + vertical}px, 0px)`,
 });
 
 const World = () => {
@@ -44,6 +45,7 @@ const World = () => {
     <div className='world-frame'>
       <div className='world' style={transformation(fromCenter)}>
         <Tiles tiles={tiles} />
+        {/* <Canvas tiles={tiles} /> */}
       </div>
       {/* <div className='fog'>
         <div className='top' />

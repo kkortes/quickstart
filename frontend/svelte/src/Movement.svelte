@@ -33,11 +33,11 @@
   $: left = pressedKeys && keyIsPressed("a");
 
   onMount(() => {
-    gameLoopId = gameLoop((time, deltaTime) => {
+    gameLoopId = gameLoop(() => {
       const h = up || down;
       const v = right || left;
 
-      const s = h && v ? 15 : 15;
+      const s = h && v ? 10 : 10;
 
       const { vertical, horizontal, x, y } = $fromCenter;
       const futureHorizontal = horizontal - (left ? -s : right ? s : 0);

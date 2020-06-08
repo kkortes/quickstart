@@ -1,5 +1,5 @@
 <script>
-  import { TILE_AMOUNT, TILE_SIZE } from "../constants/WORLD.js";
+  import { TILE_AMOUNT, TILE_SIZE, WORLD_SIZE } from "../constants/WORLD.js";
   import { renderable, width, height } from "../game/game.js";
   import { getContext } from "svelte";
   import { makeTiles } from "../game/tiles.js";
@@ -15,12 +15,12 @@
 
   // TODO: check if potentional bug, sprite.onload might have to be called
   renderable(props => {
-    const { context, width, height } = props;
-    context.clearRect(0, 0, width, height);
+    const { context } = props;
+    context.clearRect(0, 0, WORLD_SIZE, WORLD_SIZE);
 
     if (color) {
       context.fillStyle = color;
-      context.fillRect(0, 0, width, height);
+      context.fillRect(0, 0, WORLD_SIZE, WORLD_SIZE);
     }
 
     Object.values(makeTiles($fromCenter.x, $fromCenter.y)).forEach(value => {
@@ -32,11 +32,15 @@
         200,
         400,
         x * 200 +
-          width / 2 -
+          WORLD_SIZE / 2 -
           100 -
           $fromCenter.x * 200 +
           $fromCenter.horizontal,
-        y * 200 + height / 2 - 300 - $fromCenter.y * 200 + $fromCenter.vertical,
+        y * 200 +
+          WORLD_SIZE / 2 -
+          300 -
+          $fromCenter.y * 200 +
+          $fromCenter.vertical,
         200,
         400
       );

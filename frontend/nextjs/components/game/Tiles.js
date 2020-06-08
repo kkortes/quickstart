@@ -10,23 +10,24 @@ import EntityLink from './EntityLink';
 import { entityOnLocation } from '../../game/entities';
 import { TILE_SIZE, WORLD_SIZE } from '../../constants/WORLD';
 
-const tileStyle = (x, y, fX, fY) => ({
+const tileStyle = (x, y, fX, fY, zIndex) => ({
   left: `${(x - fX) * TILE_SIZE + WORLD_SIZE / 2 - TILE_SIZE / 2}px`,
   top: `${(y - fY) * TILE_SIZE + WORLD_SIZE / 2 - TILE_SIZE / 2}px`,
+  zIndex,
 });
 
 const Tiles = ({ tiles }) => {
   const [{ fromCenter }] = useGlobal();
   return (
     <>
-      {Object.entries(tiles).map(([key, { x, y, style }]) => {
+      {Object.values(tiles).map(({ x, y, style, zIndex }) => {
         const entity = entityOnLocation(x, y);
 
         return (
           <div
-            key={key}
+            key={`${x}_${y}`}
             className='tile'
-            style={tileStyle(x, y, fromCenter.x, fromCenter.y)}
+            style={tileStyle(x, y, fromCenter.x, fromCenter.y, zIndex)}
           >
             <div className='background' style={style} />
             <div className='inner'>
@@ -50,7 +51,6 @@ const Tiles = ({ tiles }) => {
           left: 0;
           right: 0;
           height: 100%;
-          background-size: 900% auto;
           pointer-events: none;
         }
         .tile {

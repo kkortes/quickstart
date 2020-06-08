@@ -103,7 +103,7 @@ const makeTile = (x, y) => {
     x,
     y,
     style,
-    zIndex: x + y,
+    zIndex: y,
     spriteCordinates,
     id: `${x}_${y}`,
   };
