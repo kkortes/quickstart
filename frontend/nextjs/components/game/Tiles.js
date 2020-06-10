@@ -66,7 +66,6 @@ const Tiles = ({ tiles }) => {
           position: relative;
           text-shadow: 0.5px 0.5px 0.5px rgba(0, 0, 0, 0.9);
           font-weight: 600;
-          font-size: 30px;
         }
         .tile:hover .inner {
           opacity: 1;

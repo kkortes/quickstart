@@ -11,11 +11,11 @@ export default () => (
   <>
     <World />
     <Player />
-    {/* <TopBar /> */}
+    <TopBar />
     <Movement />
-    {/* <Inventory /> */}
-    {/* <Stats /> */}
-    {/* <Drops /> */}
-    {/* <EntityInfo /> */}
+    <Inventory />
+    <Stats />
+    <Drops />
+    <EntityInfo />
   </>
 );

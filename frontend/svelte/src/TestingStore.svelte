@@ -1,17 +1,10 @@
 <script>
   import { store, actions } from "./store.js";
 
-  const { toggleName, togglePoints, toggleBoth } = actions;
+  const { setName, setPoints, setNameAndPoints, resetAll } = actions;
 
   $: playerName = $store.playerName;
   $: points = $store.points;
-
-  // const toggleName = ({ playerName }) => {
-  //   console.log($store);
-  //   $store = {
-  //     playerName
-  //   };
-  // };
 </script>
 
 Current value of player name: {playerName}
@@ -19,12 +12,21 @@ Current value of player name: {playerName}
 Current points: {points}
 <br />
 <br />
-<button on:click|preventDefault={() => toggleName({ playerName: 'somethign' })}>
-  Set name to "somethign"
+<button on:click|preventDefault={() => setName({ playerName: 'something' })}>
+  Set name to "something"
 </button>
 <br />
-<button on:click|preventDefault={() => togglePoints('first ran')}>
-  Toggle points
+
+<button on:click|preventDefault={() => setPoints({ points: points - 1 })}>
+  -1
+</button>
+<button on:click|preventDefault={() => setPoints({ points: points + 1 })}>
+  +1
+</button>
+<button on:click|preventDefault={() => setPoints({ points: 0 })}>Reset</button>
+<br />
+<button on:click|preventDefault={() => setNameAndPoints()}>
+  Set name to "hercules" and points to "1337"
 </button>
 <br />
-<button on:click|preventDefault={() => toggleBoth()}>Toggle both</button>
+<button on:click|preventDefault={() => resetAll()}>Reset all</button>

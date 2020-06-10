@@ -1,38 +1,45 @@
 import { writable } from 'svelte/store';
 
-const store = writable({
+const INITIAL_STORE = {
   playerName: 'nothing',
   points: 0,
-});
+};
+
+const store = writable(INITIAL_STORE);
 
 const reducers = {
-  toggleBoth: (_payload, store, _actions) => {
+  setNameAndPoints: (_payload, store, { setPoints, setName }) => {
+    console.log(setPoints);
     return {
       ...store,
-      points: 1337,
-      playerName: 'hercules',
+      // Solve this case
+      ...setPoints({ points: 1337 }),
+      ...setName({ playerName: 'hercules' }),
     };
   },
-  togglePoints: (_payload, store, { toggleBoth }) => {
+  setPoints: ({ points }, store) => {
     return {
-      ...toggleBoth(),
-      points: store.points === 0 ? 2 : 0,
+      ...store,
+      points,
     };
   },
-  toggleName: (payload, _store, { togglePoints }) => {
+  setName: ({ playerName }, store) => {
     return {
-      ...togglePoints('hehe'),
-      playerName: payload.playerName,
+      ...store,
+      playerName,
     };
+  },
+  resetAll: () => {
+    return INITIAL_STORE;
   },
 };
 
-const cleanActions = (store, repeat = false) =>
+const addActionsRecursively = (store) =>
   Object.entries(reducers).reduce(
     (a, [action, reducer]) => ({
       ...a,
       [action]: (payload) =>
-        reducer(payload, store, repeat ? cleanActions(store) : {}),
+        reducer(payload, store, addActionsRecursively(store)),
     }),
     {}
   );
@@ -48,7 +55,7 @@ store.subscribe((st) => {
           reducer(
             payload,
             { ...st, ...ns },
-            cleanActions({ ...st, ...ns }, true)
+            addActionsRecursively({ ...st, ...ns })
           )
         ),
     }),

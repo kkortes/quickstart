@@ -29,7 +29,7 @@ export default () => {
     const h = up || down;
     const v = right || left;
 
-    const value = (h && v ? 4 : 4) * (movementSpeed + 1);
+    const value = (h && v ? 10 : 10) * (movementSpeed + 1);
 
     const { vertical, horizontal, x, y } = fromCenter;
 
@@ -39,25 +39,25 @@ export default () => {
     const HM = futureHorizontal / TILE_SIZE;
     const VM = futureVertical / TILE_SIZE;
 
-    // if (HM <= -0.5 || HM >= 0.5 || VM <= -0.5 || VM >= 0.5) {
-    //   const newX = HM <= -0.5 ? x + 1 : HM >= 0.5 ? x - 1 : x;
-    //   const newY = VM <= -0.5 ? y + 1 : VM >= 0.5 ? y - 1 : y;
+    if (HM <= -0.5 || HM >= 0.5 || VM <= -0.5 || VM >= 0.5) {
+      const newX = HM <= -0.5 ? x + 1 : HM >= 0.5 ? x - 1 : x;
+      const newY = VM <= -0.5 ? y + 1 : VM >= 0.5 ? y - 1 : y;
 
-    //   if (position.x !== newX || position.y !== newY) {
-    //     const entity = entityOnLocation(newX, newY);
+      if (position.x !== newX || position.y !== newY) {
+        const entity = entityOnLocation(newX, newY);
 
-    //     if (!isEmpty(entity)) {
-    //       pickUpEntity({
-    //         entityRef: entity.ref,
-    //         pickId: `${newX}_${newY}_${entity.tier}`,
-    //       });
-    //     }
+        if (!isEmpty(entity)) {
+          pickUpEntity({
+            entityRef: entity.ref,
+            pickId: `${newX}_${newY}_${entity.tier}`,
+          });
+        }
 
-    //     setPosition({ x: newX, y: newY });
-    //   }
-    // } else if (position.x !== x || position.y !== y) {
-    //   setPosition({ x, y });
-    // }
+        setPosition({ x: newX, y: newY });
+      }
+    } else if (position.x !== x || position.y !== y) {
+      setPosition({ x, y });
+    }
 
     if (HM <= -1 || HM >= 1 || VM <= -1 || VM >= 1) {
       setFromCenter({
