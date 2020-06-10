@@ -1,6 +1,4 @@
 import { writable } from 'svelte/store';
-import lodash from 'lodash';
-const { isEmpty } = lodash;
 
 const store = writable({
   playerName: 'nothing',
@@ -8,20 +6,20 @@ const store = writable({
 });
 
 const reducers = {
-  toggleBoth: (store, _payload, _actions) => {
+  toggleBoth: (_payload, store, _actions) => {
     return {
       ...store,
       points: 1337,
       playerName: 'hercules',
     };
   },
-  togglePoints: (store, _payload, actions) => {
+  togglePoints: (_payload, store, { toggleBoth }) => {
     return {
-      ...actions.toggleBoth(),
+      ...toggleBoth(),
       points: store.points === 0 ? 2 : 0,
     };
   },
-  toggleName: (_store, payload, _actions) => {
+  toggleName: (payload, _store, { togglePoints }) => {
     return {
       ...togglePoints('hehe'),
       playerName: payload.playerName,
@@ -29,33 +27,29 @@ const reducers = {
   },
 };
 
-let actions = {};
-store.subscribe((st) => {
-  const bareActions = Object.entries(reducers).reduce(
+const cleanActions = (store, repeat = false) =>
+  Object.entries(reducers).reduce(
     (a, [action, reducer]) => ({
       ...a,
-      [action]: (store, payload, actions = {}) =>
-        reducer(store, payload, actions),
+      [action]: (payload) =>
+        reducer(payload, store, repeat ? cleanActions(store) : {}),
     }),
     {}
   );
 
-  const cleanActions = (store) =>
-    Object.entries(bareActions).reduce(
-      (a, [action, reducer]) => ({
-        ...a,
-        [action]: (payload) =>
-          reducer(store, payload, isEmpty(store) ? {} : cleanActions()),
-      }),
-      {}
-    );
+let actions = {};
 
-  actions = Object.entries(bareActions).reduce(
+store.subscribe((st) => {
+  actions = Object.entries(reducers).reduce(
     (a, [action, reducer]) => ({
       ...a,
       [action]: (payload) =>
         store.update((ns) =>
-          reducer({ ...st, ...ns }, payload, cleanActions({ ...st, ...ns }))
+          reducer(
+            payload,
+            { ...st, ...ns },
+            cleanActions({ ...st, ...ns }, true)
+          )
         ),
     }),
     {}
