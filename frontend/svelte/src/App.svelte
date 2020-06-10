@@ -3,6 +3,7 @@
   import Protected from "./components/Protected.svelte";
   import Loader from "./components/Loader.svelte";
   import Notifications from "./components/ui/Notifications.svelte";
+  import TestingStore from "./TestingStore.svelte";
 
   let loggedIn = false;
   let token = false;
@@ -17,7 +18,7 @@
 </style>
 
 {#if !token}
-  <Login />
+  <TestingStore />
 {/if}
 
 {#if token && !loggedIn}
