@@ -10,7 +10,7 @@
   import Canvas from "./Canvas.svelte";
   import Grid from "./Grid.svelte";
   import { getContext } from "svelte";
-  import { key } from "./fromCenter.js";
+  import { key } from "./stores/fromCenter.js";
 
   let fromCenter = getContext(key);
 

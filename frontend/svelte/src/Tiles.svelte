@@ -3,7 +3,7 @@
   export let tiles;
 
   import { getContext } from "svelte";
-  import { key } from "./fromCenter.js";
+  import { key } from "./stores/fromCenter.js";
   let fromCenter = getContext(key);
 
   $: iteratableTiles = Object.entries(tiles);

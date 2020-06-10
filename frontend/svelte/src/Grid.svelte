@@ -3,7 +3,7 @@
   import { renderable, width, height } from "../game/game.js";
   import { getContext } from "svelte";
   import { makeTiles } from "../game/tiles.js";
-  import { key } from "./fromCenter.js";
+  import { key } from "./stores/fromCenter.js";
   import lodash from "lodash";
   const { times } = lodash;
 
@@ -13,7 +13,7 @@
   let sprite = new Image();
   sprite.src = "./static/world-map_2.png";
 
-  // TODO: check if potentional bug, sprite.onload might have to be called
+  // TODO: check if potentional bug, sprite.onloads might have to be called
   renderable(props => {
     const { context } = props;
     context.clearRect(0, 0, WORLD_SIZE, WORLD_SIZE);

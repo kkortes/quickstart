@@ -1,5 +1,6 @@
 <script>
-  import World from "./World.svelte";
+  // import World from "./World.svelte";
+  import Game from "./Game.svelte";
   import Movement from "./Movement.svelte";
 </script>
 
@@ -12,5 +13,5 @@
 </style>
 
 <Movement>
-  <World />
+  <Game />
 </Movement>

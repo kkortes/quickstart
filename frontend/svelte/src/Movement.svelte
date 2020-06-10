@@ -2,10 +2,8 @@
   import gameLoop from "../game/gameLoop.js";
   import { TILE_SIZE } from "../constants/WORLD.js";
   import { onMount, onDestroy, setContext, getContext } from "svelte";
-  import { key } from "./fromCenter.js";
-  import CONTEXTS from "../constants/CONTEXTS.js";
   import { writable } from "svelte/store";
-  import { fromCenter } from "../game/store.js";
+  import { key, fromCenter } from "./stores/fromCenter.js";
 
   setContext(key, fromCenter);
 
