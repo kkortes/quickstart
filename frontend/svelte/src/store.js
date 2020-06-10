@@ -3,35 +3,32 @@ import { writable } from 'svelte/store';
 const INITIAL_STORE = {
   playerName: 'nothing',
   points: 0,
+  fromCenter: {
+    x: 0,
+    y: 0,
+  },
 };
 
 const store = writable(INITIAL_STORE);
 
 const reducers = {
-  setNameAndPoints: (_payload, store, { setPoints, setName }) => {
-    console.log(setPoints);
-    return {
-      ...store,
-      // Solve this case
-      ...setPoints({ points: 1337 }),
-      ...setName({ playerName: 'hercules' }),
-    };
-  },
-  setPoints: ({ points }, store) => {
-    return {
-      ...store,
-      points,
-    };
-  },
-  setName: ({ playerName }, store) => {
-    return {
-      ...store,
-      playerName,
-    };
-  },
-  resetAll: () => {
-    return INITIAL_STORE;
-  },
+  increaseX: (_payload, { fromCenter }) => ({
+    fromCenter: {
+      ...fromCenter,
+      x: fromCenter.x + 1,
+    },
+  }),
+  setNameAndPoints: (_payload, _store, { setPoints, setName }) => ({
+    ...setPoints({ points: 1337 }),
+    ...setName({ playerName: 'hercules' }),
+  }),
+  setPoints: ({ points }, store) => ({
+    points,
+  }),
+  setName: ({ playerName }, store) => ({
+    playerName,
+  }),
+  resetAll: () => INITIAL_STORE,
 };
 
 const addActionsRecursively = (store) =>
@@ -44,20 +41,24 @@ const addActionsRecursively = (store) =>
     {}
   );
 
+const { subscribe, update } = store;
+
 let actions = {};
 
-store.subscribe((st) => {
+subscribe((st) => {
   actions = Object.entries(reducers).reduce(
     (a, [action, reducer]) => ({
       ...a,
       [action]: (payload) =>
-        store.update((ns) =>
-          reducer(
+        update((ns) => ({
+          ...st,
+          ...ns,
+          ...reducer(
             payload,
             { ...st, ...ns },
             addActionsRecursively({ ...st, ...ns })
-          )
-        ),
+          ),
+        })),
     }),
     {}
   );

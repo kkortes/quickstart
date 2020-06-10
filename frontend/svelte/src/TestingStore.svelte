@@ -1,16 +1,36 @@
 <script>
   import { store, actions } from "./store.js";
 
-  const { setName, setPoints, setNameAndPoints, resetAll } = actions;
-
+  const { setName, setPoints, setNameAndPoints, increaseX, resetAll } = actions;
+  let stores = [];
+  $: stores = [...stores, $store];
   $: playerName = $store.playerName;
   $: points = $store.points;
+  $: fromCenter = $store.fromCenter;
+
+  $: console.log(stores);
+  $: {
+    if (stores.length > 1) {
+      console.log("CHECK EQUALITY");
+      if (
+        stores[stores.length - 2].fromCenter ===
+        stores[stores.length - 1].fromCenter
+      ) {
+        console.log("EQUAL!");
+      }
+    }
+  }
+  const startTimeout = () => {
+    for (let i = 0; i < 1000; i++) {
+      increaseX();
+    }
+  };
 </script>
 
-Current value of player name: {playerName}
-<br />
-Current points: {points}
-<br />
+<pre>{JSON.stringify($store, null, 2)}</pre>
+
+<button on:click={() => increaseX()}>Inc X</button>
+
 <br />
 <button on:click|preventDefault={() => setName({ playerName: 'something' })}>
   Set name to "something"
@@ -30,3 +50,8 @@ Current points: {points}
 </button>
 <br />
 <button on:click|preventDefault={() => resetAll()}>Reset all</button>
+<br />
+<br />
+<button on:click|preventDefault={() => startTimeout()}>
+  Increment X by 1; 1000 times
+</button>

@@ -17,6 +17,7 @@ export default {
   },
   plugins: [
     replace({
+      exclude: 'node_modules/**',
       'process.env.NODE_ENV': production ? 'production' : 'development',
     }),
     svelte({
