@@ -1,7 +1,11 @@
 <script>
-  // import World from "./World.svelte";
-  import Game from "./Game.svelte";
-  import Movement from "./Movement.svelte";
+  import Login from "./components/Login.svelte";
+  import Protected from "./components/Protected.svelte";
+  import Loader from "./components/Loader.svelte";
+  import Notifications from "./components/ui/Notifications.svelte";
+
+  let loggedIn = false;
+  let token = false;
 </script>
 
 <style>
@@ -12,6 +16,16 @@
   }
 </style>
 
-<Movement>
-  <Game />
-</Movement>
+{#if !token}
+  <Login />
+{/if}
+
+{#if token && !loggedIn}
+  <Loader text="fetching state" />
+{/if}
+
+{#if token && loggedIn}
+  <Protected />
+{/if}
+
+<Notifications />

@@ -4,13 +4,13 @@
     TILE_AMOUNT,
     WORLD_SIZE,
     ROTATEX
-  } from "../constants/WORLD.js";
-  import { makeTiles } from "../game/tiles.js";
-  import Tiles from "./Tiles.svelte";
+  } from "../../constants/WORLD.js";
+  import { makeTiles } from "../../game/tiles.js";
+  // import Tiles from "./Tiles.svelte";
   import Canvas from "./Canvas.svelte";
   import Grid from "./Grid.svelte";
   import { getContext } from "svelte";
-  import { key } from "./stores/fromCenter.js";
+  import { key } from "../stores/fromCenter.js";
 
   let fromCenter = getContext(key);
 

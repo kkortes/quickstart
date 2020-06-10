@@ -1,9 +1,9 @@
 <script>
-  import gameLoop from "../game/gameLoop.js";
-  import { TILE_SIZE } from "../constants/WORLD.js";
+  import gameLoop from "../../game/gameLoop.js";
+  import { TILE_SIZE } from "../../constants/WORLD.js";
   import { onMount, onDestroy, setContext, getContext } from "svelte";
   import { writable } from "svelte/store";
-  import { key, fromCenter } from "./stores/fromCenter.js";
+  import { key, fromCenter } from "../stores/fromCenter.js";
 
   setContext(key, fromCenter);
 
@@ -35,7 +35,7 @@
       const h = up || down;
       const v = right || left;
 
-      const s = h && v ? 10 : 10;
+      const s = h && v ? 15 : 15;
 
       const { vertical, horizontal, x, y } = $fromCenter;
       const futureHorizontal = horizontal - (left ? -s : right ? s : 0);

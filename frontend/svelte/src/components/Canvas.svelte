@@ -9,8 +9,8 @@
     context as contextStore,
     props,
     time
-  } from "../game/game.js";
-  import { WORLD_SIZE, ROTATEX } from "../constants/WORLD.js";
+  } from "../../game/game.js";
+  import { WORLD_SIZE, ROTATEX } from "../../constants/WORLD.js";
 
   let frame,
     canvas,
