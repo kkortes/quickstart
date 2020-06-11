@@ -18,8 +18,9 @@
     EMAIL_INVALID,
     ACCOUNT_CREATED
   } from "../../universal/NOTIFICATIONS";
-  import { notify } from "../stores/notifications.js";
-  import { socket } from "../stores/socket.js";
+  import { store, actions } from "../store";
+
+  const { notify, login } = actions;
 
   let email = cookie.get("email") || "";
   let password = cookie.get("password") || "";
@@ -40,7 +41,7 @@
 
     loading = true;
 
-    const response = await $socket.request(action, {
+    const response = await $store.socket.request(action, {
       email,
       password: sha1(password)
     });

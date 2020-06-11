@@ -1,11 +1,7 @@
 <script>
-  import gameLoop from "../../game/gameLoop.js";
-  import { TILE_SIZE } from "../../constants/WORLD.js";
-  import { onMount, onDestroy, setContext, getContext } from "svelte";
-  import { writable } from "svelte/store";
-  import { key, fromCenter } from "../stores/fromCenter.js";
-
-  setContext(key, fromCenter);
+  import { renderable } from "../engine";
+  import { TILE_SIZE } from "../constants/WORLD.js";
+  import { store } from "../store";
 
   let gameLoopId,
     pressedKeys = [];
@@ -30,38 +26,36 @@
   $: down = pressedKeys && keyIsPressed("s");
   $: left = pressedKeys && keyIsPressed("a");
 
-  onMount(() => {
-    gameLoopId = gameLoop(() => {
-      const h = up || down;
-      const v = right || left;
+  renderable(props => {
+    const { context } = props;
 
-      const s = h && v ? 15 : 15;
+    const h = up || down;
+    const v = right || left;
 
-      const { vertical, horizontal, x, y } = $fromCenter;
-      const futureHorizontal = horizontal - (left ? -s : right ? s : 0);
-      const futureVertical = vertical - (up ? -s : down ? s : 0);
-      const HM = futureHorizontal / TILE_SIZE;
-      const VM = futureVertical / TILE_SIZE;
+    const s = h && v ? 15 : 15;
 
-      if (HM <= -1 || HM >= 1 || VM <= -1 || VM >= 1) {
-        $fromCenter = {
-          horizontal: futureHorizontal % TILE_SIZE,
-          vertical: futureVertical % TILE_SIZE,
-          x: HM <= -1 ? x + 1 : HM >= 1 ? x - 1 : x,
-          y: VM <= -1 ? y + 1 : VM >= 1 ? y - 1 : y
-        };
-      } else {
-        $fromCenter = {
-          vertical: futureVertical,
-          horizontal: futureHorizontal,
-          x,
-          y
-        };
-      }
-    });
+    const { vertical, horizontal, x, y } = $store.fromCenter;
+    const futureHorizontal = horizontal - (left ? -s : right ? s : 0);
+    const futureVertical = vertical - (up ? -s : down ? s : 0);
+    const HM = futureHorizontal / TILE_SIZE;
+    const VM = futureVertical / TILE_SIZE;
+
+    if (HM <= -1 || HM >= 1 || VM <= -1 || VM >= 1) {
+      $store.fromCenter = {
+        horizontal: futureHorizontal % TILE_SIZE,
+        vertical: futureVertical % TILE_SIZE,
+        x: HM <= -1 ? x + 1 : HM >= 1 ? x - 1 : x,
+        y: VM <= -1 ? y + 1 : VM >= 1 ? y - 1 : y
+      };
+    } else {
+      $store.fromCenter = {
+        vertical: futureVertical,
+        horizontal: futureHorizontal,
+        x,
+        y
+      };
+    }
   });
-
-  onDestroy(() => cancelAnimationFrame(gameLoopId));
 </script>
 
 <svelte:window on:keydown={handleKeydown} on:keyup={handleKeyup} />

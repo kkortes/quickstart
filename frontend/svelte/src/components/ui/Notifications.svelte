@@ -1,9 +1,8 @@
 <script>
   import Icon from "./Icon.svelte";
-  import {
-    notifications,
-    removeNotification
-  } from "../../stores/notifications.js";
+  import { store, actions } from "../../store";
+  const { removeNotification } = actions;
+  const { notifications } = $store;
 
   let timeouts = {};
 
@@ -23,7 +22,7 @@
       }
     })(type);
 
-  $: notificationsToRender = $notifications.map(notification => {
+  $: notificationsToRender = $store.notifications.map(notification => {
     const color = getColor(notification.type);
     return {
       ...notification,
@@ -33,7 +32,7 @@
   });
 
   $: {
-    const notification = $notifications[$notifications.length - 1];
+    const notification = $store.notifications[$store.notifications.length - 1];
     if (notification) {
       timeouts[notification.key] = setTimeout(() => {
         removeNotification(notification.key);
@@ -118,8 +117,8 @@
 </style>
 
 <div class="notifications">
-  {#each notificationsToRender as { key, title, text, type, color, style }}
-    <div {key} class="notification" {style}>
+  {#each notificationsToRender as { key, title, text, type, color, style } (key)}
+    <div class="notification" {style}>
       <Icon name={type} size={24} {color} />
       <div class="content">
         <h3>{title}</h3>

@@ -1,24 +1,38 @@
 <script>
+  import { LOGIN_ACCOUNT } from "../universal/SOCKET_ACTIONS.js";
   import Login from "./components/Login.svelte";
   import Protected from "./components/Protected.svelte";
   import Loader from "./components/Loader.svelte";
   import Notifications from "./components/ui/Notifications.svelte";
-  import TestingStore from "./TestingStore.svelte";
+  import cookies from "js-cookie";
+  import { store, actions } from "./store";
+  const { login, notify } = actions;
 
-  let loggedIn = false;
-  let token = false;
+  $: token = $store.token || tryLogin();
+  $: console.log("token", token);
+  $: loggedIn = $store.account._id;
+
+  const tryLogin = () => {
+    const token = cookies.get("token");
+
+    if (token) {
+      (async () => {
+        const response = await $store.socket.request(LOGIN_ACCOUNT, { token });
+
+        if (response.type !== "error") {
+          $store.token = token;
+          login(response);
+          loggedIn = true;
+        }
+      })();
+    }
+
+    return token;
+  };
 </script>
 
-<style>
-  :global(body) {
-    margin: 0;
-    padding: 0;
-    overflow: hidden;
-  }
-</style>
-
 {#if !token}
-  <TestingStore />
+  <Login />
 {/if}
 
 {#if token && !loggedIn}

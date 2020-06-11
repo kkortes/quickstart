@@ -1,6 +1,6 @@
-import { TILE_AMOUNT } from '../constants/WORLD';
+import { TILE_AMOUNT } from '../constants/WORLD.js';
 import SimplexNoise from 'simplex-noise';
-import randomNumber from '../common/randomNumber';
+import randomNumber from '../common/randomNumber.js';
 import lodash from 'lodash';
 const { times, isEmpty, range } = lodash;
 

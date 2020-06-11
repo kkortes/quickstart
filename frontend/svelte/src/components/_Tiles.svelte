@@ -1,10 +1,8 @@
 <script>
-  import { TILE_SIZE, WORLD_SIZE } from "../constants/WORLD";
-  export let tiles;
+  import { TILE_SIZE, WORLD_SIZE } from "../constants/WORLD.js";
+  import { store } from "../../store";
 
-  import { getContext } from "svelte";
-  import { key } from "./stores/fromCenter.js";
-  let fromCenter = getContext(key);
+  export let tiles;
 
   $: iteratableTiles = Object.entries(tiles);
 </script>
@@ -42,7 +40,7 @@
 {#each iteratableTiles as [key, { x, y, style, id, zIndex }] (id)}
   <div
     class="tile"
-    style={`width: ${TILE_SIZE}px;height: ${TILE_SIZE}px; z-index: ${zIndex}; top: ${(y - $fromCenter.y) * TILE_SIZE + WORLD_SIZE / 2 - TILE_SIZE / 2 + TILE_SIZE}px; left: ${(x - $fromCenter.x) * TILE_SIZE + WORLD_SIZE / 2 - TILE_SIZE / 2}px;`}>
+    style={`width: ${TILE_SIZE}px;height: ${TILE_SIZE}px; z-index: ${zIndex}; top: ${(y - $store.fromCenter.y) * TILE_SIZE + WORLD_SIZE / 2 - TILE_SIZE / 2 + TILE_SIZE}px; left: ${(x - $store.fromCenter.x) * TILE_SIZE + WORLD_SIZE / 2 - TILE_SIZE / 2}px;`}>
     <div class="background" {style} />
     <div class="inner">{x}, {y}</div>
   </div>

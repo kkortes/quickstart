@@ -4,19 +4,17 @@
     TILE_AMOUNT,
     WORLD_SIZE,
     ROTATEX
-  } from "../../constants/WORLD.js";
-  import { makeTiles } from "../../game/tiles.js";
+  } from "../constants/WORLD.js";
+  import { makeTiles } from "../engine/tiles.js";
   // import Tiles from "./Tiles.svelte";
   import Canvas from "./Canvas.svelte";
   import Grid from "./Grid.svelte";
-  import { getContext } from "svelte";
-  import { key } from "../stores/fromCenter.js";
+  import Movement from "./Movement.svelte";
+  import { store } from "../store";
 
-  let fromCenter = getContext(key);
-
-  $: tiles = makeTiles($fromCenter.x, $fromCenter.y);
-  $: offsetLeft = -(WORLD_SIZE / 2 - $fromCenter.horizontal);
-  $: offsetRight = -(WORLD_SIZE / 2 - $fromCenter.vertical);
+  $: tiles = makeTiles($store.fromCenter.x, $store.fromCenter.y);
+  $: offsetLeft = -(WORLD_SIZE / 2 - $store.fromCenter.horizontal);
+  $: offsetRight = -(WORLD_SIZE / 2 - $store.fromCenter.vertical);
 </script>
 
 <style>
@@ -57,6 +55,7 @@
 <div class="world-frame" style={`perspective: ${PERSPECTIVE};`}>
   <Canvas>
     <Grid />
+    <Movement />
   </Canvas>
   <!-- <div
     class="world"
@@ -66,10 +65,10 @@
 </div>
 
 <div class="player">
-  X:{$fromCenter.x} Y:{$fromCenter.y}
+  X:{$store.fromCenter.x} Y:{$store.fromCenter.y}
   <br />
   <br />
-  Horizontal: {$fromCenter.horizontal}
+  Horizontal: {$store.fromCenter.horizontal}
   <br />
-  Vertical: {$fromCenter.vertical}
+  Vertical: {$store.fromCenter.vertical}
 </div>
