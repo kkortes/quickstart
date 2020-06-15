@@ -32,6 +32,7 @@ export default () => {
     const value = (h && v ? 10 : 10) * (movementSpeed + 1);
 
     const { vertical, horizontal, x, y } = fromCenter;
+    console.log(fromCenter);
 
     const futureHorizontal = horizontal - (left ? -value : right ? value : 0);
     const futureVertical = vertical - (up ? -value : down ? value : 0);

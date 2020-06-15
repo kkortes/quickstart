@@ -1,7 +1,7 @@
 <script>
   import { TILE_AMOUNT, TILE_SIZE, WORLD_SIZE } from "../constants/WORLD.js";
   import { renderable } from "../engine";
-  import { makeTiles } from "../engine/tiles.js";
+  import { regenerate } from "../engine/tiles.js";
   import { store } from "../store";
   import { compare } from "../common/helper.js";
   import lodash from "lodash";
@@ -10,6 +10,22 @@
   let color = "black";
   let sprite = new Image();
   sprite.src = "./static/world-map_2.png";
+
+  let tiles = [];
+  let refX = undefined;
+  let refY = undefined;
+  $: {
+    tiles = regenerate(
+      tiles,
+      refX,
+      refY,
+      $store.fromCenter.x,
+      $store.fromCenter.y
+    );
+
+    refX = $store.fromCenter.x;
+    refY = $store.fromCenter.y;
+  }
 
   // TODO: check if potentional bug, sprite.onloads might have to be called
   renderable(props => {
@@ -21,7 +37,7 @@
       context.fillRect(0, 0, WORLD_SIZE, WORLD_SIZE);
     }
 
-    Object.values(makeTiles($store.fromCenter.x, $store.fromCenter.y))
+    Object.values(tiles)
       .sort((a, b) => compare(a.y, b.y))
       .forEach(value => {
         const { spriteCordinates, x, y } = value;

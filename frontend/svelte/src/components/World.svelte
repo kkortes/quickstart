@@ -5,14 +5,12 @@
     WORLD_SIZE,
     ROTATEX
   } from "../constants/WORLD.js";
-  import { makeTiles } from "../engine/tiles.js";
   // import Tiles from "./Tiles.svelte";
   import Canvas from "./Canvas.svelte";
   import Grid from "./Grid.svelte";
   import Movement from "./Movement.svelte";
   import { store } from "../store";
 
-  $: tiles = makeTiles($store.fromCenter.x, $store.fromCenter.y);
   $: offsetLeft = -(WORLD_SIZE / 2 - $store.fromCenter.horizontal);
   $: offsetRight = -(WORLD_SIZE / 2 - $store.fromCenter.vertical);
 </script>

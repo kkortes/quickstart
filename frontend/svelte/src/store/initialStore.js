@@ -24,4 +24,5 @@ export default {
     },
   },
   notifications: [],
+  points: 1,
 };

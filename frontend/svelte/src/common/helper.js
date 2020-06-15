@@ -4,4 +4,6 @@ const compare = (a, b) => {
   return 0;
 };
 
-export { compare };
+const sleep = (ms) => new Promise((res) => setTimeout(res, ms));
+
+export { compare, sleep };

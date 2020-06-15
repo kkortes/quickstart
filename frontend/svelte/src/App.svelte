@@ -9,7 +9,6 @@
   const { login, notify } = actions;
 
   $: token = $store.token || tryLogin();
-  $: console.log("token", token);
   $: loggedIn = $store.account._id;
 
   const tryLogin = () => {

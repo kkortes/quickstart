@@ -1,10 +1,10 @@
 <script>
   import { renderable } from "../engine";
   import { TILE_SIZE } from "../constants/WORLD.js";
-  import { store } from "../store";
+  import { store, actions } from "../store";
+  const { setFromCenter, setPosition } = actions;
 
-  let gameLoopId,
-    pressedKeys = [];
+  let pressedKeys = [];
 
   const keyIsPressed = key => pressedKeys.find(pk => pk === key.toLowerCase());
 
@@ -40,20 +40,46 @@
     const HM = futureHorizontal / TILE_SIZE;
     const VM = futureVertical / TILE_SIZE;
 
+    if (HM <= -0.5 || HM >= 0.5 || VM <= -0.5 || VM >= 0.5) {
+      const newX = HM <= -0.5 ? x + 1 : HM >= 0.5 ? x - 1 : x;
+      const newY = VM <= -0.5 ? y + 1 : VM >= 0.5 ? y - 1 : y;
+
+      if (
+        $store.account.position.x !== newX ||
+        $store.account.position.y !== newY
+      ) {
+        // const entity = entityOnLocation(newX, newY);
+
+        // if (!isEmpty(entity)) {
+        //   pickUpEntity({
+        //     entityRef: entity.ref,
+        //     pickId: `${newX}_${newY}_${entity.tier}`,
+        //   });
+        // }
+
+        setPosition({ x: newX, y: newY });
+      }
+    } else if (
+      $store.account.position.x !== x ||
+      $store.account.position.y !== y
+    ) {
+      setPosition({ x, y });
+    }
+
     if (HM <= -1 || HM >= 1 || VM <= -1 || VM >= 1) {
-      $store.fromCenter = {
+      setFromCenter({
         horizontal: futureHorizontal % TILE_SIZE,
         vertical: futureVertical % TILE_SIZE,
         x: HM <= -1 ? x + 1 : HM >= 1 ? x - 1 : x,
         y: VM <= -1 ? y + 1 : VM >= 1 ? y - 1 : y
-      };
+      });
     } else {
-      $store.fromCenter = {
+      setFromCenter({
         vertical: futureVertical,
         horizontal: futureHorizontal,
         x,
         y
-      };
+      });
     }
   });
 </script>

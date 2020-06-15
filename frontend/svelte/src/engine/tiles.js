@@ -2,6 +2,7 @@ import { TILE_AMOUNT } from '../constants/WORLD.js';
 import SimplexNoise from 'simplex-noise';
 import randomNumber from '../common/randomNumber.js';
 import lodash from 'lodash';
+import produce from 'immer';
 const { times, isEmpty, range } = lodash;
 
 const simplex = new SimplexNoise('testar');
@@ -109,56 +110,43 @@ const makeTile = (x, y) => {
   };
 };
 
-const initializeTile = (index, xOffset, yOffset) => {
-  const tiles = Math.sqrt(TILE_AMOUNT);
-  const column = (index % tiles) - (tiles - 1) / 2;
-  const row = Math.floor(index / tiles) - (tiles - 1) / 2;
+const makeInitialTiles = (xOffset, yOffset) =>
+  times(TILE_AMOUNT, (index) => {
+    const tiles = Math.sqrt(TILE_AMOUNT);
+    const column = (index % tiles) - (tiles - 1) / 2;
+    const row = Math.floor(index / tiles) - (tiles - 1) / 2;
 
-  const x = column + xOffset;
-  const y = row + yOffset;
+    const x = column + xOffset;
+    const y = row + yOffset;
 
-  return makeTile(x, y);
-};
+    return makeTile(x, y);
+  }).reduce((a, tile) => ({ ...a, [`${tile.x}_${tile.y}`]: tile }), {});
 
-let tiles = {};
-let cX = 0;
-let cY = 0;
-const makeTiles = (x, y) => {
-  const ws = Math.sqrt(TILE_AMOUNT);
-  const lessHalf = Math.floor(ws / 2);
-  const greaterHalf = Math.ceil(ws / 2);
+const regenerate = (tiles, oX, oY, x, y) =>
+  isEmpty(tiles)
+    ? makeInitialTiles(x, y)
+    : produce(tiles, (tempTiles) => {
+        const WORLD_LENGTH = Math.sqrt(TILE_AMOUNT);
+        const lessHalf = Math.floor(WORLD_LENGTH / 2);
+        const greaterHalf = Math.ceil(WORLD_LENGTH / 2);
+        if (oX !== x) {
+          range(y - lessHalf, y + greaterHalf).forEach((y) => {
+            const addX = x - (oX > x ? lessHalf : -lessHalf);
+            tempTiles[`${addX}_${y}`] = makeTile(addX, y);
 
-  if (isEmpty(tiles)) {
-    tiles = times(TILE_AMOUNT, (index) => initializeTile(index, x, y)).reduce(
-      (a, tile) => ({ ...a, [tile.id]: tile }),
-      {}
-    );
-  }
+            const removeX = x + (oX > x ? greaterHalf : -greaterHalf);
+            delete tempTiles[`${removeX}_${y}`];
+          });
+        }
+        if (oY !== y) {
+          range(x - lessHalf, x + greaterHalf).forEach((x) => {
+            const addY = y - (oY > y ? lessHalf : -lessHalf);
+            tempTiles[`${x}_${addY}`] = makeTile(x, addY);
 
-  if (cY !== y) {
-    range(x - lessHalf, x + greaterHalf).forEach((x) => {
-      const addY = y - (cY > y ? lessHalf : -lessHalf);
-      tiles[`${x}_${addY}`] = makeTile(x, addY);
+            const removeY = y + (oY > y ? greaterHalf : -greaterHalf);
+            delete tempTiles[`${x}_${removeY}`];
+          });
+        }
+      });
 
-      const removeY = y + (cY > y ? greaterHalf : -greaterHalf);
-      delete tiles[`${x}_${removeY}`];
-    });
-  }
-
-  if (cX !== x) {
-    range(y - lessHalf, y + greaterHalf).forEach((y) => {
-      const addX = x - (cX > x ? lessHalf : -lessHalf);
-      tiles[`${addX}_${y}`] = makeTile(addX, y);
-
-      const removeX = x + (cX > x ? greaterHalf : -greaterHalf);
-      delete tiles[`${removeX}_${y}`];
-    });
-  }
-
-  cY = y;
-  cX = x;
-
-  return tiles;
-};
-
-export { initializeTile, makeTile, makeTiles };
+export { makeTile, makeInitialTiles, regenerate };

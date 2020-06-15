@@ -79,6 +79,13 @@
     password,
     rememberMe
   );
+
+  $: {
+    if (!attemptLogin) {
+      email = "";
+      password = "";
+    }
+  }
 </script>
 
 <style>
