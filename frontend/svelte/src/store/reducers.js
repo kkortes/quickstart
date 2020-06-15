@@ -64,16 +64,18 @@ export default {
       },
     };
   },
-  logout: (payload, store, { notify }) => {
+  logout: async (payload, store, { notify }) => {
     const { account, socket } = store;
     socket.emit(REGISTER_TOKEN, '');
     cookie.remove('token');
 
-    storeState(account, notify, store);
+    await storeState(account, notify, store);
+
+    notify(payload);
 
     return {
       ...INITIAL_STORE,
-      ...notify(payload),
+      notifications: [...store.notifications],
     };
   },
 };
