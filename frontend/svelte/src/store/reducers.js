@@ -1,9 +1,10 @@
-import { REGISTER_TOKEN } from '../../universal/SOCKET_ACTIONS.js';
-import INITIAL_STORE from './initialStore.js';
+import { REGISTER_TOKEN } from '../../universal/SOCKET_ACTIONS';
+import INITIAL_STORE from './initialStore';
 import uuid from 'short-uuid';
 import cookie from 'js-cookie';
-import { storeState, storeStateWithDebounce } from '../common/db.js';
-import { sleep } from '../../universal/helpers.js';
+import { storeState, storeStateWithDebounce } from '../common/db';
+import { sleep } from '../../universal/helpers';
+import socket from '../common/socket';
 
 export default {
   removeNotification: (key, { notifications }) => ({
@@ -11,7 +12,14 @@ export default {
       (notification) => notification.key !== key
     ),
   }),
-  notify: ({ title, text, type }, { notifications }) => {
+  notify: ({ title, ...notification }, { notifications }) => {
+    const type = notification.hasOwnProperty('error')
+      ? 'error'
+      : notification.type;
+    const text = notification.hasOwnProperty('error')
+      ? notification.error
+      : notification.text;
+
     const key = uuid.generate();
     return {
       notifications: [
@@ -49,6 +57,7 @@ export default {
   }),
   login: (payload, { account, fromCenter }) => {
     const { token, ...dbData } = payload;
+
     cookie.set('token', token, { expires: 1 });
 
     return {
@@ -59,13 +68,13 @@ export default {
       },
       fromCenter: {
         ...fromCenter,
-        x: dbData.position.x,
-        y: dbData.position.y,
+        x: dbData.hasOwnProperty('position') ? dbData.position.x : 0,
+        y: dbData.hasOwnProperty('position') ? dbData.position.y : 0,
       },
     };
   },
   logout: async (payload, store, { notify }) => {
-    const { account, socket } = store;
+    const { account } = store;
     socket.emit(REGISTER_TOKEN, '');
     cookie.remove('token');
 

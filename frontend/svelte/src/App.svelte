@@ -6,6 +6,7 @@
   import Notifications from "./components/ui/Notifications.svelte";
   import cookies from "js-cookie";
   import { store, actions } from "./store";
+  import { request } from "./common/socket";
   const { login, notify } = actions;
 
   $: token = $store.token || tryLogin();
@@ -16,13 +17,13 @@
 
     if (token) {
       (async () => {
-        const response = await $store.socket.request(LOGIN_ACCOUNT, { token });
+        try {
+          const response = await request(LOGIN_ACCOUNT, { token });
 
-        if (response.type !== "error") {
           $store.token = token;
           login(response);
           loggedIn = true;
-        }
+        } catch {}
       })();
     }
 

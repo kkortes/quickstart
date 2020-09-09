@@ -5,27 +5,26 @@
   import TextInput from "./form/TextInput.svelte";
   import Button from "./form/Button.svelte";
   import { store, actions } from "../store";
-  const { changeUsername } = actions;
+  import { request } from "../common/socket";
+  const { changeUsername, notify } = actions;
 
+  let username = "";
   let loading = false;
 
   const confirmUsername = async username => {
     loading = true;
 
-    const response = await $store.socket.request(USERNAME_AVAILABILITY, {
-      username
-    });
+    try {
+      const response = await request(USERNAME_AVAILABILITY, {
+        username
+      });
+      changeUsername(response.username);
+    } catch (error) {
+      notify(error);
+    }
 
     loading = false;
-
-    if (response.type === "error") {
-      notify(response);
-    } else {
-      changeUsername(response.username);
-    }
   };
-
-  $: username = $store.account.username;
 
   const style = `${loading ? "pointer-events: none" : ""}`;
 </script>

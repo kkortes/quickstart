@@ -19,6 +19,7 @@
     ACCOUNT_CREATED
   } from "../../universal/NOTIFICATIONS";
   import { store, actions } from "../store";
+  import { request } from "../common/socket";
 
   const { notify, login } = actions;
 
@@ -41,17 +42,19 @@
 
     loading = true;
 
-    const response = await $store.socket.request(action, {
-      email,
-      password: sha1(password)
-    });
-
-    loading = false;
-
-    if (response.type === "error") {
-      notify(response);
+    let response;
+    try {
+      response = await request(action, {
+        email,
+        password: sha1(password)
+      });
+    } catch (error) {
+      notify(error);
+      loading = false;
       return;
     }
+
+    loading = false;
 
     if (action === CREATE_ACCOUNT) {
       notify(ACCOUNT_CREATED);

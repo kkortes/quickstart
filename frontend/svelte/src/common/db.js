@@ -1,6 +1,7 @@
+import lodash from 'lodash';
 import { STORE_STATE } from '../../universal/SOCKET_ACTIONS.js';
 import { STATE_STORED } from '../../universal/NOTIFICATIONS.js';
-import lodash from 'lodash';
+import { request } from './socket';
 const { debounce, pickBy, pick } = lodash;
 
 let lastStoredState = {};
@@ -9,7 +10,7 @@ const isDifferentThanLastStored = (v, k) =>
   JSON.stringify(v) !== JSON.stringify(lastStoredState[k]);
 
 const storeState = async (data, notify, store) => {
-  const { socket, token } = store;
+  const { token } = store;
 
   const dirtyKeys = Object.keys(pickBy(data, isDifferentThanLastStored));
 
@@ -21,13 +22,13 @@ const storeState = async (data, notify, store) => {
     update,
   };
 
-  const response = await socket.request(STORE_STATE, payload);
-
-  if (response.type === 'error') {
-    notify(response);
-  } else {
+  let response;
+  try {
+    response = await request(STORE_STATE, payload);
     notify(STATE_STORED);
     lastStoredState = data;
+  } catch (error) {
+    notify(error);
   }
 
   return response;

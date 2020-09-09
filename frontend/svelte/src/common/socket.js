@@ -6,13 +6,17 @@ import { REGISTER_TOKEN } from '../../universal/SOCKET_ACTIONS';
 
 const socket = io(config.endpoint.socket);
 
-socket.request = (name, args) =>
-  new Promise((resolve) => {
-    const id = setTimeout(() => resolve(NETWORK_TIMEOUT), 1500);
+export const request = (name, args) =>
+  new Promise((resolve, reject) => {
+    const id = setTimeout(() => reject(NETWORK_TIMEOUT), 1500);
 
-    socket.emit(name, args, (r) => {
+    socket.emit(name, args, (response) => {
       clearTimeout(id);
-      resolve(r);
+      if (response.hasOwnProperty('error')) {
+        reject(response);
+      } else {
+        resolve(response);
+      }
     });
   });
 

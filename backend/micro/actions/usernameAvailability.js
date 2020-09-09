@@ -14,11 +14,5 @@ export default async ({ username }, mongo) => {
     username: LCusername,
   });
 
-  if (user) {
-    return USERNAME_TAKEN;
-  } else {
-    return {
-      username,
-    };
-  }
+  return user ? USERNAME_TAKEN : { username: LCusername };
 };

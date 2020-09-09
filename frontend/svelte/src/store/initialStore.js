@@ -1,8 +1,6 @@
 import { EQUIPMENT, STATS } from '../constants/INITIALS.js';
-import socket from '../common/socket.js';
 
 export default {
-  socket,
   token: '',
   enitityInfo: undefined,
   worldTier: 1,
