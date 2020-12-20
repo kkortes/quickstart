@@ -44,7 +44,6 @@ npm run dev
 - Get rid of `uuid` dependency
 - Get rid of `react-transition-group` dependency
 - Make it so that `<Crow />` can handle `null` (not creating white space)
-- Split up `/micro/actions/createAccount.js` into `createAccount` and `recoverAccount`
 
 ### Switch snippet
 

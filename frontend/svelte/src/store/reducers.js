@@ -3,7 +3,6 @@ import INITIAL_STORE from './initialStore';
 import uuid from 'short-uuid';
 import cookie from 'js-cookie';
 import { storeState, storeStateWithDebounce } from '../common/db';
-import { sleep } from '../../universal/helpers';
 import socket from '../common/socket';
 
 export default {
