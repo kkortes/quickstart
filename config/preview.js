@@ -3,6 +3,6 @@ export default {
   debug: true,
   dbName: 'quickstart',
   endpoint: {
-    socket: 'http://localhost:3001',
+    socket: 'http://localhost:3003',
   },
 };

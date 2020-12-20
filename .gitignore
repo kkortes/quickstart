@@ -13,3 +13,7 @@ node_modules*
 !./config
 .vercel
 .vscode
+
+/.svelte
+/build
+/functions

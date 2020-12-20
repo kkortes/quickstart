@@ -27,7 +27,7 @@ client.connect((error, db) => {
   mongo = db;
   websocketserver(socketio(server), mongo);
 
-  server.listen(3001, () =>
+  server.listen(3003, () =>
     console.log(
       `Server started with config: ${JSON.stringify(config, null, 2)}`
     )
