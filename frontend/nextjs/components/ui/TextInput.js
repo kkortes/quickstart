@@ -13,7 +13,7 @@ const TextInput = ({ onChange, text, type, disabled, value, ...props }) => {
         value={value}
         onChange={(e) => onChange(e.target.value)}
         className={classNames({
-          focus: value,
+          focus: value !== '',
         })}
       />
       <div className='text'>{text}</div>

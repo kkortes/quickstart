@@ -11,7 +11,7 @@ export default ({ children }) => (
         href='/static/favicon.ico'
       />
       <link
-        href='https://fonts.googleapis.com/css?family=Bree+Serif|Fira+Sans+Condensed&display=swap'
+        href='https://fonts.googleapis.com/css?family=Bree+Serif|Fira+Sans+Condensed|Volkhov&display=swap'
         rel='stylesheet'
       />
       <link href='./static/icomoon/style.css' rel='stylesheet' />
@@ -34,8 +34,7 @@ export default ({ children }) => (
           flex-direction: column;
           overflow-y: scroll;
           overflow-x: hidden;
-          padding: 20px 15px 90px 15px;
-          padding-bottom: 250px;
+          overflow: hidden;
         }
       `}
     </style>
@@ -56,7 +55,7 @@ export default ({ children }) => (
           font-size: 1.6rem;
           line-height: 2rem;
           color: #444;
-          background-color: #fafafa;
+          background-color: black;
         }
         *::-webkit-scrollbar {
           width: 10px;

@@ -1,5 +1,5 @@
-import { NETWORK_ERROR } from '../../../universal/NOTIFICATIONS.js';
-import config from '../../../config/index.js';
+import { NETWORK_ERROR } from '../universal/NOTIFICATIONS.js';
+import config from '../config/index.js';
 
 export default async (body, mongo) => {
   const collection = mongo.db(config.dbName).collection('state');

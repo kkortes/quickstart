@@ -5,20 +5,67 @@ import socket from '../common/socket';
 import { storeState, storeStateWithDebounce } from '../common/db';
 import cookie from 'js-cookie';
 import Router from 'next/router';
-import { ACCOUNT_LOGGED_OUT } from '../../../universal/NOTIFICATIONS';
-import { REGISTER_TOKEN } from '../../../universal/SOCKET_ACTIONS';
+import { REGISTER_TOKEN } from '../universal/SOCKET_ACTIONS';
+import { EQUIPMENT, STATS } from '../constants/INITIALS';
 
 const INITIAL_STATE = {
   socket,
   token: '',
+  enitityInfo: undefined,
+  worldTier: 1,
+  fromCenter: {
+    vertical: 0,
+    horizontal: 0,
+    x: 0,
+    y: 0,
+  },
+  drops: [],
   account: {
     username: '',
+    equipment: EQUIPMENT,
+    stats: STATS,
+    picks: [],
+    position: {
+      x: 0,
+      y: 0,
+    },
   },
   notifications: [],
 };
 
 const INITIAL_REDUCERS = {
-  accountChanges: ({ account }, { notify }, payload) => {
+  pickUpEntity: ({ account, drops }, _dispatch, payload) => ({
+    account: {
+      ...account,
+      picks: [...account.picks, payload.pickId],
+    },
+    drops: [
+      ...drops,
+      {
+        ref: payload.entityRef,
+        id: new Date().getTime(),
+      },
+    ],
+  }),
+  setPosition: async (_store, { accountChanges }, payload) =>
+    accountChanges({ position: payload }),
+  setEntityInfo: (_store, _dispatch, payload) => ({
+    entityInfo: payload,
+  }),
+  setStat: async ({ account }, { accountChanges }, payload) =>
+    accountChanges({
+      stats: {
+        ...account.stats,
+        [payload.key]:
+          parseFloat(payload.value) + '' === payload.value
+            ? parseFloat(payload.value)
+            : payload.value,
+      },
+    }),
+  setFromCenter: (_store, _dispatch, payload) => ({
+    fromCenter: payload,
+  }),
+  accountChanges: async ({ account }, { notify }, payload) => {
     const merged = {
       ...account,
       ...payload,
@@ -30,15 +77,10 @@ const INITIAL_REDUCERS = {
       account: merged,
     };
   },
-  changeUsername: async (_store, { accountChanges }, payload) => {
-    const store = await accountChanges({
+  changeUsername: async (_store, { accountChanges }, payload) =>
+    accountChanges({
       username: payload,
-    });
-
-    return {
-      account: store.account,
-    };
-  },
+    }),
   clearNotifications: () => ({
     notifications: [],
   }),
@@ -70,8 +112,9 @@ const INITIAL_REDUCERS = {
     socket.emit(REGISTER_TOKEN, '');
     cookie.remove('token');
     Router.push('/');
-    notify(payload);
-    return storeState(account, notify);
+    const newState = await notify(payload);
+    await storeState(account, notify);
+    return { ...INITIAL_STATE, notifications: newState.notifications };
   },
 };
 

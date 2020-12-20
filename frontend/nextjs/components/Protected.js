@@ -1,8 +1,11 @@
-import { useDispatch, useGlobal } from 'reactn';
+import { useGlobal } from 'reactn';
 import StateChecks from './StateChecks';
-import { ACCOUNT_LOGGED_OUT } from '../../../universal/NOTIFICATIONS';
 
 import UsernameInput from './UsernameInput';
+import config from '../config';
+import Debug from './Debug';
+import Interface from './game/Interface';
+import CharacterSheet from './CharacterSheet';
 
 export default ({ token }) => {
   const [
@@ -11,18 +14,13 @@ export default ({ token }) => {
       account: { username },
     },
   ] = useGlobal();
-  const { logout } = useDispatch();
 
   return (
     <>
-      <div>
-        Logged in as {token}
-        <br />
-        Socket ID: {socket.id}
-        <br />
-        <div onClick={() => logout(ACCOUNT_LOGGED_OUT)}>Logout</div>
-      </div>
+      {username && <Interface />}
+      {/* {username && <CharacterSheet />} */}
       {!username && <UsernameInput />}
+      {config.debug && <Debug token={token} socket={socket} />}
       <StateChecks />
     </>
   );

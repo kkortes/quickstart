@@ -1,0 +1,31 @@
+{
+  "name": "svelte",
+  "version": "1.0.2",
+  "scripts": {
+    "build": "rollup -c",
+    "dev": "rollup -c -w",
+    "start": "sirv public",
+    "link": "(exec rm -Rf universal) && (exec ln -s ../../universal ./universal) && (exec rm -Rf config) && (exec ln -s ../../config ./config)",
+    "eject": "(exec rm -Rf universal) && (exec cp -r ../../universal/ ./universal) && (exec rm -Rf config) && (exec cp -r ../../config/ ./config)"
+  },
+  "devDependencies": {
+    "@rollup/plugin-commonjs": "11.0.2",
+    "@rollup/plugin-node-resolve": "^7.0.0",
+    "@rollup/plugin-replace": "^2.3.3",
+    "rollup": "^1.20.0",
+    "rollup-plugin-livereload": "^1.2.0",
+    "rollup-plugin-svelte": "^5.0.3",
+    "rollup-plugin-terser": "^5.1.2",
+    "svelte": "^3.0.0"
+  },
+  "dependencies": {
+    "immer": "^7.0.0",
+    "js-cookie": "^2.2.1",
+    "seedrandom": "^3.0.5",
+    "sha1": "^1.1.1",
+    "short-uuid": "^3.1.1",
+    "simplex-noise": "^2.4.0",
+    "sirv-cli": "^0.4.4",
+    "socket.io-client": "^2.3.0"
+  }
+}

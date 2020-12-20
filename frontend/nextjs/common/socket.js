@@ -1,8 +1,8 @@
 import io from 'socket.io-client';
 import { setGlobal, getGlobal } from 'reactn';
-import config from '../../../config';
-import { NETWORK_TIMEOUT } from '../../../universal/NOTIFICATIONS';
-import { REGISTER_TOKEN } from '../../../universal/SOCKET_ACTIONS';
+import config from '../config';
+import { NETWORK_TIMEOUT } from '../universal/NOTIFICATIONS';
+import { REGISTER_TOKEN } from '../universal/SOCKET_ACTIONS';
 
 const socket = io(config.endpoint.socket);
 

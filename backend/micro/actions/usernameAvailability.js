@@ -1,6 +1,6 @@
-import { USERNAME_TAKEN } from '../../../universal/NOTIFICATIONS.js';
-import config from '../../../config/index.js';
-import { sleep } from '../../../universal/helpers.js';
+import { USERNAME_TAKEN } from '../universal/NOTIFICATIONS.js';
+import config from '../config/index.js';
+import { sleep } from '../universal/helpers.js';
 
 export default async ({ username }, mongo) => {
   if (config.debug) {
@@ -14,11 +14,5 @@ export default async ({ username }, mongo) => {
     username: LCusername,
   });
 
-  if (user) {
-    return USERNAME_TAKEN;
-  } else {
-    return {
-      username,
-    };
-  }
+  return user ? USERNAME_TAKEN : { username: LCusername };
 };

@@ -8,5 +8,12 @@ node_modules*
 **/mongo-db
 **/.next
 **/universal
+!./universal
 **/config
+!./config
 .vercel
+.vscode
+
+**/.svelte
+**/build
+**/functions

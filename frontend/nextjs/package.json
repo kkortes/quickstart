@@ -5,7 +5,7 @@
   "main": "pages/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "next",
+    "dev": "next -p 3002",
     "build": "next build",
     "start": "next start",
     "link": "(exec rm -Rf universal) && (exec ln -s ../../universal ./universal) && (exec rm -Rf config) && (exec ln -s ../../config ./config)",
@@ -14,7 +14,9 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@welldone-software/why-did-you-render": "^4.2.1",
     "classnames": "^2.2.6",
+    "immer": "^6.0.9",
     "js-cookie": "^2.2.1",
     "lodash": "^4.17.15",
     "next": "^9.3.5",
@@ -24,8 +26,10 @@
     "react-dom": "^16.13.1",
     "react-transition-group": "^4.4.1",
     "reactn": "^2.2.7",
+    "seedrandom": "^3.0.5",
     "sha1": "^1.1.1",
     "short-uuid": "^3.1.1",
+    "simplex-noise": "^2.4.0",
     "socket.io-client": "^2.3.0"
   }
 }

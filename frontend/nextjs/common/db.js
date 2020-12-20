@@ -1,7 +1,7 @@
 import { debounce, pickBy, pick } from 'lodash';
-import { STORE_STATE } from '../../../universal/SOCKET_ACTIONS';
+import { STORE_STATE } from '../universal/SOCKET_ACTIONS';
 import { getGlobal } from 'reactn';
-import { STATE_STORED } from '../../../universal/NOTIFICATIONS';
+import { STATE_STORED } from '../universal/NOTIFICATIONS';
 
 let lastStoredState = {};
 

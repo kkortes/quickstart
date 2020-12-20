@@ -3,7 +3,7 @@ import production from './production.js';
 import { deepMerge } from '../universal/helpers.js';
 
 const defaultConfig = {
-  dbName: 'test',
+  dbName: 'quickstart',
 };
 
 export default deepMerge(
