@@ -143,6 +143,16 @@ const regenerate = (tiles, oX, oY, x, y) =>
             delete tempTiles[`${x}_${removeY}`];
           });
         }
+
+        if (oY !== y && oX !== x) {
+          const extra = tiles.length / 2;
+
+          const gh = greaterHalf + extra;
+          const removeX = x + (oX > x ? gh : -gh);
+          const removeY = y + (oY > y ? greaterHalf : -greaterHalf);
+
+          delete tempTiles[`${removeX}_${removeY}`];
+        }
       });
 
 export { makeTile, makeInitialTiles, regenerate };
