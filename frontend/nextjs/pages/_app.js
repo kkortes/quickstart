@@ -112,9 +112,9 @@ const INITIAL_REDUCERS = {
     socket.emit(REGISTER_TOKEN, '');
     cookie.remove('token');
     Router.push('/');
-    notify(payload);
+    const newState = await notify(payload);
     await storeState(account, notify);
-    return INITIAL_STATE;
+    return { ...INITIAL_STATE, notifications: newState.notifications };
   },
 };
 

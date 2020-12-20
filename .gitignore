@@ -10,3 +10,4 @@ node_modules*
 **/universal
 **/config
 .vercel
+.vscode

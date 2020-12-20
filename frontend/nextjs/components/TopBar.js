@@ -1,4 +1,5 @@
 import { useDispatch, useGlobal } from 'reactn';
+import { ACCOUNT_LOGGED_OUT } from '../universal/NOTIFICATIONS';
 
 export default () => {
   const { logout } = useDispatch();
@@ -16,7 +17,7 @@ export default () => {
       <div>
         {username} X:{x} Y:{y} Vertical: {vertical} Horizontal: {horizontal}
       </div>
-      <div onClick={() => logout()}>Logout</div>
+      <div onClick={() => logout(ACCOUNT_LOGGED_OUT)}>Logout</div>
 
       <style jsx>{`
         .top-bar {
