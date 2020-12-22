@@ -1,7 +1,8 @@
-import { PASSWORD_INCORRECT } from '../universal/NOTIFICATIONS.js';
-import config from '../config/index.js';
-import { sleep } from '../universal/helpers.js';
 import mongodb from 'mongodb';
+import config from '@shared/config/index.js';
+import { PASSWORD_INCORRECT } from '@shared/consts/NOTIFICATIONS.js';
+import { sleep } from '@shared/utils/index.js';
+
 const { ObjectID } = mongodb;
 
 export default async ({ email, password, token }, mongo) => {

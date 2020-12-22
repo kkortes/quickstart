@@ -5,14 +5,15 @@
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "NODE_ENV=development nodemon --watch ./",
-    "link": "(exec rm -Rf universal) && (exec ln -s ../../universal ./universal) && (exec rm -Rf config) && (exec ln -s ../../config ./config)",
-    "eject": "(exec rm -Rf universal) && (exec cp -r ../../universal/ ./universal) && (exec rm -Rf config) && (exec cp -r ../../config/ ./config)"
+    "dev": "NODE_ENV=development nodemon --watch ./"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "phaser": "^3.23.0"
+    "phaser": "^3.23.0",
+    "@shared/config": "file:../../shared/config",
+    "@shared/consts": "file:../../shared/consts",
+    "@shared/utils": "file:../../shared/utils"
   },
   "devDependencies": {
     "nodemon": "^2.0.4"

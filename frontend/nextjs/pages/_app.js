@@ -1,12 +1,12 @@
 import { withInit } from 'reactn';
 import uuid from 'short-uuid';
+import cookie from 'js-cookie';
+import Router from 'next/router';
+import { REGISTER_TOKEN } from '../node_modules/@shared/consts/SOCKET_ACTIONS.js';
+import { EQUIPMENT, STATS } from '../constants/INITIALS';
 import Meta from '../components/Meta';
 import socket from '../common/socket';
 import { storeState, storeStateWithDebounce } from '../common/db';
-import cookie from 'js-cookie';
-import Router from 'next/router';
-import { REGISTER_TOKEN } from '../universal/SOCKET_ACTIONS';
-import { EQUIPMENT, STATS } from '../constants/INITIALS';
 
 const INITIAL_STATE = {
   socket,

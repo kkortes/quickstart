@@ -1,6 +1,6 @@
 import lodash from 'lodash';
-import { STORE_STATE } from '../../universal/SOCKET_ACTIONS.js';
-import { STATE_STORED } from '../../universal/NOTIFICATIONS.js';
+import { STORE_STATE } from '@shared/consts/SOCKET_ACTIONS.js';
+import { STATE_STORED } from '@shared/consts/NOTIFICATIONS.js';
 import { request } from './socket';
 const { debounce, pickBy, pick } = lodash;
 

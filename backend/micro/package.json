@@ -6,13 +6,14 @@
   "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "NODE_ENV=development nodemon --watch ./",
-    "link": "(exec rm -Rf universal) && (exec ln -s ../../universal ./universal) && (exec rm -Rf config) && (exec ln -s ../../config ./config)",
-    "eject": "(exec rm -Rf universal) && (exec cp -r ../../universal/ ./universal) && (exec rm -Rf config) && (exec cp -r ../../config/ ./config)"
+    "dev": "NODE_ENV=development nodemon --watch ./"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@shared/config": "file:../../shared/config",
+    "@shared/consts": "file:../../shared/consts",
+    "@shared/utils": "file:../../shared/utils",
     "dotenv": "^8.2.0",
     "lodash": "^4.17.15",
     "micro": "^9.3.4",

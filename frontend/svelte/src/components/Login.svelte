@@ -1,23 +1,23 @@
 <script>
   import sha1 from "sha1";
   import cookie from "js-cookie";
+  import {
+    LOGIN_ACCOUNT,
+    CREATE_ACCOUNT
+  } from "@shared/consts/SOCKET_ACTIONS";
+  import {
+    PASSWORD_MISSING,
+    ACCOUNT_LOGGED_IN,
+    EMAIL_INVALID,
+    ACCOUNT_CREATED
+  } from "@shared/consts/NOTIFICATIONS";
+  import { validateEmail } from "@shared/utils";
   import Center from "./ui/Center.svelte";
   import Crow from "./ui/Crow.svelte";
   import TextInput from "./form/TextInput.svelte";
   import PasswordInput from "./form/PasswordInput.svelte";
   import Button from "./form/Button.svelte";
   import CheckBox from "./form/CheckBox.svelte";
-  import { validateEmail } from "../../universal/helpers.js";
-  import {
-    LOGIN_ACCOUNT,
-    CREATE_ACCOUNT
-  } from "../../universal/SOCKET_ACTIONS";
-  import {
-    PASSWORD_MISSING,
-    ACCOUNT_LOGGED_IN,
-    EMAIL_INVALID,
-    ACCOUNT_CREATED
-  } from "../../universal/NOTIFICATIONS";
   import { store, actions } from "../store";
   import { request } from "../common/socket";
 

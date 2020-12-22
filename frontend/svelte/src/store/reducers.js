@@ -1,7 +1,7 @@
-import { REGISTER_TOKEN } from '../../universal/SOCKET_ACTIONS';
-import INITIAL_STORE from './initialStore';
 import uuid from 'short-uuid';
 import cookie from 'js-cookie';
+import { REGISTER_TOKEN } from '@shared/consts/SOCKET_ACTIONS.js';
+import INITIAL_STORE from './initialStore';
 import { storeState, storeStateWithDebounce } from '../common/db';
 import socket from '../common/socket';
 

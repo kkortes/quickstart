@@ -1,12 +1,12 @@
 <script>
   import { onMount } from "svelte";
-  import config from "../../config";
-  import { store, actions } from "../store";
-  import { LOGGED_IN_ELSWEHRE } from "../../universal/SOCKET_ACTIONS";
+  import { LOGGED_IN_ELSWEHRE } from "@shared/consts/SOCKET_ACTIONS";
   import {
     ACCOUNT_LOGGED_IN_ELSEWHERE,
     ACCOUNT_LOGGED_OUT
-  } from "../../universal/NOTIFICATIONS";
+  } from "@shared/consts/NOTIFICATIONS";
+  import config from "@shared/config";
+  import { store, actions } from "../store";
   import socket from "../common/socket";
 
   const { logout } = actions;

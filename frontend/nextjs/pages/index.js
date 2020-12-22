@@ -1,8 +1,8 @@
+import { useEffect, setGlobal, useDispatch, useState, getGlobal } from 'reactn';
+import { LOGIN_ACCOUNT } from '../node_modules/@shared/consts/SOCKET_ACTIONS';
 import Login from '../components/Login';
 import Protected from '../components/Protected';
 import auth from '../common/auth';
-import { useEffect, setGlobal, useDispatch, useState, getGlobal } from 'reactn';
-import { LOGIN_ACCOUNT } from '../universal/SOCKET_ACTIONS';
 import Loader from '../components/Loader';
 
 export default ({ token }) => {

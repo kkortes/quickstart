@@ -1,20 +1,22 @@
+import { useEffect, useDispatch, useGlobal, useState, setGlobal } from 'reactn';
 import sha1 from 'sha1';
-import { LOGIN_ACCOUNT, CREATE_ACCOUNT } from '../universal/SOCKET_ACTIONS';
-import { validateEmail } from '../universal/helpers';
-import { useDispatch, useGlobal, useState, setGlobal } from 'reactn';
-import TextInput from './ui/TextInput';
-import Crow from './ui/Crow';
-import Button from './ui/Button';
-import CheckBox from './ui/CheckBox';
+import {
+  LOGIN_ACCOUNT,
+  CREATE_ACCOUNT,
+} from '../node_modules/@shared/consts/SOCKET_ACTIONS';
+import { validateEmail } from '../node_modules/@shared/utils';
 import {
   PASSWORD_MISSING,
   ACCOUNT_LOGGED_IN,
   EMAIL_INVALID,
   ACCOUNT_CREATED,
-} from '../universal/NOTIFICATIONS';
+} from '../node_modules/@shared/consts/NOTIFICATIONS';
+import TextInput from './ui/TextInput';
+import Crow from './ui/Crow';
+import Button from './ui/Button';
+import CheckBox from './ui/CheckBox';
 import cookie from 'js-cookie';
 import Center from './ui/Center';
-import { useEffect } from 'react';
 
 export default () => {
   const [{ socket }] = useGlobal();

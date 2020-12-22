@@ -4,7 +4,7 @@ import {
   STORE_STATE,
   REGISTER_TOKEN,
   USERNAME_AVAILABILITY,
-} from './universal/SOCKET_ACTIONS.js';
+} from '@shared/consts/SOCKET_ACTIONS.js';
 import loginAccount from './actions/loginAccount.js';
 import createAccount from './actions/createAccount.js';
 import storeState from './actions/storeState.js';

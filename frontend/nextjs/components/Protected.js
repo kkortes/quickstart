@@ -1,8 +1,7 @@
 import { useGlobal } from 'reactn';
+import config from '../node_modules/@shared/config';
 import StateChecks from './StateChecks';
-
 import UsernameInput from './UsernameInput';
-import config from '../config';
 import Debug from './Debug';
 import Interface from './game/Interface';
 import CharacterSheet from './CharacterSheet';

@@ -2,9 +2,15 @@
   "name": "sveltekit",
   "version": "0.0.1",
   "scripts": {
-    "dev": "svelte-kit dev",
+    "_dev": "svelte-kit dev",
     "build": "svelte-kit build",
     "start": "svelte-kit start"
+  },
+  "dependencies": {
+    "@shared/config": "file:../../shared/config",
+    "@shared/consts": "file:../../shared/consts",
+    "@shared/utils": "file:../../shared/utils",
+    "@apeegg/svelte-component-kit": "file:../../shared/svelte-component-kit"
   },
   "devDependencies": {
     "@sveltejs/adapter-node": "next",

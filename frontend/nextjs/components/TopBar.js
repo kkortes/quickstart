@@ -1,5 +1,5 @@
 import { useDispatch, useGlobal } from 'reactn';
-import { ACCOUNT_LOGGED_OUT } from '../universal/NOTIFICATIONS';
+import { ACCOUNT_LOGGED_OUT } from '../node_modules/@shared/consts/NOTIFICATIONS';
 
 export default () => {
   const { logout } = useDispatch();

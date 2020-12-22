@@ -4,9 +4,7 @@
   "scripts": {
     "build": "rollup -c",
     "dev": "rollup -c -w",
-    "start": "sirv public",
-    "link": "(exec rm -Rf universal) && (exec ln -s ../../universal ./universal) && (exec rm -Rf config) && (exec ln -s ../../config ./config)",
-    "eject": "(exec rm -Rf universal) && (exec cp -r ../../universal/ ./universal) && (exec rm -Rf config) && (exec cp -r ../../config/ ./config)"
+    "start": "sirv public"
   },
   "devDependencies": {
     "@rollup/plugin-commonjs": "11.0.2",
@@ -19,6 +17,10 @@
     "svelte": "^3.0.0"
   },
   "dependencies": {
+    "@shared/config": "file:../../shared/config",
+    "@shared/consts": "file:../../shared/consts",
+    "@shared/utils": "file:../../shared/utils",
+    "@apeegg/svelte-component-kit": "file:../../shared/svelte-component-kit",
     "immer": "^7.0.0",
     "js-cookie": "^2.2.1",
     "seedrandom": "^3.0.5",

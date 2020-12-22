@@ -1,5 +1,5 @@
 <script>
-  import { ACCOUNT_LOGGED_OUT } from "../../universal/NOTIFICATIONS.js";
+  import { ACCOUNT_LOGGED_OUT } from "@shared/consts/NOTIFICATIONS.js";
   import { store, actions } from "../store";
   const { logout } = actions;
 

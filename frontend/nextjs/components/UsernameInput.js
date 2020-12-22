@@ -1,8 +1,8 @@
 import { useDispatch, useGlobal, useState } from 'reactn';
+import { USERNAME_AVAILABILITY } from '../node_modules/@shared/consts/SOCKET_ACTIONS';
 import TextInput from './ui/TextInput';
 import Crow from './ui/Crow';
 import Button from './ui/Button';
-import { USERNAME_AVAILABILITY } from '../universal/SOCKET_ACTIONS';
 import Center from './ui/Center';
 
 export default () => {

@@ -1,10 +1,10 @@
 <script>
-  import { LOGIN_ACCOUNT } from "../universal/SOCKET_ACTIONS.js";
+  import cookies from "js-cookie";
+  import { LOGIN_ACCOUNT } from "@shared/consts/SOCKET_ACTIONS";
   import Login from "./components/Login.svelte";
   import Protected from "./components/Protected.svelte";
   import Loader from "./components/Loader.svelte";
   import Notifications from "./components/ui/Notifications.svelte";
-  import cookies from "js-cookie";
   import { store, actions } from "./store";
   import { request } from "./common/socket";
   const { login, notify } = actions;
@@ -29,6 +29,12 @@
 
     return token;
   };
+  import shared from '@apeegg/svelte-component-kit'
+	console.log(shared);
+	import config from '@shared/config'
+  console.log(config)
+  import {PASSWORD_INCORRECT} from '@shared/consts/NOTIFICATIONS'
+  console.log(PASSWORD_INCORRECT)
 </script>
 
 {#if !token}

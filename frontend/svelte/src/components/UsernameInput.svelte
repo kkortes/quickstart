@@ -1,5 +1,5 @@
 <script>
-  import { USERNAME_AVAILABILITY } from "../../universal/SOCKET_ACTIONS.js";
+  import { USERNAME_AVAILABILITY } from "@shared/consts/SOCKET_ACTIONS.js";
   import Center from "./ui/Center.svelte";
   import Crow from "./ui/Crow.svelte";
   import TextInput from "./form/TextInput.svelte";
