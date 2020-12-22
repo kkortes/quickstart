@@ -1,5 +1,7 @@
 <script>
 	import Counter from '$components/Counter.svelte';
+	import { validateEmail } from '@shared/utils';
+	console.log(validateEmail('kim@kortes.se'))
 </script>
 
 <main>
