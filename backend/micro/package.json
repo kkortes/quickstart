@@ -1,6 +1,6 @@
 {
   "name": "micro",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "",
   "main": "index.js",
   "type": "module",
@@ -17,8 +17,8 @@
     "dotenv": "^8.2.0",
     "lodash": "^4.17.15",
     "micro": "^9.3.4",
-    "socket.io": "^2.3.0",
-    "mongodb": "^3.5.7"
+    "mongodb": "^3.5.7",
+    "socket.io": "^2.3.0"
   },
   "devDependencies": {
     "nodemon": "^2.0.3"

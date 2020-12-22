@@ -1,16 +1,16 @@
 {
   "name": "sveltekit",
-  "version": "0.0.1",
+  "version": "1.0.3",
   "scripts": {
     "_dev": "svelte-kit dev",
     "build": "svelte-kit build",
     "start": "svelte-kit start"
   },
   "dependencies": {
+    "@apeegg/svelte-component-kit": "file:../../shared/svelte-component-kit",
     "@shared/config": "file:../../shared/config",
     "@shared/consts": "file:../../shared/consts",
-    "@shared/utils": "file:../../shared/utils",
-    "@apeegg/svelte-component-kit": "file:../../shared/svelte-component-kit"
+    "@shared/utils": "file:../../shared/utils"
   },
   "devDependencies": {
     "@sveltejs/adapter-node": "next",

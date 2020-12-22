@@ -1,6 +1,6 @@
 {
   "name": "phaser-game",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "",
   "main": "server.js",
   "scripts": {
@@ -10,10 +10,10 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "phaser": "^3.23.0",
     "@shared/config": "file:../../shared/config",
     "@shared/consts": "file:../../shared/consts",
-    "@shared/utils": "file:../../shared/utils"
+    "@shared/utils": "file:../../shared/utils",
+    "phaser": "^3.23.0"
   },
   "devDependencies": {
     "nodemon": "^2.0.4"
