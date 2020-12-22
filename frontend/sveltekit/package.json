@@ -1,6 +1,6 @@
 {
   "name": "sveltekit",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "scripts": {
     "_dev": "svelte-kit dev",
     "build": "svelte-kit build",
