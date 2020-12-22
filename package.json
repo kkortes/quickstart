@@ -11,8 +11,7 @@
     "new-version": "lerna version --conventional-commits --yes",
     "diff": "lerna diff",
     "bootstrap": "lerna bootstrap",
-    "unlink": "lerna run unlink",
-    "eject": "lerna run eject"
+    "clean": "lerna run clean"
   },
   "devDependencies": {
     "babel-eslint": "^10.1.0",

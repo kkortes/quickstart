@@ -2,9 +2,10 @@
   "name": "sveltekit",
   "version": "1.0.4",
   "scripts": {
-    "_dev": "svelte-kit dev",
+    "dev": "svelte-kit dev",
     "build": "svelte-kit build",
-    "start": "svelte-kit start"
+    "start": "svelte-kit start",
+    "clean": "../../scripts/clean"
   },
   "dependencies": {
     "@apeegg/svelte-component-kit": "file:../../shared/svelte-component-kit",
