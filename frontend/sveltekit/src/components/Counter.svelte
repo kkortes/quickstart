@@ -1,4 +1,6 @@
 <script>
+import Hexagon from '@apeegg/svelte-component-kit/Hexagon.svelte';
+
 	let count = 0;
 
 	const increment = () => {
@@ -9,6 +11,8 @@
 <button on:click={increment}>
 	Clicks: {count}
 </button>
+
+<Hexagon />
 
 <style>
 	button {
