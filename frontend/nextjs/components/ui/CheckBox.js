@@ -1,6 +1,6 @@
 import Icon from './Icon';
 
-export default ({ id, text, onChange, value }) => {
+const CheckBox = ({ id, text, onChange, value }) => {
   return (
     <div className='checkbox'>
       <label htmlFor={id}>
@@ -50,3 +50,5 @@ export default ({ id, text, onChange, value }) => {
     </div>
   );
 };
+
+export default CheckBox;

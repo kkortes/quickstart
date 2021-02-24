@@ -31,7 +31,6 @@ npm run dev
 - ✅ Tab reload and duplicate prevention
 - ✅ Duplicate user session prevention
 - ✅ Notification center
-- ✅ "Eject"-script `npm run eject` for easier hosting
 - ❌ Heroku backend hosting setup
 - ❌ Vercel frontend hosting setup
 - ❌ Persistant and safe localStorage
@@ -39,8 +38,6 @@ npm run dev
 
 ### Todo
 
-- Get rid of `proptypes` dependency
-- Get rid of `classnames` dependency
 - Get rid of `react-transition-group` dependency
 - Make it so that `<Crow />` can handle `null` (not creating white space)
 - Get eslint to work by ignoring all `node_module`-directories in subfolders

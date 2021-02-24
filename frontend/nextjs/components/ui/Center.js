@@ -1,4 +1,4 @@
-export default ({ children }) => (
+const Center = ({ children }) => (
   <div className='center'>
     {children}
     <style jsx>{`
@@ -10,3 +10,5 @@ export default ({ children }) => (
     `}</style>
   </div>
 );
+
+export default Center;

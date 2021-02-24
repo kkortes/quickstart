@@ -1,13 +1,9 @@
 import { Children } from 'react';
-import PropTypes from 'prop-types';
-import classNames from 'classnames';
 
 const Crow = ({ wingSpan, gutter, children, ...styles }) => {
-  const classes = classNames('crow', {
-    auto: wingSpan && !Array.isArray(wingSpan),
-    [`gutter-${gutter}`]: gutter,
-    ...styles,
-  });
+  const classes = `crow ${wingSpan && !Array.isArray(wingSpan) ? 'auto' : ''} ${
+    gutter ? `gutter-${gutter}` : ''
+  } ${Object.keys(styles).reduce((a, key) => `${a} ${key}`, '')}`;
 
   const { vertical, horizontal } = styles;
   return (
@@ -94,32 +90,6 @@ const Crow = ({ wingSpan, gutter, children, ...styles }) => {
       </style>
     </div>
   );
-};
-
-Crow.propTypes = {
-  wingSpan: PropTypes.oneOfType([PropTypes.array, PropTypes.bool]),
-  gutter: PropTypes.number,
-  children: PropTypes.any, // eslint-disable-line
-  up: PropTypes.bool,
-  right: PropTypes.bool,
-  down: PropTypes.bool,
-  left: PropTypes.bool,
-  vertical: PropTypes.bool,
-  horizontal: PropTypes.bool,
-  debug: PropTypes.bool,
-};
-
-Crow.defaultProps = {
-  wingSpan: undefined,
-  gutter: undefined,
-  children: null,
-  up: false,
-  right: false,
-  down: false,
-  left: false,
-  vertical: false,
-  horizontal: false,
-  debug: false,
 };
 
 export default Crow;

@@ -1,7 +1,3 @@
-import { useState } from 'react';
-import classNames from 'classnames';
-import PropTypes from 'prop-types';
-
 const borderColor = '#3e2723';
 
 const TextInput = ({ onChange, text, type, disabled, value, ...props }) => {
@@ -12,9 +8,7 @@ const TextInput = ({ onChange, text, type, disabled, value, ...props }) => {
         type={type}
         value={value}
         onChange={(e) => onChange(e.target.value)}
-        className={classNames({
-          focus: value !== '',
-        })}
+        className={`${value ? focus : ''}`}
       />
       <div className='text'>{text}</div>
 
@@ -60,22 +54,6 @@ const TextInput = ({ onChange, text, type, disabled, value, ...props }) => {
       </style>
     </div>
   );
-};
-
-TextInput.propTypes = {
-  onChange: PropTypes.func,
-  value: PropTypes.string,
-  text: PropTypes.string,
-  type: PropTypes.string,
-  disabled: PropTypes.bool,
-};
-
-TextInput.defaultProps = {
-  onChange: () => {},
-  value: '',
-  text: '',
-  type: '',
-  disabled: false,
 };
 
 export default TextInput;

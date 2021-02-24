@@ -1,5 +1,3 @@
-import PropTypes from 'prop-types';
-
 const Icon = ({ name, size, color }) => (
   <span className={`icon-${name} icon ${name}`}>
     <style jsx>
@@ -15,17 +13,5 @@ const Icon = ({ name, size, color }) => (
     </style>
   </span>
 );
-
-Icon.propTypes = {
-  name: PropTypes.string,
-  size: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
-  color: PropTypes.string,
-};
-
-Icon.defaultProps = {
-  name: 'logo',
-  size: 20,
-  color: '#444',
-};
 
 export default Icon;

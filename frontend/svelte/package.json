@@ -26,7 +26,6 @@
     "js-cookie": "^2.2.1",
     "seedrandom": "^3.0.5",
     "sha1": "^1.1.1",
-    "short-uuid": "^3.1.1",
     "simplex-noise": "^2.4.0",
     "sirv-cli": "^0.4.4",
     "socket.io-client": "^2.3.0"

@@ -1,5 +1,4 @@
 import { withInit } from 'reactn';
-import uuid from 'short-uuid';
 import cookie from 'js-cookie';
 import Router from 'next/router';
 import { REGISTER_TOKEN } from '../node_modules/@shared/consts/SOCKET_ACTIONS.js';
@@ -7,6 +6,7 @@ import { EQUIPMENT, STATS } from '../constants/INITIALS';
 import Meta from '../components/Meta';
 import socket from '../common/socket';
 import { storeState, storeStateWithDebounce } from '../common/db';
+import { generateId } from '../node_modules/@shared/utils';
 
 const INITIAL_STATE = {
   socket,
@@ -89,7 +89,7 @@ const INITIAL_REDUCERS = {
   }),
   notify: ({ notifications }, _dispatch, { title, text, type }) => ({
     notifications: notifications.concat({
-      key: uuid.generate(),
+      key: generateId(),
       title,
       text,
       type,

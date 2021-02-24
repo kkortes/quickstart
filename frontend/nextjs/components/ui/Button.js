@@ -1,5 +1,3 @@
-import PropTypes from 'prop-types';
-
 const borderColor = '#1eadfa';
 const primaryBorderColor = '#1eadfa';
 const primaryTextColor = '#fff';
@@ -95,19 +93,5 @@ const Button = ({
     </style>
   </button>
 );
-
-Button.propTypes = {
-  onClick: PropTypes.func,
-  text: PropTypes.string,
-  ghost: PropTypes.bool,
-  disabled: PropTypes.bool,
-};
-
-Button.defaultProps = {
-  onClick: () => {},
-  text: '',
-  ghost: false,
-  disabled: false,
-};
 
 export default Button;
