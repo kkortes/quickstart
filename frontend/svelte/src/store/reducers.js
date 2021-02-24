@@ -1,9 +1,9 @@
-import uuid from 'short-uuid';
 import cookie from 'js-cookie';
 import { REGISTER_TOKEN } from '@shared/consts/SOCKET_ACTIONS.js';
 import INITIAL_STORE from './initialStore';
 import { storeState, storeStateWithDebounce } from '../common/db';
 import socket from '../common/socket';
+import { generateId } from '@shared/config/node_modules/@shared/utils';
 
 export default {
   removeNotification: (key, { notifications }) => ({
@@ -19,7 +19,7 @@ export default {
       ? notification.error
       : notification.text;
 
-    const key = uuid.generate();
+    const key = generateId();
     return {
       notifications: [
         ...notifications,

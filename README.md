@@ -41,7 +41,6 @@ npm run dev
 
 - Get rid of `proptypes` dependency
 - Get rid of `classnames` dependency
-- Get rid of `uuid` dependency
 - Get rid of `react-transition-group` dependency
 - Make it so that `<Crow />` can handle `null` (not creating white space)
 - Get eslint to work by ignoring all `node_module`-directories in subfolders

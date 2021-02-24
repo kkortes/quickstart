@@ -13,4 +13,6 @@ const deepMerge = (object, mergeObject) =>
     isArray(a) ? unionWith(isEqual, a, b) : undefined
   );
 
-export { sleep, validateEmail, deepMerge };
+const generateId = () => Math.random().toString(36).substr(2, 9);
+
+export { sleep, validateEmail, deepMerge, generateId };

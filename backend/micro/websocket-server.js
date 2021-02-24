@@ -26,8 +26,8 @@ export default (io, mongo) => {
       token: '',
     });
 
-    socket.action(LOGIN_ACCOUNT, async (name, mongo) => {
-      const result = await loginAccount(name, mongo);
+    socket.action(LOGIN_ACCOUNT, async (data, mongo) => {
+      const result = await loginAccount(data, mongo);
 
       if (result.token) {
         registerToken(io, socket, sessions, result.token);

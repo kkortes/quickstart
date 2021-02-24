@@ -12,7 +12,7 @@ export const request = (name, args) =>
 
     socket.emit(name, args, (response) => {
       clearTimeout(id);
-      if (response.hasOwnProperty('error')) {
+      if (response.hasOwnProperty('type') && response.type === 'error') {
         reject(response);
       } else {
         resolve(response);
