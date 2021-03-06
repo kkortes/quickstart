@@ -1,13 +1,13 @@
 {
-  "name": "micros",
+  "name": "micro",
   "version": "1.0.5",
-  "description": "",
-  "main": "index.js",
-  "type": "module",
   "engines": {
     "node": "15.3.0",
     "npm": "7.0.14"
   },
+  "description": "",
+  "main": "index.js",
+  "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "NODE_ENV=development nodemon --watch ./",
