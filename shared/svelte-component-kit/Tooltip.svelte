@@ -1,20 +1,18 @@
 <script>
+	const generateStyles = (styles) => Object.entries(styles)
+		.reduce((a, [property, value]) => [...a, `${property}: ${value};`], [])
+		.join(' ')
+	
 	export let direction = 'up';
 	export let parent = undefined;
 	export let width = 200;
 	
 	let tooltipRef;
 	let tooltipStyles;
-	let triangleRef;
 	let triangleStyles;
-	let horizontalBleed;
+  let horizontalBleed;
 	let verticalBleed;
 	
-
-	const generateStyles = (styles) => Object.entries(styles)
-		.reduce((a, [property, value]) => [...a, `${property}: ${value};`], [])
-		.join(' ')
-
 	tooltipStyles = generateStyles({
 		width: `${width}px`
 	})
@@ -31,32 +29,32 @@
 			const { innerWidth, innerHeight } = window;		
 			const { clientWidth: childW, clientHeight: childH } = tooltipRef;
 			const {
-				offsetLeft: parentX,
-				offsetTop: parentY,
-				clientWidth: parentW,
-				clientHeight: parentH 
-			} = parent;
+				left: parentX,
+				top: parentY,
+				width: parentW,
+				height: parentH 
+			} = parent.getBoundingClientRect();
 		
-			const horizontalCheck = parentX - (parentW / 2 + childW) * dirX
+			const horizontalCheck = parentX + parentW / 2 - (parentW / 2 + childW) * dirX
 			
-			const leftCheck = vertical ? parentX + (childW / 2) * dirX : horizontalCheck;
+			const leftCheck = vertical ? parentX + parentW / 2 - childW / 2 : horizontalCheck;
 			if (leftCheck < 0) {
 				horizontalBleed = leftCheck;
 			}
 			
-			const rightCheck = vertical ? parentX + (childW / 2) : horizontalCheck;
+			const rightCheck = vertical ? parentX + parentW / 2 + childW / 2 : horizontalCheck;
+
 			if (rightCheck > innerWidth) {
 				horizontalBleed = rightCheck - innerWidth;
 			}
 			
-			const verticalCheck = parentY - (parentH / 2 + childH) * dirY;
-			
-			const topCheck = vertical ? verticalCheck : parentY - childH / 2;
+			const verticalCheck = parentY + parentH / 2 - (parentH / 2) * dirY - childH * dirY;
+			const topCheck = vertical ? verticalCheck : parentY + parentH / 2 - childH / 2;
 			if (topCheck < 0) {
 				verticalBleed = topCheck;
 			}
 			
-			const bottomCheck = vertical ? verticalCheck : parentY + childH / 2;
+			const bottomCheck = vertical ? verticalCheck : parentY + parentH / 2 + childH / 2;
 			if (bottomCheck > innerHeight) {
 				verticalBleed = bottomCheck - innerHeight;
 			}
@@ -89,22 +87,28 @@
 </script>
 
 <div class={`tooltip ${direction}`} bind:this={tooltipRef} style={tooltipStyles}>
-	<slot />
-	<div class="triangle" bind:this={triangleRef} style={triangleStyles} />
+	<div class="inner">
+		<slot />
+	</div>
+	<div class="triangle" style={triangleStyles} />
 </div>
 
 <style>
 	.tooltip {
 		position: absolute;
+		transition: opacity .15s ease;
+	}
+	.inner {
+		padding: 20px;
 		background: gray;
 		color: #fff;
-		padding: 20px;
-		transition: opacity .15s ease;
 	}
 	.up,
 	.down {
 		left: 50%;
 		transform: translate(-50%, 0);
+		display: flex;
+		justify-content: center;
 	}
 	.up {
 		bottom: 100%;
@@ -119,9 +123,15 @@
 	}
 	.left {
 		right: 100%;
+		display: flex;
+    justify-content: flex-end;
+    align-items: center;
 	}
 	.right {
 		left: 100%;
+		display: flex;
+    justify-content: flex-start;
+    align-items: center;
 	}
 	.triangle {
 		content: '';
