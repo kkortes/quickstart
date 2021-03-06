@@ -8,7 +8,9 @@
     "dev": "next -p 3002",
     "build": "next build",
     "start": "next start",
-    "clean": "../../scripts/clean"
+    "clean": "../../scripts/clean",
+    "make-deployable": "node ../../scripts/stack-mode.js production",
+    "make-undeployable": "node ../../scripts/stack-mode.js development"
   },
   "author": "",
   "license": "ISC",

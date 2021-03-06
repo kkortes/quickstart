@@ -5,7 +5,9 @@
     "build": "rollup -c",
     "dev": "rollup -c -w",
     "start": "sirv public",
-    "clean": "../../scripts/clean"
+    "clean": "../../scripts/clean",
+    "make-deployable": "node ../../scripts/stack-mode.js production",
+    "make-undeployable": "node ../../scripts/stack-mode.js development"
   },
   "devDependencies": {
     "@rollup/plugin-commonjs": "11.0.2",

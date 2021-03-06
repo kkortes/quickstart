@@ -12,7 +12,9 @@
     "diff": "lerna diff",
     "bootstrap": "lerna bootstrap",
     "clean": "lerna run clean",
-    "lint": "eslint frontend backend shared"
+    "lint": "eslint frontend backend shared",
+    "make-deployable": "lerna run make-deployable",
+    "make-undeployable": "lerna run make-undeployable"
   },
   "devDependencies": {
     "babel-eslint": "^10.1.0",

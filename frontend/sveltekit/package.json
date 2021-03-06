@@ -5,7 +5,9 @@
     "dev": "svelte-kit dev",
     "build": "svelte-kit build",
     "start": "svelte-kit start",
-    "clean": "../../scripts/clean"
+    "clean": "../../scripts/clean",
+    "make-deployable": "node ../../scripts/stack-mode.js production",
+    "make-undeployable": "node ../../scripts/stack-mode.js development"
   },
   "dependencies": {
     "@shared/config": "file:../../shared/config",
