@@ -1,1 +1,19 @@
-{"name":"mongodb","version":"1.0.5","description":"","main":"index.js","scripts":{"test":"echo \"Error: no test specified\" && exit 1","dev":"./scripts/mongo","stop":"kill -2 `pgrep mongo`;","clean":"../../scripts/clean","make-deployable":"node ../../scripts/stack-mode.js production","make-undeployable":"node ../../scripts/stack-mode.js development"},"author":"","license":"ISC","dependencies":{"mongodb":"^3.5.7"}}
+{
+  "name": "mongodb",
+  "version": "1.0.5",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "./scripts/mongo",
+    "stop": "kill -2 `pgrep mongo`;",
+    "clean": "../../scripts/clean",
+    "make-deployable": "node ../../scripts/stack-mode.js production",
+    "make-undeployable": "node ../../scripts/stack-mode.js development"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "mongodb": "^3.5.7"
+  }
+}
