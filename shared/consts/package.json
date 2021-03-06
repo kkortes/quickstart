@@ -4,10 +4,6 @@
   "description": "",
   "main": "",
   "type": "module",
-  "engines": {
-    "node": "15.3.0",
-    "npm": "7.0.14"
-  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "clean": "../../scripts/clean"

@@ -1,6 +1,0 @@
-#!/bin/bash
-rm -Rf universal
-cp -r ../../universal/ ./universal
-
-rm -Rf config
-cp -r ../../config/ ./config

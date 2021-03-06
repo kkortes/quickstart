@@ -36,31 +36,6 @@ npm run dev
 - ❌ Persistant and safe localStorage
 - ❌ Password recovery via email
 
-## Setting up new Heroku server instance deployment
-
-```
-cd packages/api && heroku create <NAME> --region eu
-heroku buildpacks:add -a <NAME> heroku/nodejs
-heroku buildpacks:add -a <NAME> https://github.com/Pagedraw/heroku-buildpack-select-subdir
-heroku git:remote -a <NAME>
-
-git subtree push --prefix <PATH/TO/PROJECT> heroku master
-
-git push heroku master
-
-```
-
-
-`git push https://git.heroku.com/$NAME.git HEAD:master`
-
-## Deploy server/\*/index.js to Heroku, one-by-one
-
-`git push worldseed-socket master`
-
-## Deploy server/\*/index.js to Heroku master from branch
-
-`git push worldseed-* $BRANCHNAME:master`
-
 ### Todo
 
 - Get rid of `react-transition-group` dependency
