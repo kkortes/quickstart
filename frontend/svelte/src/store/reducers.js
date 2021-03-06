@@ -3,7 +3,7 @@ import { REGISTER_TOKEN } from '@shared/consts/SOCKET_ACTIONS.js';
 import INITIAL_STORE from './initialStore';
 import { storeState, storeStateWithDebounce } from '../common/db';
 import socket from '../common/socket';
-import { generateId } from '@shared/config/node_modules/@shared/utils';
+import { generateId } from '@shared/utils';
 
 export default {
   removeNotification: (key, { notifications }) => ({

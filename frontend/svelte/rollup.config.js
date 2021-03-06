@@ -4,6 +4,7 @@ import commonjs from '@rollup/plugin-commonjs';
 import replace from '@rollup/plugin-replace';
 import livereload from 'rollup-plugin-livereload';
 import { terser } from 'rollup-plugin-terser';
+import {} from 'dotenv/config';
 
 const production = !process.env.ROLLUP_WATCH;
 
@@ -18,7 +19,12 @@ export default {
   plugins: [
     replace({
       exclude: 'node_modules/**',
-      'process.env.NODE_ENV': production ? 'production' : 'development',
+      'process.env.NODE_ENV': JSON.stringify(
+        production ? 'production' : 'development'
+      ),
+      'process.env.SOCKET_SERVER_URL': JSON.stringify(
+        process.env.SOCKET_SERVER_URL
+      ),
     }),
     svelte({
       // enable run-time checks when not in production

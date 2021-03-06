@@ -5,14 +5,13 @@
     ACCOUNT_LOGGED_IN_ELSEWHERE,
     ACCOUNT_LOGGED_OUT
   } from "@shared/consts/NOTIFICATIONS";
-  import config from "@shared/config";
   import { store, actions } from "../store";
   import socket from "../common/socket";
 
   const { logout } = actions;
 
   const forceClear = () => {
-    if (!config.debug) {
+    if (process.env.NODE_ENV === 'production') {
       logout(ACCOUNT_LOGGED_OUT);
     }
     return null;
