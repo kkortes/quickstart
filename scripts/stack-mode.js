@@ -37,4 +37,4 @@ if (environment === 'development') {
   exec('rm -R shared');
 }
 
-console.log(json);
+fs.writeFileSync('package.json', JSON.stringify(json));
