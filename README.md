@@ -36,6 +36,27 @@ npm run dev
 - ❌ Persistant and safe localStorage
 - ❌ Password recovery via email
 
+## Setting up new Heroku server instance deployment
+
+`$NAME = example-name`
+`$PROCFILEDIR = server/example-dir`
+
+`heroku create -a $NAME --region eu`
+
+`heroku buildpacks:add -a $NAME https://github.com/heroku/heroku-buildpack-multi-procfile`
+
+`heroku config:set -a $NAME PROCFILE=$PROCFILEFIR/Procfile`
+
+`git push https://git.heroku.com/$NAME.git HEAD:master`
+
+## Deploy server/\*/index.js to Heroku, one-by-one
+
+`git push worldseed-socket master`
+
+## Deploy server/\*/index.js to Heroku master from branch
+
+`git push worldseed-* $BRANCHNAME:master`
+
 ### Todo
 
 - Get rid of `react-transition-group` dependency
