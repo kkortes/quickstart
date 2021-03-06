@@ -38,14 +38,18 @@ npm run dev
 
 ## Setting up new Heroku server instance deployment
 
-`$NAME = example-name`
-`$PROCFILEDIR = server/example-dir`
+```
+cd packages/api && heroku create <NAME> --region eu
+heroku buildpacks:add -a <NAME> heroku/nodejs
+heroku buildpacks:add -a <NAME> https://github.com/Pagedraw/heroku-buildpack-select-subdir
+heroku git:remote -a <NAME>
 
-`heroku create -a $NAME --region eu`
+git subtree push --prefix <PATH/TO/PROJECT> heroku master
 
-`heroku buildpacks:add -a $NAME https://github.com/heroku/heroku-buildpack-multi-procfile`
+git push heroku master
 
-`heroku config:set -a $NAME PROCFILE=$PROCFILEFIR/Procfile`
+```
+
 
 `git push https://git.heroku.com/$NAME.git HEAD:master`
 
